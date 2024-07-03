@@ -1,5 +1,6 @@
 import React from "react";
 import { TouchableOpacity, StyleSheet, Text } from "react-native";
+
 export const IdCheckBtn = () => {
     return(
         <TouchableOpacity style={styles.checkBtn}>
@@ -7,6 +8,23 @@ export const IdCheckBtn = () => {
         </TouchableOpacity>
     );
 }
+
+export const PWNextBtn = (props) => {
+    return(
+        <TouchableOpacity style={styles.checkBtn} onPress={()=>props.setPwNextCheck(true)}>
+            <Text style={styles.checkBtnText}>다음</Text>
+        </TouchableOpacity>
+    );
+}
+
+export const PWCheckBtn = () => {
+    return(
+        <TouchableOpacity style={styles.checkBtn}>
+            <Text style={styles.checkBtnText}>확인</Text>
+        </TouchableOpacity>
+    );
+}
+
 
 const styles = StyleSheet.create({
     checkBtn:{
