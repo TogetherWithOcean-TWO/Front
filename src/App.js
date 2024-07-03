@@ -1,22 +1,29 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import LandingScreen from "./screens/landingScreen/LandingScreen";
+import SplashScreen from "./screens/SplashScreen/SplashScreen";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import SignupScreen from "./screens/signupScreen/SignupScreen";
+import FindForLoginScreen from "./screens/loginScreen/FindForLoginScreen";
+
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen
+        {/* <Stack.Screen
           name="Landing"
-          component={LandingScreen}
+          component={SplashScreen}
           //options={{ headerShown: false }}
-          options={{ title: "OverView" }}
+          options={{ title: "overView" }}
+        /> */}
+        {/* <Stack.Screen name="Login" component={LoginScreen} /> */}
+        {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
+        <Stack.Screen
+          name="Findforlogin"
+          component={FindForLoginScreen}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

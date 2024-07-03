@@ -1,12 +1,12 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-function LandingScreen(){
+function SplashScreen(){
   return (
   <View>
-    <Text>LandingScreen</Text>
+    <Text>SplashScreen</Text>
   </View>
   );
 }
 
-export default LandingScreen;
+export default SplashScreen;
