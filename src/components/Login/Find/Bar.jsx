@@ -17,12 +17,12 @@ export const Main = () => {
     const [pwNextCheck, setPwNextCheck] = useState(false);
 
     return (
+        // navigation 사용 안한버전
         <View style={styles.main}>
             <ChooseFindBar selectIdOrPW={selectIdOrPW} setSelectIdOrPW={setSelectIdOrPW} setPwNextCheck={setPwNextCheck}/>
             {selectIdOrPW?<FindIdForm/>:
             (pwNextCheck?<FindPWNextForm/>:<FindPWForm setPwNextCheck={setPwNextCheck}/>)
             }
-            {/* </> */}
         </View>
     );
 }
