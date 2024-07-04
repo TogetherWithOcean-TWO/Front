@@ -1,22 +1,28 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import { ChooseFindBar } from './ChooseFindBar';
-import { FindIdForm, FindPWForm } from './FindForm';
+import { FindIdForm, FindPWForm, FindPWNextForm } from './FindForm';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+
 
 export const TopBar = () => {
 return (
     <View style={styles.topBar}>
-        {/* image btn -> 뒤로가기 btn */}
-        <Image style={styles.leftArrow} source={require("../../../assets/images/left_arrow.png")}/>
+        <Icon style={styles.leftArrow} name="arrow-back-ios" size={32}  />
     </View>
 );}
 
 export const Main = () => {
     const [selectIdOrPW, setSelectIdOrPW] = useState(true); // id->true, pw->false
+    const [pwNextCheck, setPwNextCheck] = useState(false);
+
     return (
+        // navigation 사용 안한버전
         <View style={styles.main}>
-            <ChooseFindBar selectIdOrPW={selectIdOrPW} setSelectIdOrPW={setSelectIdOrPW}/>
-            {selectIdOrPW?<FindIdForm/>:<FindPWForm/>}
+            <ChooseFindBar selectIdOrPW={selectIdOrPW} setSelectIdOrPW={setSelectIdOrPW} setPwNextCheck={setPwNextCheck}/>
+            {selectIdOrPW?<FindIdForm/>:
+            (pwNextCheck?<FindPWNextForm/>:<FindPWForm setPwNextCheck={setPwNextCheck}/>)
+            }
         </View>
     );
 }
@@ -33,6 +39,7 @@ const styles = StyleSheet.create({
     leftArrow: {
         top:20,
         left:15,
+        color: "#032661"
     },
     main: {
         width: "100%",
