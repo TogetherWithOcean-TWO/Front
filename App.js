@@ -20,16 +20,14 @@ const App = () => {
         {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
 
         {/* 아이디/비밀번호 찾기 */}
-        {/*<Stack.Screen
+        <Stack.Screen
           name="Findforlogin"
           component={FindForLoginScreen}
           options={{ headerShown: false }}
-        />*/}
+        />
 
         {/*splash 화면*/}
-        <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} /> 
-        {/*<Stack.Screen name="Login" component={LoginScreen} />*/}
-        
+        {/* <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />  */}
       </Stack.Navigator>
     </NavigationContainer>
   );

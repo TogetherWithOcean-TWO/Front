@@ -4,6 +4,8 @@ import { ChooseFindBar } from './ChooseFindBar';
 import { FindIdForm, FindPWForm, FindPWNextForm } from './FindForm';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
+import EStyleSheet from 'react-native-extended-stylesheet';
+
 
 export const TopBar = () => {
 return (
@@ -17,7 +19,6 @@ export const Main = () => {
     const [pwNextCheck, setPwNextCheck] = useState(false);
 
     return (
-        // navigation 사용 안한버전
         <View style={styles.main}>
             <ChooseFindBar selectIdOrPW={selectIdOrPW} setSelectIdOrPW={setSelectIdOrPW} setPwNextCheck={setPwNextCheck}/>
             {selectIdOrPW?<FindIdForm/>:
