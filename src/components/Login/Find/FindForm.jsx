@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { IdCheckBtn, PWNextBtn, PWCheckBtn } from "./Button";
+import { FindIdModal } from "./Modal";
+
 
 export const FindIdForm = () => {
     const [name, setName] = useState("");
     const [phoneNumber, setPhoneNumber] = useState("");
+
+    const [isSuccess, setIsSuccess] = useState(false);
+
 
     return (
         <View style={styles.findIdForm}>
@@ -40,7 +45,8 @@ export const FindIdForm = () => {
                     keyboardType="numeric"
                 />
             </View>
-            <IdCheckBtn />
+            {/* <IdCheckBtn /> */}
+            <FindIdModal isSuccess={isSuccess}/>
         </View>
     );
 };
