@@ -13,35 +13,23 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator> */}
-      {/* <Stack.Screen
-          name="Landing"
-          component={SplashScreen}
-          //options={{ headerShown: false }}
-          options={{ title: "overView" }}
-        /> */}
-      {/* <Stack.Screen name="Signup" component={SignupScreen} /> */}
-
-      {/* 아이디/비밀번호 찾기 */}
-      <Stack.Screen
-        name="Findforlogin"
-        component={FindForLoginScreen}
-        options={{ headerShown: false }}
-      />
-
-      {/*splash 화면*/}
-      {/* <Stack.Screen name="SplashScreen" component={SplashScreen} options={{ headerShown: false }} />  */}
-      {/*<Stack.Screen name="Login" component={LoginScreen} />*/}
-
-      <Stack.Navigator initialRouteName="Signup">
+      <Stack.Navigator initialRouteName="Findforlogin">
         <Stack.Screen
-          name="Landing"
-          component={LandingScreen}
+          name="SplashScreen"
+          component={SplashScreen}
           options={{ headerShown: false }}
-          //options={{ title: "Overview" }}
+        />
+        <Stack.Screen
+          name="Findforlogin"
+          component={FindForLoginScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen name="Login" component={LoginScreen} />
-        <Stack.Screen name="Signup" component={SignupScreen} />
+        <Stack.Screen
+          name="Signup"
+          component={SignupScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="SignupAddress" component={SignupAddressScreen} />
         <Stack.Screen
           name="SignupCharacter"
@@ -52,11 +40,6 @@ const App = () => {
           component={SignupCharacterNameScreen}
         />
         <Stack.Screen name="SignupSetGoal" component={SignupSetGoalScreen} />
-        <Stack.Screen
-          name="SplashScreen"
-          component={SplashScreen}
-          options={{ headerShown: false }}
-        />
       </Stack.Navigator>
     </NavigationContainer>
   );
