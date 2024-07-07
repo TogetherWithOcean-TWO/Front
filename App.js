@@ -13,33 +13,51 @@ const Stack = createStackNavigator();
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Findforlogin">
+      <Stack.Navigator initialRouteName="SplashScreen">
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name="LoginScreen"
+          component={LoginScreen}
+          options={{ headerShown: false }}
+        />
+
         <Stack.Screen
           name="Findforlogin"
           component={FindForLoginScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="Login" component={LoginScreen} />
+
         <Stack.Screen
           name="Signup"
           component={SignupScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen name="SignupAddress" component={SignupAddressScreen} />
+
+        <Stack.Screen
+          name="SignupAddress"
+          component={SignupAddressScreen}
+          options={{ headerShown: false }}
+        />
         <Stack.Screen
           name="SignupCharacter"
           component={SignupCharacterScreen}
+          options={{ headerShown: false }}
         />
         <Stack.Screen
           name="SignupCharacterName"
           component={SignupCharacterNameScreen}
+          options={{ headerShown: false }}
         />
-        <Stack.Screen name="SignupSetGoal" component={SignupSetGoalScreen} />
+        <Stack.Screen
+          name="SignupSetGoal"
+          component={SignupSetGoalScreen}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

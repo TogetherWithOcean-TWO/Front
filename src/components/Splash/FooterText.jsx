@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, TouchableOpacity } from 'react-native';
-
+import { Text, TouchableOpacity } from 'react-native';
+import EStyleSheet from '../../styles/global'
 
 const FooterText = ({ text, onPress }) => {
   return (
@@ -11,15 +11,15 @@ const FooterText = ({ text, onPress }) => {
 };
 
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container:{
     position : 'absolute',
     bottom : -20,
-    right : 50,
+    right : 10,
   },
   footerText: {
-    color: '#A8A8A8',
-    fontSize : 10,
+    color: '#Gray01',
+    fontSize : 13,
     textDecorationLine : 'underline',
   },
 });
