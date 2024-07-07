@@ -8,9 +8,28 @@ import EStyleSheet from "../../../styles/global";
 
 export const FindIdForm = () => {
   const [name, setName] = useState("");
-  const [phoneNumber, formatPhoneNumber] = useState("");
+
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [phoneNumberError, setPhoneNumberError] = useState("");
+
   const [certificationNumber, setCertificationNumber] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
+
+  const formatPhoneNumber = (text) => {
+    let formatted = text.replace(/\D/g, "");
+
+    if (formatted.length > 3 && formatted.length < 8)
+      formatted = formatted.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+    if (formatted.length >= 8)
+      formatted = formatted.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
+    setPhoneNumber(formatted);
+
+    if (!formatted || !/^010-\d{4}-\d{4}$/.test(formatted)) {
+      setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
+    } else {
+      setPhoneNumberError(" ");
+    }
+  };
 
   return (
     <View style={styles.findIdForm}>

@@ -89,7 +89,7 @@ export const SignupForm = ({ setIsValid }) => {
       setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
     }
 
-    setIsValid(valid);
+    setIsValid(true);
   };
 
   const formatPhoneNumber = (text) => {
