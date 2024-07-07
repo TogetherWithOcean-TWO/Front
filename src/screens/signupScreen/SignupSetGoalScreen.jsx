@@ -8,6 +8,8 @@ import character3 from '../../assets/images/character3.png';
 import character4 from '../../assets/images/character4.png';
 
 import { useNavigation } from '@react-navigation/native';
+import { BackBar } from '../../components/common/CustomBar';
+
 
 function SignupSetGoalScreen() {
     const route = useRoute();
@@ -40,7 +42,7 @@ function SignupSetGoalScreen() {
 
     const done = () => {
         if (isValid) {
-            modalRef.current.showModal();
+            // modalRef.current.showModal();
       }};
 
       useEffect(() => {
@@ -65,12 +67,9 @@ function SignupSetGoalScreen() {
 
     return (
         <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+          <BackBar navigation={navigation}/>
         <View style={styles.container}>
-            <View style={styles.navbar}>
-                <TouchableOpacity onPress={() =>navigation.goBack()}>
-                    <Image source={backIcon} style={styles.backIcon} />
-                </TouchableOpacity>
-            </View>
+            
             <View style={styles.character}>
                 <Text style={styles.info}>목표 걸음을 설정해주세요</Text>
                 <View style={styles.buttonContainer}>
