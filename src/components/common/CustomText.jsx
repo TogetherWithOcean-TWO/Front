@@ -26,6 +26,7 @@ const styles = EStyleSheet.create({
   text: {
     color: "$Blue01",
     fontWeight: "bold",
+    fontFamily: "Pretendard",
   },
   mainText: {
     fontSize: 30,
