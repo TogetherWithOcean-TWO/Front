@@ -44,6 +44,7 @@ const styles = EStyleSheet.create({
   text: {
     color: "$White01",
     fontSize: "15px",
+    fontFamily: "Pretendard",
   },
 
   wideButton: {
