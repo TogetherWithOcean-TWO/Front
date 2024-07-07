@@ -5,7 +5,7 @@ import { useNavigation } from "@react-navigation/native";
 import { BackBar } from "../../components/common/CustomBar";
 import { MainTitle } from "../../components/common/CustomText";
 import { WideButton } from "../../components/common/CustomButton";
-import { AddressForm } from "../../components/Signup/AdressForm";
+import { AddressForm } from "../../components/Signup/AddressForm";
 import EStyleSheet from "../../styles/global";
 
 function SignupAddressScreen() {

@@ -106,7 +106,7 @@ const styles = EStyleSheet.create({
     height: 80,
   },
   input: {
-    backgroundColor: "#EDF0F4",
+    backgroundColor: "$Blue02",
     padding: 15,
     borderRadius: 10,
   },

@@ -2,7 +2,7 @@ import { View, Alert, KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import EStyleSheet from "../../styles/global";
 
-import { BackBar } from "../../components/common/CustomBar";
+import { BackBar, LogoBar } from "../../components/common/CustomBar";
 import { MainTitle } from "../../components/common/CustomText";
 import { SignupForm } from "../../components/Signup/SignupForm";
 import { WideButton } from "../../components/common/CustomButton";

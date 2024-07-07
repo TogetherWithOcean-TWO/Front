@@ -15,7 +15,10 @@ export const WideButton = ({ text, onPress }) => {
 
 export const NarrowButton = ({ text, onPress }) => {
   return (
-    <TouchableOpacity style={[styles.button, styles.narrowButton]}>
+    <TouchableOpacity
+      style={[styles.button, styles.narrowButton]}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -24,7 +27,7 @@ export const NarrowButton = ({ text, onPress }) => {
 // halfButton
 export const HalfButton = ({ text, onPress }) => {
   return (
-    <TouchableOpacity style={styles.halfButton}>
+    <TouchableOpacity style={styles.halfButton} onPress={onPress}>
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
