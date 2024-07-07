@@ -4,13 +4,16 @@ import { WideButton } from "../../components/common/CustomButton";
 import EStyleSheet from "../../styles/global";
 import FooterText from "../../components/Splash/FooterText";
 import { useNavigation } from "@react-navigation/native";
+import { LogoWithText } from "../../components/common/Logo";
+import { LoginForm } from "../../components/Login/LoginForm";
+import { KakaoLoginButton } from "../../components/Login/KakaoLoginButton";
 
 function LoginScreen() {
   const navigation = useNavigation();
 
   const navigateToMainScreen = () => {
     // navigation.navigate("Main");
-    navigation.navigate("Findforlogin");
+    // navigation.navigate("Findforlogin");
   };
 
   const navigateToKakaoLoginScreen = () => {
@@ -23,16 +26,16 @@ function LoginScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
-        <Text style={styles.title}>가치해양</Text>
-        <Image
-          source={require("../../assets/images/splash.gif")}
-          style={styles.image}
-        />
+        <LogoWithText />
       </View>
-
+      <LoginForm />
       <View style={styles.buttonContainer}>
-        <WideButton text="로그인" onPress={navigateToMainScreen} />
-        <WideButton text="카카오로그인" onPress={navigateToMainScreen} />
+        <View style={styles.button}>
+          <WideButton text="로그인" onPress={navigateToMainScreen} />
+        </View>
+        <View style={styles.button}>
+          <KakaoLoginButton onPress={navigateToMainScreen} />
+        </View>
         <FooterText
           text="아이디 / 비밀번호를 잊어버렸나요?"
           onPress={navigateToFindForLoginScreen}
@@ -51,22 +54,18 @@ const styles = EStyleSheet.create({
   },
   imageContainer: {
     alignItems: "center",
-    marginBottom: 50,
+    marginBottom: 40,
   },
-  image: {
-    width: 100,
-    height: 100,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "$Blue01",
-  },
+
   buttonContainer: {
     width: "80%",
-    bottom: -200,
+    bottom: -30,
     alignItems: "center",
     position: "relative",
+  },
+  button: {
+    width: "100%",
+    marginVertical: 5,
   },
 });
 
