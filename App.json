@@ -1,0 +1,13 @@
+{
+    "expo": {
+      "plugins": [
+        [
+          "expo-font",
+          {
+            "fonts": ["./src/assets/fonts/JejuGothic.ttf"]
+            
+          }
+        ]
+      ]
+    }
+  }
