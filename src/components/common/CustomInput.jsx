@@ -33,9 +33,11 @@ const styles = EStyleSheet.create({
     padding: 15,
     borderRadius: 10,
     margintVertical: 2,
+    fontFamily: "Pretendard",
   },
   inputWithBtn: {
     width: "75%",
     marginRight: 10,
+    fontFamily: "Pretendard",
   },
 });
