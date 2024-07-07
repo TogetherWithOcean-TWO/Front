@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, Image } from "react-native";
+import { View } from "react-native";
 import FooterText from "../../components/Splash/FooterText";
 import { WideButton } from "../../components/common/CustomButton";
 import EStyleSheet from "../../styles/global";
@@ -40,7 +40,7 @@ const styles = EStyleSheet.create({
   },
   buttonContainer: {
     width: "80%",
-    bottom: -200,
+    bottom: -150,
     alignItems: "center",
     position: "relative",
   },

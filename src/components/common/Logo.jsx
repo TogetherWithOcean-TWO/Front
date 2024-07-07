@@ -18,6 +18,7 @@ const styles = EStyleSheet.create({
     fontSize: 18,
     fontWeight: "bold",
     color: "$Blue01",
+    textAlign: "center",
   },
   image: {
     width: 100,
