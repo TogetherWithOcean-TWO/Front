@@ -1,26 +1,24 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import { TopBar, Main } from '../../components/Login/Find/Bar';
+import React from "react";
+import { View } from "react-native";
+import { MainContainer } from "../../components/Login/Find/Container";
+import { BackBar } from "../../components/common/CustomBar";
+import EStyleSheet from "../../styles/global";
 
-
-function FindForLoginScreen(){
-
+function FindForLoginScreen() {
   return (
     <View style={styles.container}>
-      <TopBar/>
-      <Main/>
+      <BackBar />
+      <MainContainer />
     </View>
   );
 }
 
-
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
     width: "100%",
     height: "100%",
-    backgroundColor: '#fff'
+    backgroundColor: "$White01",
   },
 });
-
 
 export default FindForLoginScreen;

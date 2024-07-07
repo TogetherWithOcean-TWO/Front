@@ -8,6 +8,8 @@ import character4 from '../../assets/images/character4.png';
 
 import { useNavigation } from '@react-navigation/native';
 
+import { BackBar } from '../../components/common/CustomBar';
+
 function SignupAddressScreen() {
     const navigation = useNavigation();
     const [selectedCharacter, setSelectedCharacter] = useState(null);
@@ -23,12 +25,9 @@ function SignupAddressScreen() {
     }
     
     return (
+      <View style={{ flex: 1 }}>
+             <BackBar navigation={navigation}/>
         <View style={styles.container}>
-            <View style={styles.navbar}>
-                <TouchableOpacity onPress={() =>navigation.goBack()}>
-                    <Image source={backIcon} style={styles.backIcon} />
-                </TouchableOpacity>
-            </View>
             <View style={styles.character}>
                 <Text style={styles.info}>키울 캐릭터를 선택해주세요</Text>
                 <View style={styles.buttonContainer}>
@@ -57,6 +56,7 @@ function SignupAddressScreen() {
                 <Text style={styles.submitButtonText}>다음</Text>
                 </TouchableOpacity>
             </View>
+        </View>
         </View>
         );
     }
