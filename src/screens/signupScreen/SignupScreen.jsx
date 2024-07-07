@@ -11,7 +11,7 @@ import { React, useState } from "react";
 function SignupScreen() {
   const navigation = useNavigation();
 
-  const [isValid, setIsValid] = useState(true);
+  const [isValid, setIsValid] = useState(false);
 
   const next = () => {
     if (isValid) {
@@ -25,8 +25,8 @@ function SignupScreen() {
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
       <BackBar navigation={navigation} />
       <View style={styles.container}>
-        <MainTitle text="회원가입" setIsValid={setIsValid} />
-        <SignupForm />
+        <MainTitle text="회원가입" />
+        <SignupForm setIsValid={setIsValid} />
         <WideButton text="다음" onPress={next} disabled={!isValid} />
       </View>
     </KeyboardAvoidingView>

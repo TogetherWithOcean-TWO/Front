@@ -18,7 +18,6 @@ function SignupAddressScreen() {
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
       <BackBar navigation={navigation} />
-
       <View style={styles.container}>
         <MainTitle text="회원가입" />
         <AddressForm />

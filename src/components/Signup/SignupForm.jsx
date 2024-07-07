@@ -6,7 +6,7 @@ import { LabelTitle, ErrorText } from "../common/CustomText";
 import { CustomInput, CustomInputWithButton } from "../common/CustomInput";
 import { NarrowButton } from "../common/CustomButton";
 
-export const SignupForm = (props) => {
+export const SignupForm = ({ setIsValid }) => {
   const [name, setName] = useState("");
   const [nickname, setNickname] = useState("");
   const [email, setEmail] = useState("");
@@ -19,7 +19,6 @@ export const SignupForm = (props) => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
-  const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     validate();
@@ -87,7 +86,7 @@ export const SignupForm = (props) => {
 
     // 전화번호 유효성 검사
     if (!phoneNumber) {
-      setPhoneNumberError("01012345678 형식에 맞게 입력해주세요");
+      setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
     }
 
     setIsValid(valid);
@@ -145,10 +144,7 @@ export const SignupForm = (props) => {
             />
             <NarrowButton text="중복확인" />
           </View>
-
-          {emailError ? (
-            <Text style={styles.errorText}>{emailError}</Text>
-          ) : null}
+          {emailError ? <ErrorText text={emailError} /> : null}
         </View>
         <View style={styles.formGroup}>
           <LabelTitle text="비밀번호" />
@@ -156,6 +152,7 @@ export const SignupForm = (props) => {
             placeholder="비밀번호를 입력해주세요"
             value={password}
             onChangeText={(text) => setPassword(text)}
+            secure={true}
           />
           {passwordError ? <ErrorText text={passwordError} /> : null}
         </View>
@@ -165,6 +162,7 @@ export const SignupForm = (props) => {
             placeholder="비밀번호를 한번 더 입력해주세요"
             value={confirmPassword}
             onChangeText={(text) => setConfirmPassword(text)}
+            secure={true}
           />
           {confirmPasswordError ? (
             <ErrorText text={confirmPasswordError} />
