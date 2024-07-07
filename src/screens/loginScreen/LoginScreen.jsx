@@ -32,6 +32,7 @@ function LoginScreen() {
 
       <View style={styles.buttonContainer}>
         <WideButton text="로그인" onPress={navigateToMainScreen} />
+        <WideButton text="카카오로그인" onPress={navigateToMainScreen} />
         <FooterText
           text="아이디 / 비밀번호를 잊어버렸나요?"
           onPress={navigateToFindForLoginScreen}

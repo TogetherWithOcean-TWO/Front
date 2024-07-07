@@ -3,11 +3,13 @@ import { View } from "react-native";
 import { MainContainer } from "../../components/Login/Find/Container";
 import { BackBar } from "../../components/common/CustomBar";
 import EStyleSheet from "../../styles/global";
+import { useNavigation } from "@react-navigation/native";
 
 function FindForLoginScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <BackBar />
+      <BackBar navigation={navigation} />
       <MainContainer />
     </View>
   );
