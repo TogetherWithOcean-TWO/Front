@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { View } from "react-native";
 import { ChooseFindBar } from "./ChooseFindBar";
-import { FindIdForm, FindPWForm, FindPWNextForm } from "./FindForm";
 import EStyleSheet from "../../../styles/global";
+import { FindIdForm } from "./FindIdForm";
+import { FindPWForm } from "./FindPWForm";
+import { FindPWNextForm } from "./FindPWNextForm";
 
 export const MainContainer = () => {
   const [selectIdOrPW, setSelectIdOrPW] = useState(true); // id->true, pw->false
