@@ -1,12 +1,13 @@
+import { React, useState } from "react";
 import { View, Alert, KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import EStyleSheet from "../../styles/global";
 
-import { BackBar, LogoBar } from "../../components/common/CustomBar";
+import { BackBar } from "../../components/common/CustomBar";
 import { MainTitle } from "../../components/common/CustomText";
 import { SignupForm } from "../../components/Signup/SignupForm";
 import { WideButton } from "../../components/common/CustomButton";
-import { React, useState } from "react";
 
 function SignupScreen() {
   const navigation = useNavigation();

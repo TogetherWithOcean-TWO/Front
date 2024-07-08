@@ -7,22 +7,18 @@ import { WideButton } from "../../components/common/CustomButton";
 import { CharactorForm } from "../../components/Signup/CharactorForm";
 import EStyleSheet from "../../styles/global";
 import { SubTitle } from "../../components/common/CustomText";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 function SignupAddressScreen() {
-  const navigation = useNavigation();
+  const { userInfo, setUserInfo } = useUserInfo();
 
-  const [selectedCharacter, setSelectedCharacter] = useState(null);
+  const navigation = useNavigation();
 
   const [characterImage, setCharacterImage] = useState(null);
 
-  const handleCharacterSelect = (index) => {
-    setSelectedCharacter(index);
-  };
-
   const next = () => {
-    if (selectedCharacter !== null) {
+    if (userInfo.charId !== null) {
       navigation.navigate("SignupCharacterName", {
-        selectedCharacter,
         characterImage,
       });
     }
@@ -35,11 +31,7 @@ function SignupAddressScreen() {
         <View style={styles.title}>
           <SubTitle text="키울 캐릭터를 선택해주세요" />
         </View>
-        <CharactorForm
-          selectedCharacter={selectedCharacter}
-          handleCharacterSelect={handleCharacterSelect}
-          setCharacterImage={setCharacterImage}
-        />
+        <CharactorForm setCharacterImage={setCharacterImage} />
         <View style={styles.button}>
           <WideButton onPress={next} text="다음" />
         </View>
