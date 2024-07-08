@@ -8,19 +8,31 @@ import { CharactorForm } from "../../components/Signup/CharactorForm";
 import EStyleSheet from "../../styles/global";
 import { SubTitle } from "../../components/common/CustomText";
 import { useUserInfo } from "../../contexts/UserInfoContext";
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupAddressScreen() {
   const { userInfo, setUserInfo } = useUserInfo();
 
   const navigation = useNavigation();
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
   const [characterImage, setCharacterImage] = useState(null);
 
   const next = () => {
-    if (userInfo.charId !== null) {
+    if (userInfo.charId !== "") {
       navigation.navigate("SignupCharacterName", {
         characterImage,
       });
+    } else {
+      openModal();
     }
   };
 
@@ -36,6 +48,12 @@ function SignupAddressScreen() {
           <WideButton onPress={next} text="다음" />
         </View>
       </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="캐릭터를 선택해주세요"
+        buttonText="닫기"
+      />
     </View>
   );
 }

@@ -9,6 +9,7 @@ import { WideButton } from "../../components/common/CustomButton";
 import { CustomInput } from "../../components/common/CustomInput";
 import { SubTitle, ErrorText } from "../../components/common/CustomText";
 import { useUserInfo } from "../../contexts/UserInfoContext";
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupCharacterNameScreen() {
   const route = useRoute();
@@ -40,13 +41,23 @@ function SignupCharacterNameScreen() {
     setIsValid(valid);
   };
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const next = () => {
     if (isValid) {
       navigation.navigate("SignupSetGoal", {
         characterImage,
       });
     } else {
-      Alert.alert("입력한 정보를 확인해주세요.");
+      openModal();
     }
   };
 
@@ -74,6 +85,12 @@ function SignupCharacterNameScreen() {
           <WideButton text="다음" onPress={next} />
         </View>
       </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="캐릭터 이름을 다시 입력해주세요"
+        buttonText="닫기"
+      />
     </KeyboardAvoidingView>
   );
 }

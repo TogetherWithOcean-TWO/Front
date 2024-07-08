@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { View, Image, KeyboardAvoidingView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
@@ -9,6 +9,7 @@ import { WideButton } from "../../components/common/CustomButton";
 import { CustomInput } from "../../components/common/CustomInput";
 import { SubTitle } from "../../components/common/CustomText";
 import { useUserInfo } from "../../contexts/UserInfoContext";
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupSetGoalScreen() {
   const route = useRoute();
@@ -25,10 +26,20 @@ function SignupSetGoalScreen() {
     setUserInfo({ ...userInfo, stepGoal: numericGoal });
   };
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const done = () => {
+    openModal();
     if (isValid) {
-      console.log(userInfo);
-      // modalRef.current.showModal();
+      navigation.navigate("MainScreen");
     }
   };
 
@@ -53,6 +64,14 @@ function SignupSetGoalScreen() {
           <WideButton text="완료" onPress={done} />
         </View>
       </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message={
+          isValid ? "회원가입을 축하드립니다 :)" : "목표를 다시 입력해주세요"
+        }
+        buttonText={isValid ? "확인" : "닫기"}
+      />
     </KeyboardAvoidingView>
   );
 }

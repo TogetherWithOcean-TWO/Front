@@ -6,15 +6,37 @@ import { CustomInput, CustomInputWithButton } from "../common/CustomInput";
 import { NarrowButton } from "../common/CustomButton";
 import { useUserInfo } from "../../contexts/UserInfoContext";
 
+import { ConfirmationModal } from "../common/Modal";
+
 export const SignupForm = ({ setIsValid }) => {
   const { userInfo, setUserInfo } = useUserInfo();
 
+  //유효성 검사에 필요한 useState
   const [nameError, setNameError] = useState("");
   const [nicknameError, setNicknameError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
+
+  // 중복확인에 필요한 useState
+  const [checkNickName, setCheckNickName] = useState(true); //true-> 중복없음, false-> 중복있음
+  const [nickNameModalVisible, setNickNameModalVisible] = useState(false);
+  const openNickNameModal = () => {
+    setNickNameModalVisible(true);
+  };
+  const closeNickNameModal = () => {
+    setNickNameModalVisible(false);
+  };
+
+  const [checkEmail, setCheckEmail] = useState(true); //true-> 중복없음, false-> 중복있음
+  const [emailModalVisible, setEmailModalVisible] = useState(false);
+  const openEmailModal = () => {
+    setEmailModalVisible(true);
+  };
+  const closeEmailModal = () => {
+    setEmailModalVisible(false);
+  };
 
   useEffect(() => {
     validate();
@@ -82,6 +104,11 @@ export const SignupForm = ({ setIsValid }) => {
     // 전화번호 유효성 검사
     if (!userInfo.phoneNumber) {
       setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
+      valid = false;
+    }
+
+    if (checkNickName === false || checkEmail === false) {
+      valid = false;
     }
 
     setIsValid(valid);
@@ -129,7 +156,7 @@ export const SignupForm = ({ setIsValid }) => {
                 setUserInfo({ ...userInfo, nickName: text })
               }
             />
-            <NarrowButton text="중복확인" />
+            <NarrowButton text="중복확인" onPress={openNickNameModal} />
           </View>
           {nicknameError ? <ErrorText text={nicknameError} /> : null}
         </View>
@@ -142,7 +169,7 @@ export const SignupForm = ({ setIsValid }) => {
               value={userInfo.email}
               onChangeText={(text) => setUserInfo({ ...userInfo, email: text })}
             />
-            <NarrowButton text="중복확인" />
+            <NarrowButton text="중복확인" onPress={openEmailModal} />
           </View>
           {emailError ? <ErrorText text={emailError} /> : null}
         </View>
@@ -181,6 +208,27 @@ export const SignupForm = ({ setIsValid }) => {
           {phoneNumberError ? <ErrorText text={phoneNumberError} /> : null}
         </View>
       </View>
+      <ConfirmationModal
+        visible={nickNameModalVisible}
+        onClose={closeNickNameModal}
+        message={
+          checkNickName
+            ? "사용할 수 있는 닉네임 입니다."
+            : "이미 사용중인 닉네임입니다."
+        }
+        buttonText="닫기"
+      />
+
+      <ConfirmationModal
+        visible={emailModalVisible}
+        onClose={closeEmailModal}
+        message={
+          checkEmail
+            ? "사용할 수 있는 이메일 입니다."
+            : "이미 사용중인 이메일입니다.\n 로그인으로 이동해주세요"
+        }
+        buttonText="닫기"
+      />
     </ScrollView>
   );
 };
