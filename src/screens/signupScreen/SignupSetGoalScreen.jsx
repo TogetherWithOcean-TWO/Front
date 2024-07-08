@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { View, Image, KeyboardAvoidingView } from "react-native";
 import { useRoute } from "@react-navigation/native";
 
@@ -8,23 +8,26 @@ import EStyleSheet from "../../styles/global";
 import { WideButton } from "../../components/common/CustomButton";
 import { CustomInput } from "../../components/common/CustomInput";
 import { SubTitle } from "../../components/common/CustomText";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 function SignupSetGoalScreen() {
   const route = useRoute();
   const navigation = useNavigation();
-  const { selectedCharacter, characterImage } = route.params;
-  const [goal, setGoal] = useState("");
-  const [isValid, setIsValid] = useState(false);
-  const modalRef = useRef();
+  const { characterImage } = route.params;
+
+  const { userInfo, setUserInfo } = useUserInfo();
+
+  const [isValid, setIsValid] = useState(true);
 
   const onlyNumbers = (text) => {
     // 숫자만 입력되도록 필터링
     const numericGoal = text.replace(/[^0-9]/g, "");
-    setGoal(numericGoal);
+    setUserInfo({ ...userInfo, stepGoal: numericGoal });
   };
 
   const done = () => {
     if (isValid) {
+      console.log(userInfo);
       // modalRef.current.showModal();
     }
   };
@@ -41,7 +44,7 @@ function SignupSetGoalScreen() {
           <View style={styles.formGroup}>
             <CustomInput
               placeholder="숫자로만 적어주세요"
-              value={goal}
+              value={userInfo.stepGoal}
               onChangeText={onlyNumbers}
             />
           </View>

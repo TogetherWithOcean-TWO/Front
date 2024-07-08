@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
 import { LabelTitle, ErrorText } from "../common/CustomText";
 import { CustomInput, CustomInputWithButton } from "../common/CustomInput";
 import { NarrowButton } from "../common/CustomButton";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 export const SignupForm = ({ setIsValid }) => {
-  const [name, setName] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const { userInfo, setUserInfo } = useUserInfo();
+
   const [nameError, setNameError] = useState("");
   const [nicknameError, setNicknameError] = useState("");
   const [emailError, setEmailError] = useState("");
@@ -22,17 +18,22 @@ export const SignupForm = ({ setIsValid }) => {
 
   useEffect(() => {
     validate();
-  }, [name, nickname, email, password, confirmPassword, phoneNumber]);
+  }, [
+    userInfo.realName,
+    userInfo.nickName,
+    userInfo.email,
+    userInfo.passwd,
+    userInfo.checkPasswd,
+    userInfo.phoneNumber,
+  ]);
 
   const validate = () => {
     let valid = true;
 
     // 이름 유효성 검사
     if (
-      !name ||
-      name.length < 2 ||
-      name.length > 10 ||
-      /\d|[^\w\s]/.test(name)
+      !userInfo.realName ||
+      !/^[가-힣a-zA-Z]{2,10}$/.test(userInfo.realName)
     ) {
       setNameError("숫자, 특수문자를 제외하고 2~10자로 입력해주세요");
       valid = false;
@@ -42,10 +43,8 @@ export const SignupForm = ({ setIsValid }) => {
 
     // 닉네임 유효성 검사
     if (
-      !nickname ||
-      nickname.length < 2 ||
-      nickname.length > 10 ||
-      /[^\w\s]/.test(nickname)
+      !userInfo.nickName ||
+      !/^[\d가-힣a-zA-Z]{2,10}$/.test(userInfo.nickName)
     ) {
       setNicknameError("특수문자를 제외하고 2~10자로 입력해주세요");
       valid = false;
@@ -54,7 +53,7 @@ export const SignupForm = ({ setIsValid }) => {
     }
 
     // 이메일 유효성 검사
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+    if (!userInfo.email || !/\S+@\S+\.\S+/.test(userInfo.email)) {
       setEmailError("이메일 형식에 맞게 입력해주세요");
       valid = false;
     } else {
@@ -63,12 +62,8 @@ export const SignupForm = ({ setIsValid }) => {
 
     // 비밀번호 유효성 검사
     if (
-      !password ||
-      password.length < 10 ||
-      password.length > 15 ||
-      !/\d/.test(password) ||
-      !/[a-zA-Z]/.test(password) ||
-      !/[^\w\s]/.test(password)
+      !userInfo.passwd ||
+      !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^\w\s]).{10,15}$/.test(userInfo.passwd)
     ) {
       setPasswordError("영문, 숫자, 특수문자 조합 10~15자로 입력해주세요");
       valid = false;
@@ -77,7 +72,7 @@ export const SignupForm = ({ setIsValid }) => {
     }
 
     // 비밀번호 확인 유효성 검사
-    if (password !== confirmPassword) {
+    if (userInfo.checkPasswd !== userInfo.passwd) {
       setConfirmPasswordError("비밀번호가 일치하지 않습니다");
       valid = false;
     } else {
@@ -85,11 +80,11 @@ export const SignupForm = ({ setIsValid }) => {
     }
 
     // 전화번호 유효성 검사
-    if (!phoneNumber) {
+    if (!userInfo.phoneNumber) {
       setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
     }
 
-    setIsValid(true);
+    setIsValid(valid);
   };
 
   const formatPhoneNumber = (text) => {
@@ -99,10 +94,11 @@ export const SignupForm = ({ setIsValid }) => {
       formatted = formatted.replace(/(\d{3})(\d{1,4})/, "$1-$2");
     if (formatted.length >= 8)
       formatted = formatted.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
-    setPhoneNumber(formatted);
+
+    setUserInfo({ ...userInfo, phoneNumber: formatted });
 
     if (!formatted || !/^010-\d{4}-\d{4}$/.test(formatted)) {
-      setPhoneNumberError("01012345678 형식에 맞게 입력해주세요");
+      setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
     } else {
       setPhoneNumberError(" ");
     }
@@ -115,8 +111,10 @@ export const SignupForm = ({ setIsValid }) => {
           <LabelTitle text="이름" />
           <CustomInput
             placeholder="이름을 입력해주세요"
-            value={name}
-            onChangeText={(text) => setName(text)}
+            value={userInfo.realName}
+            onChangeText={(text) =>
+              setUserInfo({ ...userInfo, realName: text })
+            }
           />
           {nameError ? <ErrorText text={nameError} /> : null}
         </View>
@@ -126,8 +124,10 @@ export const SignupForm = ({ setIsValid }) => {
             <CustomInputWithButton
               style={styles.inputWithButtonInput}
               placeholder="닉네임을 입력해주세요"
-              value={nickname}
-              onChangeText={(text) => setNickname(text)}
+              value={userInfo.nickName}
+              onChangeText={(text) =>
+                setUserInfo({ ...userInfo, nickName: text })
+              }
             />
             <NarrowButton text="중복확인" />
           </View>
@@ -139,8 +139,8 @@ export const SignupForm = ({ setIsValid }) => {
             <CustomInputWithButton
               style={styles.inputWithButtonInput}
               placeholder="이메일을 입력해주세요"
-              value={email}
-              onChangeText={(text) => setEmail(text)}
+              value={userInfo.email}
+              onChangeText={(text) => setUserInfo({ ...userInfo, email: text })}
             />
             <NarrowButton text="중복확인" />
           </View>
@@ -150,8 +150,8 @@ export const SignupForm = ({ setIsValid }) => {
           <LabelTitle text="비밀번호" />
           <CustomInput
             placeholder="비밀번호를 입력해주세요"
-            value={password}
-            onChangeText={(text) => setPassword(text)}
+            value={userInfo.passwd}
+            onChangeText={(text) => setUserInfo({ ...userInfo, passwd: text })}
             secure={true}
           />
           {passwordError ? <ErrorText text={passwordError} /> : null}
@@ -160,8 +160,10 @@ export const SignupForm = ({ setIsValid }) => {
           <LabelTitle text="비밀번호 확인" />
           <CustomInput
             placeholder="비밀번호를 한번 더 입력해주세요"
-            value={confirmPassword}
-            onChangeText={(text) => setConfirmPassword(text)}
+            value={userInfo.checkPasswd}
+            onChangeText={(text) =>
+              setUserInfo({ ...userInfo, checkPasswd: text })
+            }
             secure={true}
           />
           {confirmPasswordError ? (
@@ -172,7 +174,7 @@ export const SignupForm = ({ setIsValid }) => {
           <LabelTitle text="전화번호" />
           <CustomInput
             placeholder="전화번호를 입력해주세요"
-            value={phoneNumber}
+            value={userInfo.phoneNumber}
             onChangeText={(text) => formatPhoneNumber(text)}
             maxLength={13}
           />
