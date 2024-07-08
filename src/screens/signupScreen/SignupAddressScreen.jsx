@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -7,12 +7,29 @@ import { MainTitle } from "../../components/common/CustomText";
 import { WideButton } from "../../components/common/CustomButton";
 import { AddressForm } from "../../components/Signup/AddressForm";
 import EStyleSheet from "../../styles/global";
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupAddressScreen() {
   const navigation = useNavigation();
 
+  const [isValid, setIsValid] = useState(false);
+
   const next = () => {
-    navigation.navigate("SignupCharacter");
+    if (isValid) {
+      navigation.navigate("SignupCharacter");
+    } else {
+      openModal();
+    }
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -20,11 +37,17 @@ function SignupAddressScreen() {
       <BackBar navigation={navigation} />
       <View style={styles.container}>
         <MainTitle text="회원가입" />
-        <AddressForm />
+        <AddressForm setIsValid={setIsValid} />
         <View style={styles.button}>
           <WideButton text="다음" onPress={next} />
         </View>
       </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="입력한 정보를 확인해주세요."
+        buttonText="닫기"
+      />
     </KeyboardAvoidingView>
   );
 }

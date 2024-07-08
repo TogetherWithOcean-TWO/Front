@@ -12,12 +12,11 @@ function LoginScreen() {
   const navigation = useNavigation();
 
   const navigateToMainScreen = () => {
-    // navigation.navigate("Main");
-    // navigation.navigate("Findforlogin");
+    navigation.navigate("MainScreen");
   };
 
   const navigateToKakaoLoginScreen = () => {
-    // navigation.navigate("KakaoLogin");
+    navigation.navigate("MainScreen");
   };
   const navigateToFindForLoginScreen = () => {
     navigation.navigate("Findforlogin");
