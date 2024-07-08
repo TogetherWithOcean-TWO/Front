@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import { FindIdModal } from "./Modal";
 import { WideButton, NarrowButton } from "../../common/CustomButton";
 import { LabelTitle, ErrorText } from "../../common/CustomText";
 import { CustomInput, CustomInputWithButton } from "../../common/CustomInput";

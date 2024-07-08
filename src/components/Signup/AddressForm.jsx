@@ -4,9 +4,28 @@ import { CustomInput } from "../common/CustomInput";
 import EStyleSheet from "../../styles/global";
 import Icon from "react-native-vector-icons/Foundation";
 import { useUserInfo } from "../../contexts/UserInfoContext";
+import { useEffect } from "react";
 
-export const AddressForm = () => {
+export const AddressForm = ({ setIsValid }) => {
   const { userInfo, setUserInfo } = useUserInfo();
+
+  useEffect(() => {
+    validate();
+  }, [userInfo.postalNumber, userInfo.address, userInfo.detailAddress]);
+
+  const validate = () => {
+    let valid = true;
+
+    if (
+      userInfo.postalNumber === "" ||
+      userInfo.address === "" ||
+      userInfo.detailAddress === ""
+    ) {
+      valid = false;
+    }
+
+    setIsValid(valid);
+  };
 
   return (
     <View>
