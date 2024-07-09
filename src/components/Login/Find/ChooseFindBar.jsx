@@ -45,6 +45,7 @@ const styles = EStyleSheet.create({
   basic: {
     fontSize: 25,
     color: "$Gray02",
+    fontFamily: "Pretendard",
   },
   basicView: {
     marginLeft: 23,
@@ -53,6 +54,8 @@ const styles = EStyleSheet.create({
     fontSize: 25,
     color: "$Blue01",
     fontWeight: "bold",
+    fontFamily: "Pretendard",
+    paddingBottom: 2,
   },
   selecView: {
     marginLeft: 23,
