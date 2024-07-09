@@ -21,7 +21,7 @@ const SplashScreen = ({ navigation }) => {
       </View>
       <View style={styles.buttonContainer}>
         <WideButton text="시작하기" onPress={navigateToSignUpScreen} />
-        <FooterText text="이미 회원이에요" onPress={navigateToLoginScreen} />
+        <FooterText text="이미 회원이에요!" onPress={navigateToLoginScreen} />
       </View>
     </View>
   );
