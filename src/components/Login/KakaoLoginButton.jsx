@@ -21,5 +21,6 @@ const styles = EStyleSheet.create({
   text: {
     color: "#000000",
     fontWeight: "bold",
+    fontFamily: "Pretendard",
   },
 });
