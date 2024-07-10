@@ -5,32 +5,40 @@ import dolphin from "../../assets/images/charactor/dolphin.png";
 import fish from "../../assets/images/charactor/fish.png";
 import seal from "../../assets/images/charactor/seal.png";
 import turtle from "../../assets/images/charactor/turtle.png";
-import { useEffect } from "react";
 
-export const CharactorForm = ({
-  selectedCharacter,
-  handleCharacterSelect,
-  setCharacterImage,
-}) => {
+import { useEffect } from "react";
+import { useUserInfo } from "../../contexts/UserInfoContext";
+
+export const CharactorForm = ({ setCharacterImage }) => {
+  const { userInfo, setUserInfo } = useUserInfo();
+
+  /**
+   * userInfo.charId
+   * 0 seal
+   * 1 dolphin
+   * 2 turtle
+   * 3 fish
+   */
+
   useEffect(() => {
     // 선택된 캐릭터에 따라 이미지를 설정
-    switch (selectedCharacter) {
-      case "seal":
+    switch (userInfo.charId) {
+      case 0:
         setCharacterImage(seal);
         break;
-      case "dolphin":
+      case 1:
         setCharacterImage(dolphin);
         break;
-      case "turtle":
+      case 2:
         setCharacterImage(turtle);
         break;
-      case "fish":
+      case 3:
         setCharacterImage(fish);
         break;
       default:
-        setCharacterImage;
+        break;
     }
-  }, [selectedCharacter]);
+  }, [userInfo.charId]);
   return (
     <View>
       <View style={styles.character}>
@@ -38,18 +46,18 @@ export const CharactorForm = ({
           <TouchableOpacity
             style={[
               styles.button,
-              selectedCharacter === "seal" && styles.selectedButton,
+              userInfo.charId === 0 && styles.selectedButton,
             ]}
-            onPress={() => handleCharacterSelect("seal")}
+            onPress={() => setUserInfo({ ...userInfo, charId: 0 })}
           >
             <Image style={styles.image} source={seal} />
           </TouchableOpacity>
           <TouchableOpacity
             style={[
               styles.button,
-              selectedCharacter === "dolphin" && styles.selectedButton,
+              userInfo.charId === 1 && styles.selectedButton,
             ]}
-            onPress={() => handleCharacterSelect("dolphin")}
+            onPress={() => setUserInfo({ ...userInfo, charId: 1 })}
           >
             <Image style={styles.image} source={dolphin} />
           </TouchableOpacity>
@@ -58,18 +66,18 @@ export const CharactorForm = ({
           <TouchableOpacity
             style={[
               styles.button,
-              selectedCharacter === "turtle" && styles.selectedButton,
+              userInfo.charId === 2 && styles.selectedButton,
             ]}
-            onPress={() => handleCharacterSelect("turtle")}
+            onPress={() => setUserInfo({ ...userInfo, charId: 2 })}
           >
             <Image style={styles.image} source={turtle} />
           </TouchableOpacity>
           <TouchableOpacity
             style={[
               styles.button,
-              selectedCharacter === "fish" && styles.selectedButton,
+              userInfo.charId === 3 && styles.selectedButton,
             ]}
-            onPress={() => handleCharacterSelect("fish")}
+            onPress={() => setUserInfo({ ...userInfo, charId: 3 })}
           >
             <Image style={styles.image} source={fish} />
           </TouchableOpacity>
