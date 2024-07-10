@@ -8,12 +8,16 @@ import SignupAddressScreen from "./src/screens/signupScreen/SignupAddressScreen"
 import SignupCharacterScreen from "./src/screens/signupScreen/SignupCharacterScreen";
 import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacterNameScreen";
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
+import HomeScreen from "./src/screens/HomeScreen"; 
+
+
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator initialRouteName="SplashScreen">
+        {/** */}
         <Stack.Screen
           name="SplashScreen"
           component={SplashScreen}
@@ -58,7 +62,15 @@ const App = () => {
           component={SignupSetGoalScreen}
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: false }}
+        />  
+        
       </Stack.Navigator>
+      
     </NavigationContainer>
   );
 };
