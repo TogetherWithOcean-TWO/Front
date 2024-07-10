@@ -9,6 +9,7 @@ import SignupCharacterScreen from "./src/screens/signupScreen/SignupCharacterScr
 import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacterNameScreen";
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
+import StoreScreen from "./src/screens/storeScreen/StoreScreen";
 
 const Stack = createStackNavigator();
 
@@ -16,7 +17,7 @@ const App = () => {
   return (
     <UserInfoProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Navigator initialRouteName="StoreScreen">
           <Stack.Screen
             name="SplashScreen"
             component={SplashScreen}
@@ -59,6 +60,11 @@ const App = () => {
           <Stack.Screen
             name="SignupSetGoal"
             component={SignupSetGoalScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="StoreScreen"
+            component={StoreScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
