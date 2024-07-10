@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
   navbar: {
     marginBottom: 5,
   },
+<<<<<<< Updated upstream
   backIcon: {
     width: 20,
     height: 20,
@@ -108,6 +109,13 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
+=======
+  button: {
+    bottom: 0,
+    height: "50%",
+    flex : "1", /*이화면만 버튼 밑에 공간 있어서 추가했습니다요*/ 
+    justifyContent: "flex-end",
+>>>>>>> Stashed changes
   },
 });
 
