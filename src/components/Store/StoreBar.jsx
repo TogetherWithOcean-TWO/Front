@@ -34,7 +34,7 @@ export const StoreBar = (props) => {
           악기
         </Text>
       </View>
-      <View
+      {/* <View
         style={
           props.category === "emotion" ? styles.selecView : styles.basicView
         }
@@ -45,7 +45,7 @@ export const StoreBar = (props) => {
         >
           감정
         </Text>
-      </View>
+      </View> */}
 
       <View
         style={
