@@ -9,6 +9,7 @@ export const WideButton = ({ text, onPress, backgroundColor, textColor}) => {
       onPress={onPress}
     >
       <Text style={[styles.text, { color: textColor ? textColor : EStyleSheet.value("$White01") }]}>{text}</Text>
+
     </TouchableOpacity>
   );
 };
@@ -40,6 +41,7 @@ const styles = EStyleSheet.create({
     justifyContent: "center",
     borderRadius: 10,
   },
+
   text: {
     color: "$White01",
     fontSize: "15px",
@@ -58,5 +60,6 @@ const styles = EStyleSheet.create({
     width: "50%",
     height: 50,
     marginHorizontal : 5
+
   },
 });

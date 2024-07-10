@@ -1,55 +1,69 @@
-import React from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image,KeyboardAvoidingView } from 'react-native';
-import backIcon from '../../assets/images/back.png';
-import searchIcon from '../../assets/images/search.png';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import { View, KeyboardAvoidingView } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+import { BackBar } from "../../components/common/CustomBar";
+import { MainTitle } from "../../components/common/CustomText";
+import { WideButton } from "../../components/common/CustomButton";
+import { AddressForm } from "../../components/Signup/AddressForm";
+import EStyleSheet from "../../styles/global";
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupAddressScreen() {
-    const navigation = useNavigation();
+  const navigation = useNavigation();
+
+  const [isValid, setIsValid] = useState(false);
+
+  const next = () => {
+    if (isValid) {
+      navigation.navigate("SignupCharacter");
+    } else {
+      openModal();
+    }
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
 
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
-    <View style={styles.container}>
-      <View style={styles.navbar}>
-        <TouchableOpacity onPress={() =>navigation.goBack()}>
-          <Image source={backIcon} style={styles.backIcon} />
-        </TouchableOpacity>
+      <BackBar navigation={navigation} />
+      <View style={styles.container}>
+        <MainTitle text="회원가입" />
+        <AddressForm setIsValid={setIsValid} />
+        <View style={styles.button}>
+          <WideButton text="다음" onPress={next} />
+        </View>
       </View>
-        <Text style={styles.title}>회원가입</Text>
-      <View style={styles.form}>
-        <View style={styles.formGroup}>
-          <Text style={styles.label}>주소</Text>
-          <View style={styles.inputWithButton}>
-            <TextInput style={styles.input} placeholderTextColor='#A8A8A8' placeholder="우편번호" />
-            <TouchableOpacity style={styles.searchButton} onPress={() => { /* 검색 */ }}>
-                <Image source={searchIcon} style={styles.searchIcon} />
-            </TouchableOpacity>
-          </View>
-          <TextInput style={styles.input} placeholderTextColor='#A8A8A8' placeholder="기본 주소"  />
-          <TextInput style={styles.input} placeholderTextColor='#A8A8A8' placeholder="상세 주소를 입력해주세요"  />
-        </View>        
-        <Text style={styles.info}>쓰레기 봉투를 배급 받으실 주소를 입력해주세요 :)</Text>
-      </View>
-      <View style={styles.footer}>
-        <TouchableOpacity style={styles.submitButton} onPress={() => navigation.navigate('SignupCharacter')}>
-          <Text style={styles.submitButtonText}>다음</Text>
-        </TouchableOpacity>
-      </View>
-    </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="입력한 정보를 확인해주세요."
+        buttonText="닫기"
+      />
     </KeyboardAvoidingView>
   );
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   container: {
-    padding: 20,
+    padding: 25,
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "$White01",
   },
-  navbar: {
-    marginBottom: 5,
+
+  info: {
+    color: "$Blue01",
+    fontWeight: "bold",
+    marginLeft: 15,
   },
-<<<<<<< Updated upstream
   backIcon: {
     width: 20,
     height: 20,
@@ -109,14 +123,15 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 16,
     fontWeight: 'bold',
-=======
+  },
   button: {
     bottom: 0,
     height: "50%",
     flex : "1", /*이화면만 버튼 밑에 공간 있어서 추가했습니다요*/ 
     justifyContent: "flex-end",
->>>>>>> Stashed changes
+
   },
-});
+}
+);
 
 export default SignupAddressScreen;
