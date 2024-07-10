@@ -37,7 +37,7 @@ export const BackBarWithPoint = ({ navigation }) => {
         onPress={goBackScreen}
       />
       <View style={styles.pointView}>
-        <PointIcon name="coins" size={15} onPress={goBackScreen} />
+        <PointIcon style={styles.pointIcon} name="coins" size={15} />
         <Text style={styles.text}>{userInfo.point}</Text>
       </View>
     </View>
@@ -86,7 +86,10 @@ const styles = EStyleSheet.create({
   text: {
     fontFamily: "Pretendard",
     fontSize: 15,
-    fontWeight: 550,
+    fontWeight: "bold",
     color: "$Blue01",
+  },
+  pointIcon: {
+    left: -5,
   },
 });
