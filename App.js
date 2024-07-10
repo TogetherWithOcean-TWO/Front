@@ -9,6 +9,7 @@ import SignupCharacterScreen from "./src/screens/signupScreen/SignupCharacterScr
 import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacterNameScreen";
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
 import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
+
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 
 const Stack = createStackNavigator();
@@ -67,6 +68,7 @@ const App = () => {
           component={WalkingScreen}
           options={{ headerShown: false }}
         />
+
         </Stack.Navigator>
       </NavigationContainer>
     </UserInfoProvider>

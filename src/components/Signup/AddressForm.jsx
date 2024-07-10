@@ -35,7 +35,6 @@ export const AddressForm = ({ setIsValid }) => {
       <View style={[styles.inputWithButton, styles.formGroup]}>
         <CustomInput
           placeholder="우편번호"
-
           value={userInfo.postalNumber}
           onChangeText={(text) =>
             setUserInfo({ ...userInfo, postalNumber: text })
@@ -53,7 +52,6 @@ export const AddressForm = ({ setIsValid }) => {
       <View style={styles.formGroup}>
         <CustomInput
           placeholder="기본 주소"
-
           value={userInfo.address}
           onChangeText={(text) => setUserInfo({ ...userInfo, address: text })}
         />
@@ -61,7 +59,6 @@ export const AddressForm = ({ setIsValid }) => {
       <View style={styles.formGroup}>
         <CustomInput
           placeholder="상세 주소를 입력해주세요"
-
           value={userInfo.detailAddress}
           onChangeText={(text) =>
             setUserInfo({ ...userInfo, detailAddress: text })

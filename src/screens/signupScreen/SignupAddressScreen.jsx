@@ -64,72 +64,16 @@ const styles = EStyleSheet.create({
     fontWeight: "bold",
     marginLeft: 15,
   },
-  backIcon: {
-    width: 20,
-    height: 20,
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    marginVertical: 10,
-    marginHorizontal : 10
-  },
-  form: {
-    flex: 1,
-  },
-  formGroup: {
-    marginHorizontal: 10,
-    marginVertical : 5
-  },
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-    marginLeft : 5,
-    color : '#032661',
-    fontWeight: 'bold',
-  },
-  input: {
-    backgroundColor : '#EDF0F4',
-    padding: 15,
-    borderRadius: 10,
-    marginBottom : 20
-  },
-  inputWithButton : {
-    position : 'relative',
-  },
-  searchButton : {
-    position : 'absolute',
-    right : 10,
-    padding : 10
-  },
-  info : {
-    color : '#032661',
-    fontWeight : 'bold',
-    marginLeft : 15
-  },
-  footer: {
-    marginTop: 20,
-    flexDirection: 'row',
-    justifyContent: 'center',
-  },
-  submitButton: {
-    backgroundColor: '#032661',
-    padding: 20,
-    borderRadius: 10,
-    width: '100%',
-  },
-  submitButtonText: {
-    color: 'white',
-    textAlign: 'center',
-    fontSize: 16,
-    fontWeight: 'bold',
+  button: {
+    bottom: 0,
+    height: "50%",
+    justifyContent: "flex-end",
   },
   button: {
     bottom: 0,
     height: "50%",
     flex : "1", /*이화면만 버튼 밑에 공간 있어서 추가했습니다요*/ 
     justifyContent: "flex-end",
-
   },
 }
 );
