@@ -20,7 +20,7 @@ function StoreScreen({ navigation }) {
       </View>
       <View style={styles.storeMain}>
         <StoreBar setCategory={setCategory} category={category} />
-        <StoreForm />
+        <StoreForm category={category} />
       </View>
     </View>
   );
@@ -29,6 +29,7 @@ function StoreScreen({ navigation }) {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "$White01",
   },
   titleView: {
     display: "flex",
