@@ -8,6 +8,8 @@ import SignupAddressScreen from "./src/screens/signupScreen/SignupAddressScreen"
 import SignupCharacterScreen from "./src/screens/signupScreen/SignupCharacterScreen";
 import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacterNameScreen";
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
+import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
+
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
 
@@ -62,6 +64,12 @@ const App = () => {
             component={SignupSetGoalScreen}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Walking"
+            component={WalkingScreen}
+            options={{ headerShown: false }}
+          />
+
           <Stack.Screen
             name="StoreScreen"
             component={StoreScreen}
