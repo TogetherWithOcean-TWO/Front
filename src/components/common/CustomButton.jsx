@@ -10,6 +10,7 @@ export const WideButton = ({ text, onPress, backgroundColor, textColor}) => {
     >
       <Text style={[styles.text, { color: textColor ? textColor : EStyleSheet.value("$White01") }]}>{text}</Text>
 
+
     </TouchableOpacity>
   );
 };
@@ -29,6 +30,7 @@ export const NarrowButton = ({ text, onPress }) => {
 export const HalfButton = ({ text, onPress }) => {
   return (
     <TouchableOpacity style={[styles.button, styles.halfButton]} onPress={onPress}>
+
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -58,8 +60,7 @@ const styles = EStyleSheet.create({
   },
   halfButton: {
     width: "50%",
-    height: 50,
-    marginHorizontal : 5
+    height: 50,    marginHorizontal : 5
 
   },
 });
