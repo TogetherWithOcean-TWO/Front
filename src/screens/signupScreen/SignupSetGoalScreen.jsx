@@ -24,9 +24,15 @@ function SignupSetGoalScreen() {
   };
 
   const done = () => {
-    if (isValid) {
+    //if (isValid) {
       // modalRef.current.showModal();
-    }
+    //}
+    navigation.navigate("HomeScreen", {
+      selectedCharacter,
+      characterImage,
+      goal,
+    });
+
   };
 
   return (
