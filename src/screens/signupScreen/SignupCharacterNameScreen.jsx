@@ -8,29 +8,30 @@ import EStyleSheet from "../../styles/global";
 import { WideButton } from "../../components/common/CustomButton";
 import { CustomInput } from "../../components/common/CustomInput";
 import { SubTitle, ErrorText } from "../../components/common/CustomText";
+import { useUserInfo } from "../../contexts/UserInfoContext";
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupCharacterNameScreen() {
   const route = useRoute();
   const navigation = useNavigation();
 
-  const { selectedCharacter, characterImage } = route.params;
-  const [name, setName] = useState("");
+  const { userInfo, setUserInfo } = useUserInfo();
+
+  const { characterImage } = route.params;
 
   const [nameError, setNameError] = useState("");
   const [isValid, setIsValid] = useState(false);
 
   useEffect(() => {
     validate();
-  }, [name]);
+  }, [userInfo.charName]);
 
   const validate = () => {
     let valid = true;
     // 이름 유효성 검사
     if (
-      !name ||
-      name.length < 2 ||
-      name.length > 10 ||
-      /\d|[^\w\s]/.test(name)
+      !userInfo.charName ||
+      !/^[가-힣a-zA-Z]{2,10}$/.test(userInfo.charName)
     ) {
       setNameError("숫자, 특수문자를 제외하고 2~10자로 입력해주세요");
       valid = false;
@@ -40,14 +41,23 @@ function SignupCharacterNameScreen() {
     setIsValid(valid);
   };
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
   const next = () => {
     if (isValid) {
       navigation.navigate("SignupSetGoal", {
-        selectedCharacter,
         characterImage,
       });
     } else {
-      Alert.alert("입력한 정보를 확인해주세요.");
+      openModal();
     }
   };
 
@@ -63,8 +73,10 @@ function SignupCharacterNameScreen() {
           <View style={styles.formGroup}>
             <CustomInput
               placeholder="띄어쓰기 없이 적어주세요 ex)수달이"
-              value={name}
-              onChangeText={(text) => setName(text)}
+              value={userInfo.charName}
+              onChangeText={(text) =>
+                setUserInfo({ ...userInfo, charName: text })
+              }
             />
             {nameError ? <ErrorText text={nameError} /> : null}
           </View>
@@ -73,6 +85,12 @@ function SignupCharacterNameScreen() {
           <WideButton text="다음" onPress={next} />
         </View>
       </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="캐릭터 이름을 다시 입력해주세요"
+        buttonText="닫기"
+      />
     </KeyboardAvoidingView>
   );
 }
