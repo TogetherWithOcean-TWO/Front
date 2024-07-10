@@ -1,12 +1,15 @@
-import { View, Alert, KeyboardAvoidingView } from "react-native";
+import { React, useState } from "react";
+import { View, KeyboardAvoidingView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+
 import EStyleSheet from "../../styles/global";
 
-import { BackBar, LogoBar } from "../../components/common/CustomBar";
+import { BackBar } from "../../components/common/CustomBar";
 import { MainTitle } from "../../components/common/CustomText";
 import { SignupForm } from "../../components/Signup/SignupForm";
 import { WideButton } from "../../components/common/CustomButton";
-import { React, useState } from "react";
+
+import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupScreen() {
   const navigation = useNavigation();
@@ -17,8 +20,18 @@ function SignupScreen() {
     if (isValid) {
       navigation.navigate("SignupAddress");
     } else {
-      Alert.alert("입력한 정보를 확인해주세요.");
+      openModal();
     }
+  };
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
   };
 
   return (
@@ -29,6 +42,12 @@ function SignupScreen() {
         <SignupForm setIsValid={setIsValid} />
         <WideButton text="다음" onPress={next} disabled={!isValid} />
       </View>
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="입력한 정보를 확인해주세요."
+        buttonText="닫기"
+      />
     </KeyboardAvoidingView>
   );
 }
