@@ -1,14 +1,32 @@
-import { View, TouchableOpacity } from "react-native";
+import { View, TouchableOpacity, Image } from "react-native";
 import { LabelTitle } from "../common/CustomText";
 import { CustomInput } from "../common/CustomInput";
 import EStyleSheet from "../../styles/global";
-import { useState } from "react";
 import Icon from "react-native-vector-icons/Foundation";
+import { useUserInfo } from "../../contexts/UserInfoContext";
+import { useEffect } from "react";
 
-export const AddressForm = () => {
-  const [basicAddress, setBasicAddress] = useState("");
-  const [detailedAddress, setDetailedAddress] = useState("");
-  const [postalNumber, setPostalNumber] = useState("");
+export const AddressForm = ({ setIsValid }) => {
+  const { userInfo, setUserInfo } = useUserInfo();
+
+  useEffect(() => {
+    validate();
+  }, [userInfo.postalNumber, userInfo.address, userInfo.detailAddress]);
+
+  const validate = () => {
+    let valid = true;
+
+    if (
+      userInfo.postalNumber === "" ||
+      userInfo.address === "" ||
+      userInfo.detailAddress === ""
+    ) {
+      valid = false;
+    }
+
+    setIsValid(valid);
+  };
+
   return (
     <View>
       <View style={styles.label}>
@@ -17,8 +35,11 @@ export const AddressForm = () => {
       <View style={[styles.inputWithButton, styles.formGroup]}>
         <CustomInput
           placeholder="우편번호"
-          value={postalNumber}
-          onChangeText={(text) => setPostalNumber(text)}
+
+          value={userInfo.postalNumber}
+          onChangeText={(text) =>
+            setUserInfo({ ...userInfo, postalNumber: text })
+          }
         />
         <TouchableOpacity
           style={styles.searchButton}
@@ -32,15 +53,19 @@ export const AddressForm = () => {
       <View style={styles.formGroup}>
         <CustomInput
           placeholder="기본 주소"
-          value={basicAddress}
-          onChangeText={(text) => setBasicAddress(text)}
+
+          value={userInfo.address}
+          onChangeText={(text) => setUserInfo({ ...userInfo, address: text })}
         />
       </View>
       <View style={styles.formGroup}>
         <CustomInput
           placeholder="상세 주소를 입력해주세요"
-          value={detailedAddress}
-          onChangeText={(text) => setDetailedAddress(text)}
+
+          value={userInfo.detailAddress}
+          onChangeText={(text) =>
+            setUserInfo({ ...userInfo, detailAddress: text })
+          }
         />
       </View>
       <LabelTitle text="쓰레기 봉투를 배급 받으실 주소를 입력해주세요 :)" />
