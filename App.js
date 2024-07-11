@@ -12,14 +12,14 @@ import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
-
+import CharactorCustomScreen from "./src/screens/charactorCustomScreen/CharactorCustomScreen";
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <UserInfoProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="StoreScreen">
+        <Stack.Navigator initialRouteName="CharactorCustomScreen">
           <Stack.Screen
             name="SplashScreen"
             component={SplashScreen}
@@ -73,6 +73,11 @@ const App = () => {
           <Stack.Screen
             name="StoreScreen"
             component={StoreScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="CharactorCustomScreen"
+            component={CharactorCustomScreen}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
