@@ -19,7 +19,7 @@ const App = () => {
   return (
     <UserInfoProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="StoreScreen">
+        <Stack.Navigator initialRouteName="SplashScreen">
           <Stack.Screen
             name="SplashScreen"
             component={SplashScreen}
