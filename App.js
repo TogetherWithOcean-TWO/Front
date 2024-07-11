@@ -11,6 +11,7 @@ import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen"
 import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
+import StoreScreen from "./src/screens/storeScreen/StoreScreen";
 
 const Stack = createStackNavigator();
 
@@ -64,11 +65,16 @@ const App = () => {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-          name="Walking"
-          component={WalkingScreen}
-          options={{ headerShown: false }}
-        />
+            name="Walking"
+            component={WalkingScreen}
+            options={{ headerShown: false }}
+          />
 
+          <Stack.Screen
+            name="StoreScreen"
+            component={StoreScreen}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </UserInfoProvider>
