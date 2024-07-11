@@ -1,14 +1,15 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { View, Image, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import EStyleSheet from "../../styles/global";
 import logo from "../../assets/images/logo.png";
+import { useUserInfo } from "../../contexts/UserInfoContext";
+import PointIcon from "react-native-vector-icons/FontAwesome5";
 
 export const BackBar = ({ navigation }) => {
   const goBackScreen = () => {
     navigation.goBack();
   };
-
   return (
     <View style={styles.bar}>
       <Icon
@@ -17,6 +18,28 @@ export const BackBar = ({ navigation }) => {
         size={32}
         onPress={goBackScreen}
       />
+    </View>
+  );
+};
+
+export const BackBarWithPoint = ({ navigation }) => {
+  const { userInfo } = useUserInfo();
+
+  const goBackScreen = () => {
+    navigation.goBack();
+  };
+  return (
+    <View style={styles.bar}>
+      <Icon
+        style={styles.leftArrow}
+        name="chevron-back-outline"
+        size={32}
+        onPress={goBackScreen}
+      />
+      <View style={styles.pointView}>
+        <PointIcon name="coins" size={15} onPress={goBackScreen} />
+        <Text style={styles.text}>{userInfo.point}</Text>
+      </View>
     </View>
   );
 };
@@ -45,5 +68,25 @@ const styles = EStyleSheet.create({
     width: 40,
     height: 40,
     left: 30,
+  },
+  pointView: {
+    display: "flex",
+    flexDirection: "row",
+    position: "absolute",
+    width: 100,
+    height: 40,
+    right: 20,
+    top: 55,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: "$Blue01",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  text: {
+    fontFamily: "Pretendard",
+    fontSize: 15,
+    fontWeight: 550,
+    color: "$Blue01",
   },
 });
