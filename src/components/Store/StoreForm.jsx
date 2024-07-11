@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
 import { ItemBox } from "./ItemBox";
 import { sea } from "../../constants/storeItem/sea";
@@ -81,5 +81,6 @@ const styles = EStyleSheet.create({
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-around",
+    height: "100%",
   },
 });
