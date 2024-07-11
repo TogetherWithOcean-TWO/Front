@@ -12,12 +12,12 @@ export const UserInfoProvider = ({ children }) => {
     passwd: "",
     checkPasswd: "",
     phoneNumber: "",
-    postalNumber: "",
+    postalCode: "",
     address: "",
     detailAddress: "",
     charId: "",
     charName: "",
-    stepGoal: "",
+    stepGoal: 0,
 
     // 포인트
     point: 10000,
