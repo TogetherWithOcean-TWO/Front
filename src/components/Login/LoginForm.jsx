@@ -4,23 +4,22 @@ import { CustomInput } from "../common/CustomInput";
 
 import EStyleSheet from "../../styles/global";
 
-export const LoginForm = () => {
-  const [userName, setUserName] = useState("");
-  const [password, setPassword] = useState("");
+export const LoginForm = (params) => {
   return (
     <View style={styles.form}>
       <View style={styles.formGroup}>
         <CustomInput
-          placeholder="username"
-          value={userName}
-          onChangeText={(text) => setUserName(text)}
+          placeholder="email"
+          value={params.email}
+          onChangeText={(text) => params.setEmail(text)}
         />
       </View>
       <View style={styles.formGroup}>
         <CustomInput
           placeholder="password"
-          value={password}
-          onChangeText={(text) => setPassword(text)}
+          value={params.passwd}
+          secure={true}
+          onChangeText={(text) => params.setPasswd(text)}
         />
       </View>
     </View>
