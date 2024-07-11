@@ -50,10 +50,10 @@ const styles = EStyleSheet.create({
     marginTop: 5,
     fontSize: 12,
   },
-  InfoText : {
-    color : "$Blue01",
-    fontSize : 16,
-    fontWeight : "bold",
-    textAlign : "center"
-  }
+  InfoText: {
+    color: "$Blue01",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });

@@ -3,9 +3,8 @@ import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
 import PointIcon from "react-native-vector-icons/FontAwesome5";
 import { ConfirmationModal, TwoConfirmationModal } from "../common/Modal";
-import { getImageSource } from "./utils";
+import { getImageSource } from "../common/CommonUtils";
 import { useUserInfo } from "../../contexts/UserInfoContext";
-
 export const ItemBox = (props) => {
   const { category, item } = props;
   const imageSource = getImageSource(category, item.name);
