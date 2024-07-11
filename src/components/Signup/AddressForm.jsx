@@ -11,13 +11,13 @@ export const AddressForm = ({ setIsValid }) => {
 
   useEffect(() => {
     validate();
-  }, [userInfo.postalNumber, userInfo.address, userInfo.detailAddress]);
+  }, [userInfo.postalCode, userInfo.address, userInfo.detailAddress]);
 
   const validate = () => {
     let valid = true;
 
     if (
-      userInfo.postalNumber === "" ||
+      userInfo.postalCode === "" ||
       userInfo.address === "" ||
       userInfo.detailAddress === ""
     ) {
@@ -35,9 +35,9 @@ export const AddressForm = ({ setIsValid }) => {
       <View style={[styles.inputWithButton, styles.formGroup]}>
         <CustomInput
           placeholder="우편번호"
-          value={userInfo.postalNumber}
+          value={userInfo.postalCode}
           onChangeText={(text) =>
-            setUserInfo({ ...userInfo, postalNumber: text })
+            setUserInfo({ ...userInfo, postalCode: text })
           }
         />
         <TouchableOpacity

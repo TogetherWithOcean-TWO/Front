@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { View } from "react-native";
 import FooterText from "../../components/Splash/FooterText";
 import { WideButton } from "../../components/common/CustomButton";
 import EStyleSheet from "../../styles/global";
 import { LogoWithText } from "../../components/common/Logo";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 const SplashScreen = ({ navigation }) => {
   const navigateToLoginScreen = () => {
@@ -14,6 +15,37 @@ const SplashScreen = ({ navigation }) => {
     navigation.navigate("Signup");
   };
 
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", () => {
+      // 화면이 포커스를 받을 때 실행되는 코드
+      resetUserInfo();
+    });
+
+    return unsubscribe;
+  }, [navigation]);
+
+  //userinfo 새롭게 세팅
+  const { userInfo, setUserInfo } = useUserInfo();
+  const resetUserInfo = () => {
+    setUserInfo({
+      //회원가입 컴포넌트
+      realName: "",
+      nickname: "",
+      email: "",
+      passwd: "",
+      checkPasswd: "",
+      phoneNumber: "",
+      postalCode: "",
+      address: "",
+      detailAddress: "",
+      charId: "",
+      charName: "",
+      stepGoal: 0,
+
+      // 포인트
+      point: 10000,
+    });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
