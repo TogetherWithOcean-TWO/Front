@@ -1,167 +1,74 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
 import PointIcon from "react-native-vector-icons/FontAwesome5";
-
-const getImageSource = (category, itemName) => {
-  switch (category) {
-    case "sea":
-      switch (itemName) {
-        case "nemo":
-          return require("../../assets/images/storeItem/sea/nemo.png");
-        case "shark":
-          return require("../../assets/images/storeItem/sea/shark.png");
-        case "clam":
-          return require("../../assets/images/storeItem/sea/clam.png");
-        case "conch":
-          return require("../../assets/images/storeItem/sea/conch.png");
-        case "seaweed":
-          return require("../../assets/images/storeItem/sea/seaweed.png");
-        case "shirimp":
-          return require("../../assets/images/storeItem/sea/shirimp.png");
-        case "squid":
-          return require("../../assets/images/storeItem/sea/squid.png");
-        case "crab":
-          return require("../../assets/images/storeItem/sea/crab.png");
-        case "threeFishs":
-          return require("../../assets/images/storeItem/sea/threeFishs.png");
-        default:
-          return null;
-      }
-    case "instrument":
-      switch (itemName) {
-        case "bell":
-          return require("../../assets/images/storeItem/instrument/bell.png");
-        case "drum":
-          return require("../../assets/images/storeItem/instrument/drum.png");
-        case "guitar":
-          return require("../../assets/images/storeItem/instrument/guitar.png");
-        case "melodeon":
-          return require("../../assets/images/storeItem/instrument/melodeon.png");
-        case "microphone":
-          return require("../../assets/images/storeItem/instrument/microphone.png");
-        case "recorder":
-          return require("../../assets/images/storeItem/instrument/recorder.png");
-        case "tambourine":
-          return require("../../assets/images/storeItem/instrument/tambourine.png");
-        case "trumpet":
-          return require("../../assets/images/storeItem/instrument/trumpet.png");
-        case "violin":
-          return require("../../assets/images/storeItem/instrument/violin.png");
-        default:
-          return null;
-      }
-    case "background":
-      switch (itemName) {
-        case "beachBall":
-          return require("../../assets/images/storeItem/background/beachBall.png");
-        case "parasol":
-          return require("../../assets/images/storeItem/background/parasol.png");
-        case "diamond":
-          return require("../../assets/images/storeItem/background/diamond.png");
-        case "bonfire":
-          return require("../../assets/images/storeItem/background/bonfire.png");
-        case "star":
-          return require("../../assets/images/storeItem/background/star.png");
-        case "sunglasses":
-          return require("../../assets/images/storeItem/background/sunglasses.png");
-        case "broomstick":
-          return require("../../assets/images/storeItem/background/broomstick.png");
-        case "sandCastle":
-          return require("../../assets/images/storeItem/background/sandCastle.png");
-        case "hat":
-          return require("../../assets/images/storeItem/background/hat.png");
-        default:
-          return null;
-      }
-    case "fruit":
-      switch (itemName) {
-        case "banana":
-          return require("../../assets/images/storeItem/fruit/banana.png");
-        case "coconut":
-          return require("../../assets/images/storeItem/fruit/coconut.png");
-        case "lemon":
-          return require("../../assets/images/storeItem/fruit/lemon.png");
-        case "mango":
-          return require("../../assets/images/storeItem/fruit/mango.png");
-        case "orange":
-          return require("../../assets/images/storeItem/fruit/orange.png");
-        case "peach":
-          return require("../../assets/images/storeItem/fruit/peach.png");
-        case "pear":
-          return require("../../assets/images/storeItem/fruit/pear.png");
-        case "pineapple":
-          return require("../../assets/images/storeItem/fruit/pineapple.png");
-        case "watermelon":
-          return require("../../assets/images/storeItem/fruit/watermelon.png");
-        default:
-          return null;
-      }
-    case "food":
-      switch (itemName) {
-        case "cake":
-          return require("../../assets/images/storeItem/food/cake.png");
-        case "croissant":
-          return require("../../assets/images/storeItem/food/croissant.png");
-        case "hamburgur":
-          return require("../../assets/images/storeItem/food/hamburgur.png");
-        case "parfait":
-          return require("../../assets/images/storeItem/food/parfait.png");
-        case "pizza":
-          return require("../../assets/images/storeItem/food/pizza.png");
-        case "popcorn":
-          return require("../../assets/images/storeItem/food/popcorn.png");
-        case "ramen":
-          return require("../../assets/images/storeItem/food/ramen.png");
-        case "sushi":
-          return require("../../assets/images/storeItem/food/sushi.png");
-        case "waffle":
-          return require("../../assets/images/storeItem/food/waffle.png");
-        default:
-          return null;
-      }
-    case "etc":
-      switch (itemName) {
-        case "band":
-          return require("../../assets/images/storeItem/etc/band.png");
-        case "camera":
-          return require("../../assets/images/storeItem/etc/camera.png");
-        case "campingCar":
-          return require("../../assets/images/storeItem/etc/campingCar.png");
-        case "cookieman":
-          return require("../../assets/images/storeItem/etc/cookieman.png");
-        case "fan":
-          return require("../../assets/images/storeItem/etc/fan.png");
-        case "santaHat":
-          return require("../../assets/images/storeItem/etc/santaHat.png");
-        case "sweetPotato":
-          return require("../../assets/images/storeItem/etc/sweetPotato.png");
-        case "umbrella":
-          return require("../../assets/images/storeItem/etc/umbrella.png");
-        case "vane":
-          return require("../../assets/images/storeItem/etc/vane.png");
-        default:
-          return null;
-      }
-    default:
-      return null;
-  }
-};
+import { ConfirmationModal, TwoConfirmationModal } from "../common/Modal";
+import { getImageSource } from "./utils";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 export const ItemBox = (props) => {
   const { category, item } = props;
   const imageSource = getImageSource(category, item.name);
 
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const [pointsAlertModal, setPointsAlertModal] = useState(false);
+  const openAlertModal = () => {
+    setPointsAlertModal(true);
+  };
+
+  const closeAlertModal = () => {
+    setPointsAlertModal(false);
+  };
+
+  const { userInfo, setUserInfo } = useUserInfo();
+
+  const buyItem = () => {
+    var newPoint = userInfo.point - item.point;
+    if (newPoint < 0) {
+      //포인트가 부족합니다
+      closeModal();
+      openAlertModal();
+      return;
+    }
+    setUserInfo({ ...userInfo, point: newPoint });
+    closeModal();
+  };
+
   return (
     <View style={styles.shadowContainer}>
-      <View style={styles.box}>
-        <Image style={styles.image} source={imageSource} />
-        <View style={styles.pointView}>
-          <PointIcon style={styles.icon} name="coins" size={15} />
-          <Text style={styles.text}>{item.point}</Text>
+      <TouchableOpacity onPress={openModal} activeOpacity={0.7}>
+        <View style={styles.box}>
+          <Image style={styles.image} source={imageSource} />
+          <View style={styles.pointView}>
+            <PointIcon style={styles.icon} name="coins" size={15} />
+            <Text style={styles.text}>{item.point}</Text>
+          </View>
+          <Text style={styles.text}>{item.nameKr}</Text>
         </View>
-        <Text style={styles.text}>{item.nameKr}</Text>
-      </View>
+      </TouchableOpacity>
+      <TwoConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        onCheck={buyItem}
+        message="구매하시겠습니까?"
+        buttonText1="확인"
+        buttonText2="닫기"
+      />
+      <ConfirmationModal
+        visible={pointsAlertModal}
+        onClose={closeAlertModal}
+        message="포인트가 부족합니다."
+        buttonText="확인"
+      />
     </View>
   );
 };
@@ -187,6 +94,8 @@ const styles = EStyleSheet.create({
   },
   image: {
     marginBottom: 2,
+    width: 55,
+    height: 55,
   },
   pointView: {
     display: "flex",

@@ -76,7 +76,7 @@ const styles = EStyleSheet.create({
     width: 100,
     height: 40,
     right: 20,
-    top: 55,
+    top: 60,
     borderRadius: 15,
     borderWidth: 2,
     borderColor: "$Blue01",
