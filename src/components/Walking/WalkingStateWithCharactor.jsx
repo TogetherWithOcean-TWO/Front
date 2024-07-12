@@ -1,4 +1,4 @@
-import { View, Text, Image} from "react-native";
+import { View, Image} from "react-native";
 import EStyleSheet from "../../styles/global";
 import dolphin from "../../assets/images/charactor/dolphin.png";
 import { InfoText, ErrorText } from "../../components/common/CustomText";
@@ -72,5 +72,13 @@ const styles = EStyleSheet.create({
         borderRadius : 15,
         alignItems : "center",
         justifyContent : "center",
-    },
+        shadowColor: "#000",
+        shadowOffset: {
+        width: 0,
+        height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
+        elevation: 5,
+        },
 });
