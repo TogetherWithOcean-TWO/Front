@@ -6,8 +6,11 @@ import { CharactorCustomForm } from "../../components/CharactorCustom/CharactorC
 import { LabelTitle } from "../../components/common/CustomText";
 import { ItemBox } from "../../components/CharactorCustom/ItemBox";
 import { ButtonView } from "../../components/CharactorCustom/ButtonView";
+import { useState } from "react";
 
 function CharactorCustomScreen() {
+  const [selectedItemIndex, setSelectedItemIndex] = useState(null); // 선택된 아이템의 인덱스 상태 추가
+
   return (
     <View style={styles.container}>
       <BackBarWithPoint />
@@ -16,8 +19,14 @@ function CharactorCustomScreen() {
         style={styles.mainContainer}
       >
         <LabelTitle text="테두리 안으로만 꾸며주세요!" />
-        <CharactorCustomForm />
-        <ButtonView />
+        <CharactorCustomForm
+          selectedItemIndex={selectedItemIndex}
+          setSelectedItemIndex={setSelectedItemIndex}
+        />
+        <ButtonView
+          selectedItemIndex={selectedItemIndex}
+          setSelectedItemIndex={setSelectedItemIndex}
+        />
         <ItemBox />
       </LinearGradient>
     </View>
@@ -46,7 +55,6 @@ const styles = EStyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10,
-    // right: 125,
   },
   btn: {
     backgroundColor: "$White03",
