@@ -14,13 +14,15 @@ function StoreScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <BackBarWithPoint navigation={navigation} />
-      <View style={styles.titleView}>
-        <MainTitle text="상점" />
-        <StoreIcon style={styles.icon} name="store" size={20} />
-      </View>
-      <View style={styles.storeMain}>
-        <StoreBar setCategory={setCategory} category={category} />
-        <StoreForm />
+      <View style={styles.mainContainer}>
+        <View style={styles.titleView}>
+          <MainTitle text="상점" />
+          <StoreIcon style={styles.icon} name="store" size={20} />
+        </View>
+        <View style={styles.storeMain}>
+          <StoreBar setCategory={setCategory} category={category} />
+          <StoreForm category={category} />
+        </View>
       </View>
     </View>
   );
@@ -29,6 +31,11 @@ function StoreScreen({ navigation }) {
 const styles = EStyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "$White01",
+  },
+  mainContainer: {
+    flex: 1,
+    backgroundColor: "blue",
   },
   titleView: {
     display: "flex",
