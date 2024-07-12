@@ -10,6 +10,9 @@ import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacte
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
 import HomeScreen from "./src/screens/HomeScreen"; 
 import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
+import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen"
+import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
+
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
 import CharactorCustomScreen from "./src/screens/charactorCustomScreen/CharactorCustomScreen";
@@ -21,7 +24,7 @@ const App = () => {
   return (
     <UserInfoProvider>
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SplashScreen">
+        <Stack.Navigator initialRouteName="Walking">
           <Stack.Screen
             name="SplashScreen"
             component={SplashScreen}
@@ -90,6 +93,20 @@ const App = () => {
             component={MarinBookScreen}
             options={{ headerShown: false }}
           />
+          name="Walking"
+          component={WalkingScreen}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+            name="PhotoSubmit"
+            component={PhotoSubmitScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Camera"
+            component={CameraScreen}
+            options={{headerShown : false}}
+            />
         </Stack.Navigator>
       </NavigationContainer>
     </UserInfoProvider>
