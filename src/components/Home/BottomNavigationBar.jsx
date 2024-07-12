@@ -39,7 +39,7 @@ const styles = EStyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-around',
         alignItems: 'center',
-        backgroundColor: '$Blue03',
+        backgroundColor: '$Blue04',
         paddingVertical: 10,
         position: 'absolute',
         bottom: 0,

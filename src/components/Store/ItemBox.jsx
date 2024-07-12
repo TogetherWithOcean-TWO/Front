@@ -1,28 +1,73 @@
-import { View, Text, Image } from "react-native";
+import React, { useState } from "react";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
-
+import PointIcon from "react-native-vector-icons/FontAwesome5";
+import { ConfirmationModal, TwoConfirmationModal } from "../common/Modal";
+import { getImageSource } from "../common/CommonUtils";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 export const ItemBox = (props) => {
-  switch (props.name) {
-    case "nemo":
-      imageSource = require("../../assets/images/storeItem/sea/nemo.png");
-      break;
-    case "shark":
-      imageSource = require("../../assets/images/storeItem/sea/shark.png");
-      break;
-    case "threeFishs":
-      imageSource = require("../../assets/images/storeItem/sea/threeFishs.png");
-      break;
-    default:
-      // 기본값 설정 (필요에 따라 다른 이미지 파일명에 따른 기본값 설정 가능)
-      imageSource = require("../../assets/images/storeItem/sea/nemo.png");
-      break;
-  }
+  const { category, item } = props;
+  const imageSource = getImageSource(category, item.name);
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const openModal = () => {
+    setModalVisible(true);
+  };
+
+  const closeModal = () => {
+    setModalVisible(false);
+  };
+
+  const [pointsAlertModal, setPointsAlertModal] = useState(false);
+  const openAlertModal = () => {
+    setPointsAlertModal(true);
+  };
+
+  const closeAlertModal = () => {
+    setPointsAlertModal(false);
+  };
+
+  const { userInfo, setUserInfo } = useUserInfo();
+
+  const buyItem = () => {
+    var newPoint = userInfo.point - item.point;
+    if (newPoint < 0) {
+      //포인트가 부족합니다
+      closeModal();
+      openAlertModal();
+      return;
+    }
+    setUserInfo({ ...userInfo, point: newPoint });
+    closeModal();
+  };
+
   return (
     <View style={styles.shadowContainer}>
-      <View style={styles.box}>
-        <Image source={imageSource} />
-        <Text>{props.nameKr}</Text>
-      </View>
+      <TouchableOpacity onPress={openModal} activeOpacity={0.7}>
+        <View style={styles.box}>
+          <Image style={styles.image} source={imageSource} />
+          <View style={styles.pointView}>
+            <PointIcon style={styles.icon} name="coins" size={15} />
+            <Text style={styles.text}>{item.point}</Text>
+          </View>
+          <Text style={styles.text}>{item.nameKr}</Text>
+        </View>
+      </TouchableOpacity>
+      <TwoConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        onCheck={buyItem}
+        message="구매하시겠습니까?"
+        buttonText1="확인"
+        buttonText2="닫기"
+      />
+      <ConfirmationModal
+        visible={pointsAlertModal}
+        onClose={closeAlertModal}
+        message="포인트가 부족합니다."
+        buttonText="확인"
+      />
     </View>
   );
 };
@@ -42,5 +87,29 @@ const styles = EStyleSheet.create({
     height: 150,
     margin: 12,
     borderRadius: 10,
+    padding: 10,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  image: {
+    marginBottom: 2,
+    width: 55,
+    height: 55,
+  },
+  pointView: {
+    display: "flex",
+    flexDirection: "row",
+    margin: 5,
+  },
+  icon: {
+    padding: 3,
+    left: -3,
+    top: -2,
+  },
+  text: {
+    fontWeight: "bold",
+    fontFamily: "Pretendard",
+    color: "$Blue01",
+    fontSize: 16,
   },
 });

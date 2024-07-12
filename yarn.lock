@@ -3504,11 +3504,6 @@ expo-keep-awake@~13.0.2:
   resolved "https://registry.npmjs.org/expo-keep-awake/-/expo-keep-awake-13.0.2.tgz"
   integrity sha512-kKiwkVg/bY0AJ5q1Pxnm/GvpeB6hbNJhcFsoOWDh2NlpibhCLaHL826KHUM+WsnJRbVRxJ+K9vbPRHEMvFpVyw==
 
-expo-linear-gradient@~13.0.2:
-  version "13.0.2"
-  resolved "https://registry.yarnpkg.com/expo-linear-gradient/-/expo-linear-gradient-13.0.2.tgz#21bd7bc7c71ef4f7c089521daa16db729d2aec5f"
-  integrity sha512-EDcILUjRKu4P1rtWcwciN6CSyGtH7Bq4ll3oTRV7h3h8oSzSilH1g6z7kTAMlacPBKvMnkkWOGzW6KtgMKEiTg==
-
 expo-modules-autolinking@1.11.1:
   version "1.11.1"
   resolved "https://registry.npmjs.org/expo-modules-autolinking/-/expo-modules-autolinking-1.11.1.tgz"
@@ -6306,33 +6301,6 @@ react-native-gesture-handler@^2.17.1:
     hoist-non-react-statics "^3.3.0"
     invariant "^2.2.4"
     prop-types "^15.7.2"
-
-react-native-health@^1.18.0:
-  version "1.18.0"
-  resolved "https://registry.yarnpkg.com/react-native-health/-/react-native-health-1.18.0.tgz#714f4f8445a51cb0c78fd576fef05b2f6bf1bf61"
-  integrity sha512-4CVLyBGrd6s/yPyb2/veZA0OobRP3SZ96eBZ2DunJr/1ZF3lKX3AuFFvGbCRNkycndni4VRr9T4b0MLqhXG+Hg==
-  dependencies:
-    "@expo/config-plugins" "^7.2.2"
-
-react-native-linear-gradient@^2.8.3:
-  version "2.8.3"
-  resolved "https://registry.yarnpkg.com/react-native-linear-gradient/-/react-native-linear-gradient-2.8.3.tgz#9a116649f86d74747304ee13db325e20b21e564f"
-  integrity sha512-KflAXZcEg54PXkLyflaSZQ3PJp4uC4whM7nT/Uot9m0e/qxFV3p6uor1983D1YOBJbJN7rrWdqIjq0T42jOJyA==
-
-react-native-maps-directions@^1.9.0:
-  version "1.9.0"
-  resolved "https://registry.yarnpkg.com/react-native-maps-directions/-/react-native-maps-directions-1.9.0.tgz#63ae8e8b36499042a658e43cd4836ac89aab8b7d"
-  integrity sha512-68SrMOUg4WQ5PmpS9sNOTZaYtdyVYJnnjQOOhABrgiKnb5BXCZRU2gDoS11gYf23hjUBjq8JXzgfn37WcINLwA==
-  dependencies:
-    lodash.isequal "^4.5.0"
-    prop-types "^15.6.0"
-
-react-native-maps@^1.15.6:
-  version "1.15.6"
-  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.15.6.tgz#237c67345f7b1ce934b4ae6cbb00387bdb8a5497"
-  integrity sha512-RRyjMvpMoV3249kJ9PA1JjZE/8FmYYHrHuloI/Vzkg/DjxFtJAbFnCnhg5AyS/LI5/n2riulbVl4qpiKpuO22Q==
-  dependencies:
-    "@types/geojson" "^7946.0.13"
 
 react-native-modal@^13.0.1:
   version "13.0.1"
