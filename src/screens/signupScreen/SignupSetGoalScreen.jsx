@@ -52,13 +52,14 @@ function SignupSetGoalScreen() {
 
   const closeModal = () => {
     setModalVisible(false);
+    navigation.navigate("HomeScreen");
   };
 
 
   const done = () => {
     openModal();
     if (isValid) {
-      navigation.navigate("MainScreen");
+      navigation.navigate("HomeScreen");
     }
 
   };
