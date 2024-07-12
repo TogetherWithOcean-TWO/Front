@@ -41,6 +41,8 @@ const styles = EStyleSheet.create({
         paddingHorizontal: 20,
         paddingVertical: 10,
         borderRadius: 15,
+        //borderWidth: 2, // 테두리 두께
+        //borderColor: 'black', // 테두리 색상
     },
     titleContainer: {
         flexDirection: 'row',

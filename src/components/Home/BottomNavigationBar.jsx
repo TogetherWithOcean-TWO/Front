@@ -45,8 +45,8 @@ const styles = EStyleSheet.create({
         bottom: 0,
         width: '100%',
         height: 90,
-        borderTopLeftRadius: 15,
-        borderTopRightRadius: 15,
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
     item: {
         alignItems: 'center',
