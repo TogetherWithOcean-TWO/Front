@@ -1,42 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { View, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
 import { LabelTitle, ErrorText } from "../common/CustomText";
 import { CustomInput, CustomInputWithButton } from "../common/CustomInput";
 import { NarrowButton } from "../common/CustomButton";
 import { useUserInfo } from "../../contexts/UserInfoContext";
-
 import { ConfirmationModal } from "../common/Modal";
+import axios from "axios";
+import { validateUserInfo, formatPhoneNumber } from "./utils";
 
 export const SignupForm = ({ setIsValid }) => {
   const { userInfo, setUserInfo } = useUserInfo();
 
-  //유효성 검사에 필요한 useState
+  const [modalVisible, setModalVisible] = useState(false);
   const [nameError, setNameError] = useState("");
-  const [nicknameError, setNicknameError] = useState("");
-  const [emailError, setEmailError] = useState("");
+  const [nicknameError, setNicknameError] = useState(
+    "특수문자를 제외하고 2~10자로 입력해주세요"
+  );
+  const [emailError, setEmailError] =
+    useState("이메일 형식에 맞게 입력해주세요");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
-
-  // 중복확인에 필요한 useState
-  const [checkNickName, setCheckNickName] = useState(true); //true-> 중복없음, false-> 중복있음
+  const [checkNickName, setCheckNickName] = useState(true);
   const [nickNameModalVisible, setNickNameModalVisible] = useState(false);
-  const openNickNameModal = () => {
-    setNickNameModalVisible(true);
-  };
-  const closeNickNameModal = () => {
-    setNickNameModalVisible(false);
-  };
-
-  const [checkEmail, setCheckEmail] = useState(true); //true-> 중복없음, false-> 중복있음
+  const [checkEmail, setCheckEmail] = useState(true);
   const [emailModalVisible, setEmailModalVisible] = useState(false);
-  const openEmailModal = () => {
-    setEmailModalVisible(true);
-  };
-  const closeEmailModal = () => {
-    setEmailModalVisible(false);
-  };
+
+  const openModal = () => setModalVisible(true);
+  const closeModal = () => setModalVisible(false);
+
+  const openNickNameModal = () => setNickNameModalVisible(true);
+  const closeNickNameModal = () => setNickNameModalVisible(false);
+
+  const openEmailModal = () => setEmailModalVisible(true);
+  const closeEmailModal = () => setEmailModalVisible(false);
+
+  const handleCheckNickName = useCallback(() => {
+    if (nicknameError === "특수문자를 제외하고 2~10자로 입력해주세요") {
+      openModal();
+      return;
+    }
+    axios
+      .get(
+        `http://13.124.240.85:8080/member/check-nick?nickname=${userInfo.nickName}`
+      )
+      .then((res) => {
+        if (res.data === "사용가능한 닉네임입니다.") {
+          setCheckNickName(true);
+        } else {
+          setCheckNickName(false);
+        }
+      })
+      .catch((error) => {});
+    openNickNameModal();
+  }, [userInfo.nickName, nicknameError]);
+
+  const handleCheckEmail = useCallback(() => {
+    if (emailError === "이메일 형식에 맞게 입력해주세요") {
+      openModal();
+      return;
+    }
+    axios
+      .get(
+        `http://13.124.240.85:8080/member/check-email?email=${userInfo.email}`
+      )
+      .then((res) => {
+        if (res.data === "사용가능한 이메일입니다.") {
+          setCheckEmail(true);
+        } else {
+          setCheckEmail(false);
+        }
+      })
+      .catch((error) => {});
+    openEmailModal();
+  }, [userInfo.email, emailError]);
 
   useEffect(() => {
     validate();
@@ -47,88 +85,23 @@ export const SignupForm = ({ setIsValid }) => {
     userInfo.passwd,
     userInfo.checkPasswd,
     userInfo.phoneNumber,
+    checkNickName,
+    checkEmail,
   ]);
 
   const validate = () => {
-    let valid = true;
-
-    // 이름 유효성 검사
-    if (
-      !userInfo.realName ||
-      !/^[가-힣a-zA-Z]{2,10}$/.test(userInfo.realName)
-    ) {
-      setNameError("숫자, 특수문자를 제외하고 2~10자로 입력해주세요");
-      valid = false;
-    } else {
-      setNameError(" ");
-    }
-
-    // 닉네임 유효성 검사
-    if (
-      !userInfo.nickName ||
-      !/^[\d가-힣a-zA-Z]{2,10}$/.test(userInfo.nickName)
-    ) {
-      setNicknameError("특수문자를 제외하고 2~10자로 입력해주세요");
-      valid = false;
-    } else {
-      setNicknameError(" ");
-    }
-
-    // 이메일 유효성 검사
-    if (!userInfo.email || !/\S+@\S+\.\S+/.test(userInfo.email)) {
-      setEmailError("이메일 형식에 맞게 입력해주세요");
-      valid = false;
-    } else {
-      setEmailError(" ");
-    }
-
-    // 비밀번호 유효성 검사
-    if (
-      !userInfo.passwd ||
-      !/^(?=.*\d)(?=.*[a-zA-Z])(?=.*[^\w\s]).{10,15}$/.test(userInfo.passwd)
-    ) {
-      setPasswordError("영문, 숫자, 특수문자 조합 10~15자로 입력해주세요");
-      valid = false;
-    } else {
-      setPasswordError(" ");
-    }
-
-    // 비밀번호 확인 유효성 검사
-    if (userInfo.checkPasswd !== userInfo.passwd) {
-      setConfirmPasswordError("비밀번호가 일치하지 않습니다");
-      valid = false;
-    } else {
-      setConfirmPasswordError(" ");
-    }
-
-    // 전화번호 유효성 검사
-    if (!userInfo.phoneNumber) {
-      setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
-      valid = false;
-    }
-
-    if (checkNickName === false || checkEmail === false) {
-      valid = false;
-    }
-
+    const { valid, errors } = validateUserInfo(
+      userInfo,
+      checkNickName,
+      checkEmail
+    );
+    setNameError(errors.nameError);
+    setNicknameError(errors.nicknameError);
+    setEmailError(errors.emailError);
+    setPasswordError(errors.passwordError);
+    setConfirmPasswordError(errors.confirmPasswordError);
+    setPhoneNumberError(errors.phoneNumberError);
     setIsValid(valid);
-  };
-
-  const formatPhoneNumber = (text) => {
-    let formatted = text.replace(/\D/g, "");
-
-    if (formatted.length > 3 && formatted.length < 8)
-      formatted = formatted.replace(/(\d{3})(\d{1,4})/, "$1-$2");
-    if (formatted.length >= 8)
-      formatted = formatted.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
-
-    setUserInfo({ ...userInfo, phoneNumber: formatted });
-
-    if (!formatted || !/^010-\d{4}-\d{4}$/.test(formatted)) {
-      setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
-    } else {
-      setPhoneNumberError(" ");
-    }
   };
 
   return (
@@ -156,7 +129,7 @@ export const SignupForm = ({ setIsValid }) => {
                 setUserInfo({ ...userInfo, nickName: text })
               }
             />
-            <NarrowButton text="중복확인" onPress={openNickNameModal} />
+            <NarrowButton text="중복확인" onPress={handleCheckNickName} />
           </View>
           {nicknameError ? <ErrorText text={nicknameError} /> : null}
         </View>
@@ -169,7 +142,7 @@ export const SignupForm = ({ setIsValid }) => {
               value={userInfo.email}
               onChangeText={(text) => setUserInfo({ ...userInfo, email: text })}
             />
-            <NarrowButton text="중복확인" onPress={openEmailModal} />
+            <NarrowButton text="중복확인" onPress={handleCheckEmail} />
           </View>
           {emailError ? <ErrorText text={emailError} /> : null}
         </View>
@@ -202,7 +175,14 @@ export const SignupForm = ({ setIsValid }) => {
           <CustomInput
             placeholder="전화번호를 입력해주세요"
             value={userInfo.phoneNumber}
-            onChangeText={(text) => formatPhoneNumber(text)}
+            onChangeText={(text) =>
+              formatPhoneNumber(
+                text,
+                setUserInfo,
+                userInfo,
+                setPhoneNumberError
+              )
+            }
             maxLength={13}
           />
           {phoneNumberError ? <ErrorText text={phoneNumberError} /> : null}
@@ -218,7 +198,6 @@ export const SignupForm = ({ setIsValid }) => {
         }
         buttonText="닫기"
       />
-
       <ConfirmationModal
         visible={emailModalVisible}
         onClose={closeEmailModal}
@@ -227,6 +206,12 @@ export const SignupForm = ({ setIsValid }) => {
             ? "사용할 수 있는 이메일 입니다."
             : "이미 사용중인 이메일입니다.\n 로그인으로 이동해주세요"
         }
+        buttonText="닫기"
+      />
+      <ConfirmationModal
+        visible={modalVisible}
+        onClose={closeModal}
+        message="입력한 정보를 확인해주세요."
         buttonText="닫기"
       />
     </ScrollView>
