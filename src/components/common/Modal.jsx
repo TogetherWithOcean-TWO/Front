@@ -29,7 +29,6 @@ export const ConfirmationModal = ({
   );
 };
 
-
 export const EditModal = ({
   visible,
   onClose,
@@ -39,7 +38,7 @@ export const EditModal = ({
   value,
   secure,
   goBack,
-  onChangeText
+  onChangeText,
 }) => {
   return (
     <Modal
@@ -54,14 +53,19 @@ export const EditModal = ({
             <Icon
               name="close-outline"
               size={20}
-              style = {styles.closeModal}
-              padding = {5}
+              style={styles.closeModal}
+              padding={5}
               onPress={goBack}
             />
           </View>
           <Text style={styles.modalText}>{message}</Text>
           <View style={styles.modalInput}>
-            <CustomInput placeholder={placeholder} value={value} secure={secure} onChangeText={onChangeText}/>
+            <CustomInput
+              placeholder={placeholder}
+              value={value}
+              secure={secure}
+              onChangeText={onChangeText}
+            />
           </View>
           <TouchableOpacity onPress={onClose}>
             <Text style={styles.button}>{buttonText}</Text>
@@ -128,7 +132,37 @@ export const ConfirmationTwoButtonModal = ({
             </TouchableOpacity>
             <TouchableOpacity onPress={onClose}>
               <Text style={[styles.btn, styles.button]}>{buttonText2}</Text>
-
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </Modal>
+  );
+};
+export const TwoConfirmationModal = ({
+  visible,
+  onClose,
+  message,
+  buttonText1,
+  buttonText2,
+  onCheck,
+}) => {
+  return (
+    <Modal
+      animationType="fade"
+      transparent={true}
+      visible={visible}
+      onRequestClose={onClose}
+    >
+      <View style={styles.centeredView}>
+        <View style={styles.modalView}>
+          <Text style={styles.modalText}>{message}</Text>
+          <View style={styles.twobtn}>
+            <TouchableOpacity onPress={onCheck}>
+              <Text style={[styles.btn, styles.button]}>{buttonText1}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={onClose}>
+              <Text style={[styles.btn, styles.button]}>{buttonText2}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -141,7 +175,7 @@ const styles = EStyleSheet.create({
   centeredView: {
     flex: 1,
     justifyContent: "center",
-     alignItems: "center",
+    alignItems: "center",
     backgroundColor: "$White02",
   },
   modalView: {
@@ -166,25 +200,25 @@ const styles = EStyleSheet.create({
     fontFamily: "Pretendard",
     color: "$Blue01",
     fontSize: 16,
-    fontWeight : "bold"
+    fontWeight: "bold",
   },
 
   button: {
     fontFamily: "Pretendard",
     fontSize: 15,
-    paddingHorizontal : 30
+    paddingHorizontal: 30,
   },
-  closeModalGoback : {
-    flexDirection : "row",
-    justifyContent : "flex-end",
-    width : "100%",
-    marginTop : -5,
-    paddingBottom : 5
+  closeModalGoback: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    width: "100%",
+    marginTop: -5,
+    paddingBottom: 5,
   },
-  modalInput : {
-    width : "100%",
-    marginTop : -10,
-    paddingBottom : 20
+  modalInput: {
+    width: "100%",
+    marginTop: -10,
+    paddingBottom: 20,
   },
   twobtn: {
     display: "flex",
@@ -193,5 +227,4 @@ const styles = EStyleSheet.create({
   btn: {
     marginHorizontal: 45,
   },
-
 });

@@ -4,11 +4,12 @@ import EStyleSheet from "../../styles/global";
 import { LinearGradient } from "expo-linear-gradient";
 import { MainTitle } from "../../components/common/CustomText";
 import { MarinBook } from "../../components/marinBook/MarinBook";
-
+import { useNavigation } from "@react-navigation/native";
 function MarinBookScreen() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <BackBar />
+      <BackBar navigation={navigation} />
       <LinearGradient
         colors={["#FFFFFF", "#95AAD4", "#28406D"]}
         style={styles.mainContainer}

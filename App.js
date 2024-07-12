@@ -8,9 +8,9 @@ import SignupAddressScreen from "./src/screens/signupScreen/SignupAddressScreen"
 import SignupCharacterScreen from "./src/screens/signupScreen/SignupCharacterScreen";
 import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacterNameScreen";
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
-import HomeScreen from "./src/screens/HomeScreen"; 
+import HomeScreen from "./src/screens/HomeScreen";
 import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
-import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen"
+import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen";
 import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
@@ -26,10 +26,15 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="CharactorCustomScreen">
+          <Stack.Navigator initialRouteName="HomeScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="HomeScreen"
+              component={HomeScreen}
               options={{ headerShown: false }}
             />
 
@@ -76,8 +81,6 @@ const App = () => {
               component={WalkingScreen}
               options={{ headerShown: false }}
             />
-   
-        
 
             <Stack.Screen
               name="StoreScreen"
@@ -95,27 +98,21 @@ const App = () => {
               component={MarinBookScreen}
               options={{ headerShown: false }}
             />
-<Stack.Screen
-            name="MarinBookScreen"
-            component={MarinBookScreen}
-            options={{ headerShown: false }}
-          />
-       
-        <Stack.Screen
-            name="PhotoSubmit"
-            component={PhotoSubmitScreen}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Camera"
-            component={CameraScreen}
-            options={{headerShown : false}}
+
+            <Stack.Screen
+              name="PhotoSubmit"
+              component={PhotoSubmitScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Camera"
+              component={CameraScreen}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>
     </UserItemInfoProvider>
-    
   );
 };
 
