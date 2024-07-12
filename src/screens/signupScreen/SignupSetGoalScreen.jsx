@@ -10,6 +10,7 @@ import { CustomInput } from "../../components/common/CustomInput";
 import { SubTitle } from "../../components/common/CustomText";
 import { useUserInfo } from "../../contexts/UserInfoContext";
 import { ConfirmationModal } from "../../components/common/Modal";
+import axios from "axios";
 
 function SignupSetGoalScreen() {
   const route = useRoute();
@@ -18,7 +19,24 @@ function SignupSetGoalScreen() {
 
   const { userInfo, setUserInfo } = useUserInfo();
 
-  const [isValid, setIsValid] = useState(true);
+  const handleSignup = async () => {
+    try {
+      console.log(userInfo);
+      const response = await axios.post(
+        "http://13.124.240.85:8080/member/join",
+        userInfo
+      );
+
+      if (response.status === 200) {
+        openModal();
+      } else {
+        alert(response.data.message || "회원가입 실패");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("회원가입 중 오류가 발생했습니다.");
+    }
+  };
 
   const onlyNumbers = (text) => {
     // 숫자만 입력되도록 필터링
@@ -36,6 +54,7 @@ function SignupSetGoalScreen() {
     setModalVisible(false);
   };
 
+
   const done = () => {
     openModal();
     if (isValid) {
@@ -43,7 +62,6 @@ function SignupSetGoalScreen() {
     }
 
   };
-
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
       <BackBar navigation={navigation} />
@@ -62,16 +80,14 @@ function SignupSetGoalScreen() {
           </View>
         </View>
         <View style={styles.button}>
-          <WideButton text="완료" onPress={done} />
+          <WideButton text="완료" onPress={handleSignup} />
         </View>
       </View>
       <ConfirmationModal
         visible={modalVisible}
         onClose={closeModal}
-        message={
-          isValid ? "회원가입을 축하드립니다 :)" : "목표를 다시 입력해주세요"
-        }
-        buttonText={isValid ? "확인" : "닫기"}
+        message="회원가입을 축하드립니다 :)"
+        buttonText="확인"
       />
     </KeyboardAvoidingView>
   );

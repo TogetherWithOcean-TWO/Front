@@ -2,22 +2,38 @@ import React from "react";
 import { TouchableOpacity, Text } from "react-native";
 import EStyleSheet from "../../styles/global";
 
-export const WideButton = ({ text, onPress }) => {
+export const WideButton = ({ text, onPress, backgroundColor, textColor }) => {
   return (
     <TouchableOpacity
-      style={[styles.button, styles.wideButton]}
+      style={[
+        styles.button,
+        styles.wideButton,
+        {
+          backgroundColor: backgroundColor
+            ? backgroundColor
+            : EStyleSheet.value("$Blue01"),
+        },
+      ]}
       onPress={onPress}
     >
-      <Text style={styles.text}>{text}</Text>
+      <Text
+        style={[
+          styles.text,
+          { color: textColor ? textColor : EStyleSheet.value("$White01") },
+        ]}
+      >
+        {text}
+      </Text>
     </TouchableOpacity>
   );
 };
 
-export const NarrowButton = ({ text, onPress }) => {
+export const NarrowButton = ({ text, onPress, disabled }) => {
   return (
     <TouchableOpacity
       style={[styles.button, styles.narrowButton]}
       onPress={onPress}
+      disabled={disabled}
     >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
@@ -27,7 +43,10 @@ export const NarrowButton = ({ text, onPress }) => {
 // halfButton
 export const HalfButton = ({ text, onPress }) => {
   return (
-    <TouchableOpacity style={styles.halfButton} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.button, styles.halfButton]}
+      onPress={onPress}
+    >
       <Text style={styles.text}>{text}</Text>
     </TouchableOpacity>
   );
@@ -58,5 +77,6 @@ const styles = EStyleSheet.create({
   halfButton: {
     width: "50%",
     height: 50,
+    marginHorizontal: 5,
   },
 });
