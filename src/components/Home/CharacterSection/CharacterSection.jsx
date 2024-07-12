@@ -42,7 +42,7 @@ const CharacterSection = () => {
     <View style={styles.container}>
       <View style={styles.sideButtons}>
         <CharacterButton iconName="camera-outline" label="캡쳐" onPress={() => {}} />
-        <CharacterButton iconName="color-wand-outline" label="꾸미기" onPress={() => {}} />
+        <CharacterButton iconName="color-wand-outline" label="꾸미기" onPress={() => navigation.navigate("CharactorCustomScreen")} />
         <CharacterButton iconName="refresh-outline" label="캐릭터 변경" onPress={() => navigation.navigate('SignupCharacter', {fromHome : true})} />
       </View>
       <View style={styles.characterContainer}>
@@ -50,8 +50,8 @@ const CharacterSection = () => {
         <LabelTitle text={userInfo.charName} style={styles.characterName}/>
       </View>
       <View style={styles.sideButtons}>
-        <CharacterButton iconName="cart-outline" label="상점" onPress={() => {}} />
-        <CharacterButton iconName="fish-outline" label="도감" onPress={() => {}} />
+        <CharacterButton iconName="cart-outline" label="상점" onPress={() => navigation.navigate('StoreScreen')} />
+        <CharacterButton iconName="fish-outline" label="도감" onPress={() => navigation.navigate('MarinBookScreen')} />
         <CharacterButton iconName="map-outline" label="나의 해양" onPress={() => {}} />
       </View>
     </View>
