@@ -1,20 +1,21 @@
 import React from "react";
 import { View, Text, ScrollView } from "react-native";
 import EStyleSheet from "../../styles/global";
-import { ItemBox } from "./ItemBox";
+// import { StoreItemBox } from "./ItemBox";
 import { sea } from "../../constants/storeItem/sea";
 import { instrument } from "../../constants/storeItem/instrument";
 import { background } from "../../constants/storeItem/background";
 import { fruit } from "../../constants/storeItem/fruit";
 import { food } from "../../constants/storeItem/food";
 import { etc } from "../../constants/storeItem/etc";
+import { StoreItemBox } from "./StoreItemBox";
 
 export const StoreForm = (props) => {
   return (
     <View style={styles.container}>
       {props.category === "sea"
         ? sea.map((item, index) => (
-            <ItemBox
+            <StoreItemBox
               key={index}
               index={index}
               category={props.category}
@@ -24,7 +25,7 @@ export const StoreForm = (props) => {
         : null}
       {props.category === "instrument"
         ? instrument.map((item, index) => (
-            <ItemBox
+            <StoreItemBox
               key={index}
               index={index}
               category={props.category}
@@ -34,7 +35,7 @@ export const StoreForm = (props) => {
         : null}
       {props.category === "background"
         ? background.map((item, index) => (
-            <ItemBox
+            <StoreItemBox
               key={index}
               index={index}
               category={props.category}
@@ -44,7 +45,7 @@ export const StoreForm = (props) => {
         : null}
       {props.category === "fruit"
         ? fruit.map((item, index) => (
-            <ItemBox
+            <StoreItemBox
               key={index}
               index={index}
               category={props.category}
@@ -54,7 +55,7 @@ export const StoreForm = (props) => {
         : null}
       {props.category === "food"
         ? food.map((item, index) => (
-            <ItemBox
+            <StoreItemBox
               key={index}
               index={index}
               category={props.category}
@@ -64,7 +65,7 @@ export const StoreForm = (props) => {
         : null}
       {props.category === "etc"
         ? etc.map((item, index) => (
-            <ItemBox
+            <StoreItemBox
               key={index}
               index={index}
               category={props.category}
