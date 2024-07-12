@@ -8,13 +8,13 @@ export const MainTitle = ({ text }) => {
 };
 
 // LabelTitle
-export const LabelTitle = ({ text }) => {
-  return <Text style={[styles.text, styles.labelText]}>{text}</Text>;
+export const LabelTitle = ({ text ,style}) => {
+  return <Text style={[styles.text, styles.labelText, style]}>{text}</Text>;
 };
 
 // SubTitle
-export const SubTitle = ({ text }) => {
-  return <Text style={[styles.text, styles.subTitle]}>{text}</Text>;
+export const SubTitle = ({ text , style}) => {
+  return <Text style={[styles.text, styles.subTitle , style]}>{text}</Text>;
 };
 
 // ErrorText
@@ -50,10 +50,10 @@ const styles = EStyleSheet.create({
     marginTop: 5,
     fontSize: 12,
   },
-  InfoText : {
-    color : "$Blue01",
-    fontSize : 16,
-    fontWeight : "bold",
-    textAlign : "center"
-  }
+  InfoText: {
+    color: "$Blue01",
+    fontSize: 16,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
 });
