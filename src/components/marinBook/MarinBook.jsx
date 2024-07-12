@@ -4,7 +4,11 @@ import EStyleSheet from "../../styles/global";
 export const MarinBook = () => {
   return (
     <View style={styles.book}>
-      <MarinComponent />
+      <MarinComponent
+        itemName={"vaquita"}
+        itemNameKr={"바키타 돌고래"}
+        mission={"회원가입 완료"}
+      />
       <MarinComponent />
       <MarinComponent />
       <MarinComponent />
