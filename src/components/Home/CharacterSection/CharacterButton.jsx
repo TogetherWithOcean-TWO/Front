@@ -23,16 +23,18 @@ const styles = EStyleSheet.create({
         backgroundColor: '$White01',
         borderRadius: 15,
         padding: 8,
-        shadowColor: '$Gray01',
-        shadowOffset: { width: 0, height: 3 },
-        shadowOpacity: 1,
+        shadowColor: '$Gray02',            
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 1,           //그림자 투명도
         shadowRadius: 4,
+        //borderWidth: 2, // 테두리 두께
+        //borderColor: 'black', // 테두리 색상
         
         
     },
     label : {
         marginTop : 2,
-        fontSize : 7,
+        fontSize : 8,
         fontWeight: 'bold',
         color : '$Blue01',
     },
