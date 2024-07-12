@@ -93,10 +93,7 @@ const App = () => {
             component={MarinBookScreen}
             options={{ headerShown: false }}
           />
-          name="Walking"
-          component={WalkingScreen}
-          options={{ headerShown: false }}
-        />
+       
         <Stack.Screen
             name="PhotoSubmit"
             component={PhotoSubmitScreen}
