@@ -8,7 +8,10 @@ import SignupAddressScreen from "./src/screens/signupScreen/SignupAddressScreen"
 import SignupCharacterScreen from "./src/screens/signupScreen/SignupCharacterScreen";
 import SignupCharacterNameScreen from "./src/screens/signupScreen/SignupCharacterNameScreen";
 import SignupSetGoalScreen from "./src/screens/signupScreen/SignupSetGoalScreen";
+import HomeScreen from "./src/screens/HomeScreen"; 
 import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
+import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen"
+import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
@@ -73,6 +76,8 @@ const App = () => {
               component={WalkingScreen}
               options={{ headerShown: false }}
             />
+   
+        
 
             <Stack.Screen
               name="StoreScreen"
@@ -90,10 +95,27 @@ const App = () => {
               component={MarinBookScreen}
               options={{ headerShown: false }}
             />
+<Stack.Screen
+            name="MarinBookScreen"
+            component={MarinBookScreen}
+            options={{ headerShown: false }}
+          />
+       
+        <Stack.Screen
+            name="PhotoSubmit"
+            component={PhotoSubmitScreen}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Camera"
+            component={CameraScreen}
+            options={{headerShown : false}}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>
     </UserItemInfoProvider>
+    
   );
 };
 

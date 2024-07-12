@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 
 import { BackBar } from "../../components/common/CustomBar";
 import { WideButton } from "../../components/common/CustomButton";
@@ -14,6 +14,10 @@ function SignupAddressScreen() {
   const { userInfo, setUserInfo } = useUserInfo();
 
   const navigation = useNavigation();
+
+  //추가
+  const route = useRoute();
+  const { fromHome } = route.params || {};
 
   const [modalVisible, setModalVisible] = useState(false);
 
@@ -30,6 +34,7 @@ function SignupAddressScreen() {
     if (userInfo.charId !== "") {
       navigation.navigate("SignupCharacterName", {
         characterImage,
+        fromHome
       });
     } else {
       openModal();

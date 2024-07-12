@@ -52,6 +52,15 @@ export const HalfButton = ({ text, onPress }) => {
   );
 };
 
+//smallButton
+export const SmallButton = ({text, onPress, right})=>{
+  return(
+      <TouchableOpacity style={[styles.button, styles.smallButton, {right : right}]}  onPress={onPress}>
+          <Text style={styles.smallButtonText}>{text}</Text>
+      </TouchableOpacity>
+  );
+};
+
 const styles = EStyleSheet.create({
   button: {
     backgroundColor: "$Blue01",
@@ -79,4 +88,15 @@ const styles = EStyleSheet.create({
     height: 50,
     marginHorizontal: 5,
   },
+  smallButton : {
+    backgroundColor : "$Blue02",
+    borderRadius : 10,
+    padding : 10,
+    position : "absolute",
+  },
+  smallButtonText : {
+    color : "$Blue01",
+      fontSize : "16px",
+      fontWeight : "bold",
+  }
 });

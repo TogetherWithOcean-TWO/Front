@@ -1,13 +1,20 @@
 {
-    "expo": {
-      "plugins": [
-        [
-          "expo-font",
-          {
-            "fonts": ["./src/assets/fonts/JejuGothic.ttf"]
-            
-          }
-        ]
+  "expo": {
+    "plugins": [
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/JejuGothic.ttf"
+          ]
+        }
       ]
+    ],
+    "android": {
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.TWO.front"
     }
   }
+}
