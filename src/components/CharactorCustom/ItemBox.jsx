@@ -1,29 +1,30 @@
 import React, { useState, useRef } from "react";
-import {
-  View,
-  ScrollView,
-  Image,
-  Dimensions,
-  Text,
-  TouchableOpacity,
-} from "react-native";
+import { View, ScrollView, Image, TouchableOpacity, Text } from "react-native";
 import EStyleSheet from "../../styles/global";
-import { useUserInfo } from "../../contexts/UserInfoContext";
 import { getImageSource } from "../common/CommonUtils";
-import { background } from "../../constants/storeItem/background";
+import { useUserItem } from "../../contexts/UserItemContext";
 
 export const ItemBox = () => {
-  const { userInfo } = useUserInfo();
   const [currentIndex, setCurrentIndex] = useState(0);
   const scrollViewRef = useRef(null);
+  const { userItemInfo, setUserItemInfo } = useUserItem();
 
   const itemsPerPage = 8;
-  const pages = Math.ceil(userInfo.userItem.length / itemsPerPage);
+  const pages = Math.ceil(userItemInfo.userItem.length / itemsPerPage);
 
   const handleScroll = (event) => {
     const slideSize = 330; // 페이지 너비와 동일하게 설정
     const index = Math.floor(event.nativeEvent.contentOffset.x / slideSize);
     setCurrentIndex(index);
+  };
+
+  const updateUseStatus = (idx) => {
+    setUserItemInfo((prevState) => {
+      const updatedUserItem = prevState.userItem.map((item) =>
+        item.idx === idx ? { ...item, use: !item.use } : item
+      );
+      return { ...prevState, userItem: updatedUserItem };
+    });
   };
 
   return (
@@ -48,12 +49,16 @@ export const ItemBox = () => {
       >
         {Array.from({ length: pages }).map((_, pageIndex) => (
           <View style={styles.page} key={pageIndex}>
-            {userInfo.userItem
+            {userItemInfo.userItem
               .slice(pageIndex * itemsPerPage, (pageIndex + 1) * itemsPerPage)
               .map((item, index) => (
-                <TouchableOpacity key={index}>
+                <TouchableOpacity
+                  key={index}
+                  disabled={item.use}
+                  onPress={() => updateUseStatus(item.idx)}
+                >
                   <Image
-                    style={styles.image}
+                    style={item.use ? [styles.use, styles.image] : styles.image}
                     source={getImageSource(item.category, item.name)}
                   />
                 </TouchableOpacity>
@@ -80,6 +85,9 @@ export const ItemBox = () => {
 };
 
 const styles = EStyleSheet.create({
+  use: {
+    opacity: 0.3,
+  },
   page: {
     marginTop: 20,
     width: 330,
@@ -110,3 +118,5 @@ const styles = EStyleSheet.create({
     marginHorizontal: 2,
   },
 });
+
+export default ItemBox;
