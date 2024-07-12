@@ -14,7 +14,12 @@ function WalkingScreen(){
     const handleStopPress = () => {
         setIsTimerActive(!isTimerActive);
     };
-   
+
+    const next = () => {
+          navigation.navigate("PhotoSubmit");
+      };
+
+      
     useEffect(()=>{
     }, [isTimerActive]);
 
@@ -23,12 +28,12 @@ function WalkingScreen(){
             <BackBar navigation={navigation} />
             <View style={styles.container}>
                 <Timer isActive={isTimerActive}/>
-                <View style = {[styles.walkingScreenWithCharacter, {marginBottom : isTimerActive ? 70 : 15}]} >
+                <View style = {[styles.walkingScreenWithCharacter, {marginBottom : isTimerActive ? 75 : 15}]} >
                     <WalkingScreenWithCharactor/>
                 </View>
                 {isTimerActive ? (<WideButton text="중지" onPress={handleStopPress}/>) 
                 : (<View style={styles.buttonContainer}>
-                        <WideButton text="사진올리기" backgroundColor={EStyleSheet.value("$Blue02")} textColor={EStyleSheet.value("$Blue01")} onPress={null}/>
+                        <WideButton text="사진올리기" backgroundColor={EStyleSheet.value("$Blue02")} textColor={EStyleSheet.value("$Blue01")} onPress={next}/>
                         <View style = { styles.twoButtonContainer}>
                             <HalfButton text="계속" onPress={handleStopPress}/>
                             <HalfButton text="종료" onPress={null}/>
@@ -53,7 +58,7 @@ const styles = EStyleSheet.create({
       twoButtonContainer : {
         flexDirection: "row",
         justifyContent : "space-between",
-        marginTop : 5,
+        marginTop : 10,
         paddingHorizontal : 5
       },
       buttonContainer : {
