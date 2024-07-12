@@ -108,37 +108,6 @@ export const SelectModal = ({
   );
 };
 
-export const ConfirmationTwoButtonModal = ({
-  visible,
-  onClose,
-  message,
-  buttonText1,
-  buttonText2,
-  onCheck,
-}) => {
-  return (
-    <Modal
-      animationType="fade"
-      transparent={true}
-      visible={visible}
-      onRequestClose={onClose}
-    >
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>{message}</Text>
-          <View style={styles.twobtn}>
-            <TouchableOpacity onPress={onCheck}>
-              <Text style={[styles.btn, styles.button]}>{buttonText1}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={onClose}>
-              <Text style={[styles.btn, styles.button]}>{buttonText2}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </View>
-    </Modal>
-  );
-};
 export const TwoConfirmationModal = ({
   visible,
   onClose,
