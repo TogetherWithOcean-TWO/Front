@@ -52,8 +52,17 @@ function SignupSetGoalScreen() {
 
   const closeModal = () => {
     setModalVisible(false);
+    navigation.navigate("HomeScreen");
   };
 
+
+  const done = () => {
+    openModal();
+    if (isValid) {
+      navigation.navigate("HomeScreen");
+    }
+
+  };
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
       <BackBar navigation={navigation} />
