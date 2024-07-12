@@ -69,6 +69,13 @@ const styles = EStyleSheet.create({
     height: "50%",
     justifyContent: "flex-end",
   },
-});
+  button: {
+    bottom: 0,
+    height: "50%",
+    flex : "1", /*이화면만 버튼 밑에 공간 있어서 추가했습니다요*/ 
+    justifyContent: "flex-end",
+  },
+}
+);
 
 export default SignupAddressScreen;
