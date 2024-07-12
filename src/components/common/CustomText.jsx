@@ -24,7 +24,7 @@ export const ErrorText = ({ text }) => {
 
 // InfoText
 export const InfoText = ({ text }) => {
-  return <Text style={[styles.text, styles.InfoText]}>{text}</Text>;
+  return <Text style={[styles.text, styles.infoText]}>{text}</Text>;
 };
 
 const styles = EStyleSheet.create({
@@ -50,7 +50,7 @@ const styles = EStyleSheet.create({
     marginTop: 5,
     fontSize: 12,
   },
-  InfoText : {
+  infoText : {
     color : "$Blue01",
     fontSize : 16,
     fontWeight : "bold",
