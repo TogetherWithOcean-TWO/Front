@@ -7,13 +7,14 @@ import { LabelTitle } from "../../components/common/CustomText";
 import { ItemBox } from "../../components/CharactorCustom/ItemBox";
 import { ButtonView } from "../../components/CharactorCustom/ButtonView";
 import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 function CharactorCustomScreen() {
   const [selectedItemIndex, setSelectedItemIndex] = useState(null); // 선택된 아이템의 인덱스 상태 추가
-
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <BackBarWithPoint />
+      <BackBarWithPoint navigation={navigation} />
       <LinearGradient
         colors={["#FFFFFF", "#95AAD4", "#28406D"]}
         style={styles.mainContainer}
