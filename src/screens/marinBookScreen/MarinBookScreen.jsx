@@ -1,10 +1,8 @@
-import { TouchableOpacity, View, Image } from "react-native";
-import { BackBarWithPoint, BackBar } from "../../components/common/CustomBar";
+import { View, Image } from "react-native";
+import { BackBar } from "../../components/common/CustomBar";
 import EStyleSheet from "../../styles/global";
 import { LinearGradient } from "expo-linear-gradient";
 import { MainTitle } from "../../components/common/CustomText";
-import { BsDisplay } from "react-icons/bs";
-import { MarinComponent } from "../../components/marinBook/MarinComponents";
 import { MarinBook } from "../../components/marinBook/MarinBook";
 
 function MarinBookScreen() {
@@ -23,10 +21,12 @@ function MarinBookScreen() {
           />
         </View>
         <MarinBook />
-        <Image
-          style={styles.imgBackground}
-          source={require("../../assets/images/badgeBackground.png")}
-        />
+        <View style={styles.imgView}>
+          <Image
+            style={styles.imgBackground}
+            source={require("../../assets/images/badgeBackground.png")}
+          />
+        </View>
       </LinearGradient>
     </View>
   );
@@ -50,11 +50,16 @@ const styles = EStyleSheet.create({
   img: {
     top: 3,
     left: 5,
+    width: 25,
+    height: 25,
   },
   imgBackground: {
-    position: "absolute",
-    bottom: 0,
-    left: 110,
+    width: 180,
+    height: 180,
+  },
+  imgView: {
+    justifyContent: "flex-end",
+    alignItems: "center",
   },
 });
 
