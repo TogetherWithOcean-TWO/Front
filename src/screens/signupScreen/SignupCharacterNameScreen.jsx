@@ -14,6 +14,7 @@ import { ConfirmationModal } from "../../components/common/Modal";
 function SignupCharacterNameScreen() {
   const route = useRoute();
   const navigation = useNavigation();
+  const { fromHome } = route.params || {};
 
   const { userInfo, setUserInfo } = useUserInfo();
 
@@ -53,9 +54,14 @@ function SignupCharacterNameScreen() {
 
   const next = () => {
     if (isValid) {
-      navigation.navigate("SignupSetGoal", {
-        characterImage,
-      });
+      //홈에서 접근
+      if(fromHome){
+        navigation.navigate("HomeScreen");
+      }else{
+        navigation.navigate("SignupSetGoal",{
+          characterImage,
+        });
+      }
     } else {
       openModal();
     }
