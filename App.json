@@ -1,13 +1,26 @@
 {
-    "expo": {
-      "plugins": [
-        [
-          "expo-font",
-          {
-            "fonts": ["./src/assets/fonts/JejuGothic.ttf"]
-            
-          }
-        ]
+  "expo": {
+    "plugins": [
+      [
+        "react-native-vision-camera",
+        {
+          "cameraPermissionText": "TWO needs access to your Camera"
+        }
+      ],
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/JejuGothic.ttf"
+          ]
+        }
       ]
+    ],
+    "android": {
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.TWO.front"
     }
   }
+}

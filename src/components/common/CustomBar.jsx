@@ -36,6 +36,7 @@ const styles = EStyleSheet.create({
     height: "12%",
     backgroundColor: "$White01",
     justifyContent: "flex-end",
+    paddingBottom : 10
   },
   leftArrow: {
     left: 15,
