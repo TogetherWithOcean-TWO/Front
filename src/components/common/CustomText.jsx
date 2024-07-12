@@ -24,7 +24,7 @@ export const ErrorText = ({ text }) => {
 
 // InfoText
 export const InfoText = ({ text }) => {
-  return <Text style={[styles.text, styles.InfoText]}>{text}</Text>;
+  return <Text style={[styles.text, styles.infoText]}>{text}</Text>;
 };
 
 const styles = EStyleSheet.create({
@@ -56,4 +56,5 @@ const styles = EStyleSheet.create({
     fontWeight: "bold",
     textAlign: "center",
   },
+
 });
