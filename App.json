@@ -2,12 +2,6 @@
   "expo": {
     "plugins": [
       [
-        "react-native-vision-camera",
-        {
-          "cameraPermissionText": "TWO needs access to your Camera"
-        }
-      ],
-      [
         "expo-font",
         {
           "fonts": [

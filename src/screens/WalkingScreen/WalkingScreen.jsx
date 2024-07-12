@@ -14,12 +14,11 @@ function WalkingScreen(){
     const handleStopPress = () => {
         setIsTimerActive(!isTimerActive);
     };
-
     const next = () => {
-          navigation.navigate("PhotoSubmit");
-      };
+        navigation.navigate("PhotoSubmit");
+    };
 
-      
+    
     useEffect(()=>{
     }, [isTimerActive]);
 
