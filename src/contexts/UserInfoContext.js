@@ -17,7 +17,8 @@ export const UserInfoProvider = ({ children }) => {
     detailAddress: "",
     charId: 0,
     charName: "",
-    stepGoal: 0,
+    stepGoal: 10000,
+    todaySteps: 1000, // 오늘 걸음 수 초기화
 
     // 포인트
     point: 10000,
