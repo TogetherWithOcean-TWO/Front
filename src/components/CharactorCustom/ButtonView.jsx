@@ -2,8 +2,20 @@ import { View, TouchableOpacity, Text } from "react-native";
 import EStyleSheet from "../../styles/global";
 import DeleteIcon from "react-native-vector-icons/MaterialCommunityIcons";
 import Icon from "react-native-vector-icons/FontAwesome6";
+import { useUserItem } from "../../contexts/UserItemContext";
 
-export const ButtonView = () => {
+export const ButtonView = ({ selectedItemIndex, setSelectedItemIndex }) => {
+  const { userItemInfo, setUserItemInfo } = useUserItem();
+  const handleDeleteBtn = () => {
+    setUserItemInfo((prevState) => {
+      const updatedUserItem = prevState.userItem.map((item) =>
+        item.idx === selectedItemIndex ? { ...item, use: false } : item
+      );
+      return { ...prevState, userItem: updatedUserItem };
+    });
+    setSelectedItemIndex(null);
+  };
+
   return (
     <View style={styles.btnView}>
       <TouchableOpacity style={[styles.itembtn, styles.btn]}>
@@ -12,7 +24,10 @@ export const ButtonView = () => {
       <TouchableOpacity style={[styles.itembtn, styles.btn]}>
         <Icon name="arrow-rotate-right" size={16} />
       </TouchableOpacity>
-      <TouchableOpacity style={[styles.itembtn, styles.btn]}>
+      <TouchableOpacity
+        style={[styles.itembtn, styles.btn]}
+        onPress={handleDeleteBtn}
+      >
         <DeleteIcon name="delete" size={18} />
       </TouchableOpacity>
       <TouchableOpacity style={[styles.btn, styles.saveBtn]}>
