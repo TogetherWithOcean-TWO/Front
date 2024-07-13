@@ -52,7 +52,7 @@ const CharacterSection = () => {
       <View style={styles.sideButtons}>
         <CharacterButton iconName="cart-outline" label="상점" onPress={() => navigation.navigate('StoreScreen')} />
         <CharacterButton iconName="fish-outline" label="도감" onPress={() => navigation.navigate('MarinBookScreen')} />
-        <CharacterButton iconName="map-outline" label="나의 해양" onPress={() => {}} />
+        <CharacterButton iconName="map-outline" label="나의 해양" onPress={() => navigation.navigate('MyOcean')} />
       </View>
     </View>
   );
