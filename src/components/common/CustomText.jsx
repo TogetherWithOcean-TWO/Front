@@ -3,8 +3,8 @@ import { Text } from "react-native";
 import EStyleSheet from "../../styles/global";
 
 // MainTitle
-export const MainTitle = ({ text }) => {
-  return <Text style={[styles.text, styles.mainText]}>{text}</Text>;
+export const MainTitle = ({ text, style }) => {
+  return <Text style={[styles.text, styles.mainText, style]}>{text}</Text>;
 };
 
 // LabelTitle
@@ -23,8 +23,8 @@ export const ErrorText = ({ text }) => {
 };
 
 // InfoText
-export const InfoText = ({ text }) => {
-  return <Text style={[styles.text, styles.infoText]}>{text}</Text>;
+export const InfoText = ({ text, style }) => {
+  return <Text style={[styles.text, styles.infoText, style]}>{text}</Text>;
 };
 
 const styles = EStyleSheet.create({
