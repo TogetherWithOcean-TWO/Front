@@ -5,6 +5,7 @@ EStyleSheet.build({
   $Blue02: "#03266115",
   $Blue03: "#03266155",
   $Blue04 : "#9EB5DD",
+  $Blue05: "#03266107",
 
   $White01: "#FFF",
   $White02: "#FFFFFF50",
