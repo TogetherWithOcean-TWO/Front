@@ -22,9 +22,10 @@ export const SignupForm = ({ setIsValid }) => {
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
   const [phoneNumberError, setPhoneNumberError] = useState("");
-  const [checkNickName, setCheckNickName] = useState(true);
+
+  const [checkNickName, setCheckNickName] = useState(false);
   const [nickNameModalVisible, setNickNameModalVisible] = useState(false);
-  const [checkEmail, setCheckEmail] = useState(true);
+  const [checkEmail, setCheckEmail] = useState(false);
   const [emailModalVisible, setEmailModalVisible] = useState(false);
 
   const openModal = () => setModalVisible(true);
@@ -183,6 +184,7 @@ export const SignupForm = ({ setIsValid }) => {
                 setPhoneNumberError
               )
             }
+            numeric={true}
             maxLength={13}
           />
           {phoneNumberError ? <ErrorText text={phoneNumberError} /> : null}

@@ -65,6 +65,7 @@ export const EditModal = ({
               value={value}
               secure={secure}
               onChangeText={onChangeText}
+              numeric={true}
             />
           </View>
           <TouchableOpacity onPress={onClose}>
