@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { View, Text,StyleSheet } from 'react-native';
 import Character from './Character';
 import CharacterButton from './CharacterButton';
 import { useUserInfo } from '../../../contexts/UserInfoContext';
 import { useNavigation } from '@react-navigation/native';
+import { captureView } from '../utils/capture';
+
 
 
 import seal from '../../../assets/images/charactor/seal.png';
@@ -16,6 +18,9 @@ import { LabelTitle } from '../../common/CustomText';
 const CharacterSection = () => {
   const { userInfo } = useUserInfo();
   const navigation = useNavigation();
+  const viewRef = useRef(null);
+  const [capturedImage, setCapturedImage] = useState(null);
+
 
   const getCharacterImage = (charId) => {
     switch (charId) {
@@ -34,6 +39,15 @@ const CharacterSection = () => {
 
   const characterImage = getCharacterImage(userInfo.charId);
 
+  const handleCapture = async () => {
+    try {
+      const uri = await captureView(viewRef.current);
+      setCapturedImage(uri);
+    } catch (error) {
+      console.error('Error capturing view: ', error);
+    }
+  };
+
   if (characterImage === null) {
     return null; // 캐릭터 이미지가 설정되지 않은 경우 렌더링하지 않음
   }
@@ -41,7 +55,7 @@ const CharacterSection = () => {
   return (
     <View style={styles.container}>
       <View style={styles.sideButtons}>
-        <CharacterButton iconName="camera-outline" label="캡쳐" onPress={() => {}} />
+        <CharacterButton iconName="camera-outline" label="캡쳐" onPress={handleCapture} />
         <CharacterButton iconName="color-wand-outline" label="꾸미기" onPress={() => navigation.navigate("CharactorCustomScreen")} />
         <CharacterButton iconName="refresh-outline" label="캐릭터 변경" onPress={() => navigation.navigate('SignupCharacter', {fromHome : true})} />
       </View>
@@ -54,6 +68,12 @@ const CharacterSection = () => {
         <CharacterButton iconName="fish-outline" label="도감" onPress={() => navigation.navigate('MarinBookScreen')} />
         <CharacterButton iconName="map-outline" label="나의 해양" onPress={() => navigation.navigate('MyOcean')} />
       </View>
+      {capturedImage && (
+        <Image
+          source={{ uri: capturedImage }}
+          style={styles.capturedImage}
+        />
+      )}
     </View>
   );
 };
@@ -88,6 +108,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     //color : 'black',
     bottom: 10,     
+  },
+  capturedImage: {
+    width: 200,
+    height: 200,
+    marginTop: 20,
   },
 });
 
