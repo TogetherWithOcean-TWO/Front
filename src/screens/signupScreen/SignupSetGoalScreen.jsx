@@ -52,16 +52,14 @@ function SignupSetGoalScreen() {
 
   const closeModal = () => {
     setModalVisible(false);
-    navigation.navigate("HomeScreen");
+    navigation.navigate("SplashScreen");
   };
-
 
   const done = () => {
     openModal();
     if (isValid) {
       navigation.navigate("HomeScreen");
     }
-
   };
   return (
     <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
@@ -77,6 +75,7 @@ function SignupSetGoalScreen() {
               placeholder="숫자로만 적어주세요"
               value={userInfo.stepGoal}
               onChangeText={onlyNumbers}
+              numeric={true}
             />
           </View>
         </View>
