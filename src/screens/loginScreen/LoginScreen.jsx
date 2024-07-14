@@ -14,11 +14,11 @@ function LoginScreen() {
   const navigation = useNavigation();
 
   const navigateToMainScreen = () => {
-    navigation.navigate("MainScreen");
+    navigation.navigate("HomeScreen");
   };
 
   const navigateToKakaoLoginScreen = () => {
-    navigation.navigate("MainScreen");
+    navigation.navigate("HomeScreen");
   };
   const navigateToFindForLoginScreen = () => {
     navigation.navigate("Findforlogin");

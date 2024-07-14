@@ -12,14 +12,14 @@ import HomeScreen from "./src/screens/HomeScreen";
 import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
 import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen";
 import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
-import MyOceanScreen from './src/screens/MyOceanScreen/MyOceanScreen';
+import MyOceanScreen from "./src/screens/MyOceanScreen/MyOceanScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
 import CharactorCustomScreen from "./src/screens/charactorCustomScreen/CharactorCustomScreen";
 import MarinBookScreen from "./src/screens/marinBookScreen/MarinBookScreen";
 import { UserItemInfoProvider } from "./src/contexts/UserItemContext";
-import {UserLocationProvider} from "./src/contexts/UserLocationContext";
+import { UserLocationProvider } from "./src/contexts/UserLocationContext";
 
 const Stack = createStackNavigator();
 
@@ -28,7 +28,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="HomeScreen">
+          <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -112,11 +112,11 @@ const App = () => {
               options={{ headerShown: false }}
             />
 
-            <Stack.Screen 
-              name="MyOcean" 
-              component={MyOceanScreen} 
-              options={{ headerShown: false }} />
-
+            <Stack.Screen
+              name="MyOcean"
+              component={MyOceanScreen}
+              options={{ headerShown: false }}
+            />
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>

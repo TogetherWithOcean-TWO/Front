@@ -3,9 +3,9 @@ import React, { createContext, useContext, useState } from "react";
 const UserInfoContext = createContext();
 
 // UserInfoProvider
+// 사용자 컴포넌트
 export const UserInfoProvider = ({ children }) => {
   const [userInfo, setUserInfo] = useState({
-    //회원가입 컴포넌트
     realName: "",
     nickname: "",
     email: "",
