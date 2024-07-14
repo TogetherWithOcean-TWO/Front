@@ -11,8 +11,13 @@ import EStyleSheet from "../styles/global";
 
 import { useUserInfo } from "../contexts/UserInfoContext";
 import { useNavigation } from "@react-navigation/native";
+import { useFonts } from "expo-font";
 
 const HomeScreen = () => {
+  const [fontsLoaded] = useFonts({
+    Pretendard: require("../assets/fonts/JejuGothic.ttf"),
+  });
+
   const { userInfo } = useUserInfo();
   const navigation = useNavigation();
 
