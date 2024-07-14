@@ -2,7 +2,13 @@ import React from "react";
 import { TextInput } from "react-native";
 import EStyleSheet from "../../styles/global";
 
-export const CustomInput = ({ placeholder, value, onChangeText, secure, numeric=false }) => {
+export const CustomInput = ({
+  placeholder,
+  value,
+  onChangeText,
+  secure,
+  numeric = false,
+}) => {
   return (
     <TextInput
       style={styles.input}
@@ -11,7 +17,7 @@ export const CustomInput = ({ placeholder, value, onChangeText, secure, numeric=
       onChangeText={onChangeText}
       placeholderTextColor="#A8A8A8"
       secureTextEntry={secure}
-      keyboardType= {numeric="true" ? "numeric" : "default"}
+      keyboardType={numeric ? "numeric" : "default"}
     />
   );
 };
