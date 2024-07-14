@@ -80,7 +80,9 @@ export const formatPhoneNumber = (
   if (formatted.length >= 8)
     formatted = formatted.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
 
-  setUserInfo({ ...userInfo, phoneNumber: formatted });
+  if (formatted.length <= 13) {
+    setUserInfo({ ...userInfo, phoneNumber: formatted });
+  }
 
   if (!formatted || !/^010-\d{4}-\d{4}$/.test(formatted)) {
     setPhoneNumberError("010-1234-5678 형식에 맞게 입력해주세요");
