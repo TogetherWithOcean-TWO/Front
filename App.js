@@ -13,6 +13,7 @@ import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
 import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen";
 import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
 import MyOceanScreen from "./src/screens/MyOceanScreen/MyOceanScreen";
+import CalendarScreen from "./src/screens/CalendarScreen/CalendarScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
@@ -28,7 +29,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="SplashScreen">
+          <Stack.Navigator initialRouteName="HomeScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -115,6 +116,11 @@ const App = () => {
             <Stack.Screen
               name="MyOcean"
               component={MyOceanScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Calendar"
+              component={CalendarScreen}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
