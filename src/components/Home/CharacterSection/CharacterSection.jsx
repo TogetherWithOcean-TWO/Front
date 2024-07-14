@@ -5,8 +5,7 @@ import CharacterButton from './CharacterButton';
 import { useUserInfo } from '../../../contexts/UserInfoContext';
 import { useNavigation } from '@react-navigation/native';
 import ViewShot from 'react-native-view-shot';
-import { requestPermissionsAsync, createAssetAsync } from 'expo-media-library';
-import { captureView } from '../utils/capture';
+import { handleCapture } from '../utils/capture';
 
 
 import seal from '../../../assets/images/charactor/seal.png';
@@ -40,24 +39,6 @@ const CharacterSection = () => {
 
   const characterImage = getCharacterImage(userInfo.charId);
 
-  const handleCapture = async () => {
-    try {
-      const { status } = await requestPermissionsAsync();
-      if (status !== 'granted') {
-        alert('Permission to access media library is required!');
-        return;
-      }
-
-      const uri = await viewRef.current.capture();
-      await createAssetAsync(uri);
-      
-      setCapturedUri(null);  //캡처 후 uri 상태 초기화
-    } catch (error) {
-      console.error('Capture failed', error);
-    }
-  };
-
-
   if (characterImage === null) {
     return null; // 캐릭터 이미지가 설정되지 않은 경우 렌더링하지 않음
   }
@@ -65,7 +46,7 @@ const CharacterSection = () => {
   return (
     <View style={styles.container}>
       <View style={styles.sideButtons}>
-        <CharacterButton iconName="camera-outline" label="캡쳐"  onPress={handleCapture} />
+        <CharacterButton iconName="camera-outline" label="캡쳐"  onPress={() => handleCapture(viewRef, setCapturedUri)} />
         <CharacterButton iconName="color-wand-outline" label="꾸미기" onPress={() => navigation.navigate("CharactorCustomScreen")} />
         <CharacterButton iconName="refresh-outline" label="캐릭터 변경" onPress={() => navigation.navigate('SignupCharacter', {fromHome : true})} />
       </View>
@@ -92,8 +73,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderWidth: 2, // 테두리 두께
-    borderColor: 'black', // 테두리 색상
+    //borderWidth: 2, // 테두리 두께
+    //borderColor: 'black', // 테두리 색상
     
   },
   sideButtons: {
@@ -115,11 +96,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     //color : 'black',
     bottom: 10,     
-  },
-  capturedImage: {
-    width: 200,
-    height: 200,
-    marginTop: 20,
   },
 });
 
