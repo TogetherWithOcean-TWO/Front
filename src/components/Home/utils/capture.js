@@ -1,18 +1,21 @@
+import { requestPermissionsAsync, createAssetAsync } from 'expo-media-library';
 import { captureRef } from 'react-native-view-shot';
-import { createAssetAsync } from 'expo-media-library';
 
-export const captureView = async (viewRef) => {
+export const handleCapture = async (viewRef, setCapturedUri) => {
   try {
+    const { status } = await requestPermissionsAsync();
+    if (status !== 'granted') {
+      alert('Permission to access media library is required!');
+      return;
+    }
+
     const uri = await captureRef(viewRef, {
       format: 'jpg',
       quality: 0.8,
     });
-
-    // Save to camera roll
     await createAssetAsync(uri);
-    return uri;
+    setCapturedUri(null);  // 캡처 후 URI 상태 초기화
   } catch (error) {
-    console.error('Failed to capture screenshot', error);
-    throw error;
+    console.error('Capture failed', error);
   }
 };
