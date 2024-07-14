@@ -29,7 +29,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="HomeScreen">
+          <Stack.Navigator initialRouteName="Findforlogin">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
