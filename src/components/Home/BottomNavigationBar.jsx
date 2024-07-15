@@ -11,7 +11,7 @@ const BottomNavigationBar = ({ navigation }) => {
     <View style={styles.container}>
       <TouchableOpacity
         style={styles.item}
-        onPress={() => navigation.navigate("Request")}
+        onPress={() => navigation.navigate("RequestTrashBag")}
       >
         <Icon name="bag-outline" size={30} color={iconColor} />
         <Text style={styles.label}>봉투신청</Text>
