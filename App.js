@@ -13,6 +13,7 @@ import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
 import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen";
 import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
 import MyOceanScreen from "./src/screens/MyOceanScreen/MyOceanScreen";
+import RequestTrashBagScreen from "./src/screens/RequestTrashBagScreen/RequestTrashBagScreen";
 
 import { UserInfoProvider } from "./src/contexts/UserInfoContext";
 import StoreScreen from "./src/screens/storeScreen/StoreScreen";
@@ -115,6 +116,12 @@ const App = () => {
             <Stack.Screen
               name="MyOcean"
               component={MyOceanScreen}
+              options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+              name="RequestTrashBag"
+              component={RequestTrashBagScreen}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
