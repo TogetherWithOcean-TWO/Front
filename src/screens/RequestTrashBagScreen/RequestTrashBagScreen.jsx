@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, Alert } from "react-native";
 import { BackBar } from "../../components/common/CustomBar";
 import { MainTitle } from "../../components/common/CustomText";
 import { WideButton } from "../../components/common/CustomButton";
@@ -8,80 +8,84 @@ import EStyleSheet from "../../styles/global";
 import { useUserInfo } from "../../contexts/UserInfoContext";
 
 import InputForm from "../../components/RequestTrashBag/InputForm";
+import QuantitySelector from "../../components/RequestTrashBag/QuantitySelector";
 import HomeScreen from "../HomeScreen";
 import { useNavigation } from "@react-navigation/native";
-//import QuantitySelector from "../../components/RequestTrashBag/QuantitySelector";
+import { ScrollView } from "react-native-gesture-handler";
 
 
-const TrashBagRequestScreen = ({ navigation }) => {
-    const { userInfo, setUserInfo } = useUserInfo();
 
-    const [formData, setFormData] = useState({
-        name: userInfo.realName,
-        phoneNumber: userInfo.phoneNumber,
-        postalCode: userInfo.postalCode,
-        address: userInfo.address,
-        detailAddress: userInfo.detailAddress,
-      });
-      const [quantity, setQuantity] = useState(1);
-    
-      const handleSubmit = () => {
-        Alert.alert('신청 완료', '쓰레기 봉투 신청이 완료되었습니다.');
-      };
+const RequestTrashBagScreen = ({ navigation }) => {
+  const { userInfo } = useUserInfo();
 
-      return (
-        <KeyboardAvoidingView style={styles.container} behavior="padding">
-          <ScrollView contentContainerStyle={styles.scrollView}>
-            <Text style={styles.title}>쓰레기 봉투 신청</Text>
-            <InputForm formData={formData} setFormData={setFormData} />
-            <Text style={styles.label}>수량</Text>
-            <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
-            <Text style={styles.infoText}>최대 쓰레기 봉투 등록 가능 개수는 {quantity}개 입니다.</Text>
-            <TouchableOpacity style={styles.submitButton} onPress={handleSubmit}>
-              <Text style={styles.submitButtonText}>신청</Text>
-            </TouchableOpacity>
-          </ScrollView>
-        </KeyboardAvoidingView>
-      );
-    };
+  const [name, setName] = useState(userInfo.realName);
+  const [phoneNumber, setPhoneNumber] = useState(userInfo.phoneNumber);
+  const [postalCode, setPostalCode] = useState(userInfo.postalCode);
+  const [address, setAddress] = useState(userInfo.address);
+  const [detailAddress, setDetailAddress] = useState(userInfo.detailAddress);
+  const [quantity, setQuantity] = useState(1); //수량
 
-    const styles = StyleSheet.create({
-        container: {
-          flex: 1,
-          padding: 20,
-          backgroundColor: '#fff',
-        },
-        scrollView: {
-          flexGrow: 1,
-          justifyContent: 'center',
-        },
-        title: {
-          fontSize: 24,
-          fontWeight: 'bold',
-          marginBottom: 20,
-        },
-        label: {
-          fontSize: 18,
-          fontWeight: 'bold',
-          marginTop: 20,
-        },
-        infoText: {
-          fontSize: 14,
-          color: '#666',
-          marginTop: 10,
-        },
-        submitButton: {
-          marginTop: 20,
-          padding: 15,
-          backgroundColor: '#005BAC',
-          borderRadius: 10,
-          alignItems: 'center',
-        },
-        submitButtonText: {
-          fontSize: 18,
-          color: '#fff',
-          fontWeight: 'bold',
-        },
-      });
-      
-      export default RequestTrashBagScreen;
+  const handleSubmit = () => {
+    //요청 처리 로직
+    console.log("Request Trash : ", {
+      name,
+      phoneNumber,
+      postalCode,
+      address,
+      detailAddress,
+      quantity,
+    });
+
+    Alert.alert('신청 완료', '쓰레기 봉투 신청이 완료되었습니다.');
+
+  };
+
+  return (
+    <KeyboardAvoidingView style={{ flex: 1 }} behavior="padding">
+
+      <View style={styles.container}>
+        <BackBar navigation={navigation} />
+        <MainTitle text="쓰레기 봉투 신청" style={styles.title} />
+
+        <ScrollView>
+          <InputForm
+            name={name} setName={setName}
+            phoneNumber={phoneNumber} setPhoneNumber={setPhoneNumber}
+            postalCode={postalCode} setPostalCode={setPostalCode}
+            address={address} setAddress={setAddress}
+            detailAddress={detailAddress} setDetailAddress={setDetailAddress}
+          />
+
+          <QuantitySelector quantity={quantity} setQuantity={setQuantity} />
+
+        </ScrollView>
+
+        <View style={styles.button}>
+          <TouchableOpacity>
+            <WideButton text="완료" onPress={handleSubmit} />
+          </TouchableOpacity>
+        </View>
+
+      </View>
+
+    </KeyboardAvoidingView>
+
+  )
+
+}
+
+const styles = EStyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "$White01"
+  },
+  title: {
+    padding: 20,
+  },
+  button: {
+    bottom: 20,
+    padding : 25,
+    justifyContent: "flex-end",
+  },
+})
+export default RequestTrashBagScreen;
