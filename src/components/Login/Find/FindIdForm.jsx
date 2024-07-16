@@ -5,13 +5,15 @@ import { LabelTitle, ErrorText } from "../../common/CustomText";
 import { CustomInput, CustomInputWithButton } from "../../common/CustomInput";
 import EStyleSheet from "../../../styles/global";
 import { ConfirmationModal } from "../../common/Modal";
+import api from "../../../api/api";
+import axios from "axios";
 
 export const FindIdForm = () => {
   const [name, setName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [certificationNumber, setCertificationNumber] = useState("");
 
-  const [email, setEmail] = useState("two@two.com");
+  const [email, setEmail] = useState(" ");
 
   const formatPhoneNumber = (text) => {
     let formatted = text.replace(/\D/g, "");
@@ -20,18 +22,38 @@ export const FindIdForm = () => {
       formatted = formatted.replace(/(\d{3})(\d{1,4})/, "$1-$2");
     if (formatted.length >= 8)
       formatted = formatted.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
+
+    if (formatted.length > 13) return;
+
     setPhoneNumber(formatted);
   };
 
   const [timer, setTimer] = useState(180); // 3 minutes in seconds
   const [isTimerActive, setIsTimerActive] = useState(false);
 
-  const startTimer = () => {
-    openSendCodeModal();
-    if (isValidSendCode) {
-      setIsTimerActive(true);
-      setTimer(180); // Reset timer to 3 minutes
-    } else {
+  const startTimer = async () => {
+    const phoneNum =
+      phoneNumber.split("-")[0] +
+      phoneNumber.split("-")[1] +
+      phoneNumber.split("-")[2];
+
+    console.log(phoneNum);
+    try {
+      const response = await api.post("/certify/send-sms", {
+        phoneNumber: phoneNum,
+      });
+      setIsValidSendCode(true);
+      console.log("res" + response);
+    } catch (error) {
+      console.error("Error posting date:", error);
+      setIsValidSendCode(false);
+    } finally {
+      openSendCodeModal();
+      console.log(isValidSendCode);
+      if (isValidSendCode) {
+        setIsTimerActive(true);
+        setTimer(180); // Reset timer to 3 minutes
+      }
     }
   };
 
@@ -61,7 +83,7 @@ export const FindIdForm = () => {
   };
 
   // 인증코드를 보냈습니다
-  const [isValidSendCode, setIsValidSendCode] = useState(true);
+  const [isValidSendCode, setIsValidSendCode] = useState(false);
   const [sendCodeModalVisible, setSendCodeModalVisible] = useState(false);
 
   const openSendCodeModal = () => {
@@ -73,10 +95,23 @@ export const FindIdForm = () => {
   };
 
   // 아이디는 ~~입니다 모달
-  const [isValidId, setIsValidId] = useState(true);
+  const [isValidId, setIsValidId] = useState(false);
   const [showIdModalVisible, setShowIdModalVisible] = useState(false);
 
-  const openIdModal = () => {
+  const openIdModal = async () => {
+    try {
+      const response = await api.post("/member/find-email", {
+        realName: name,
+        phoneNumber: phoneNumber,
+        confirm: correctCertification, // 인증 여부를 프론트가 true, false로 가지고 있다가 리턴해줘야 함
+      });
+      console.log("Server response:", response.data);
+      setIsValidId(true);
+      setEmail(response.data);
+    } catch (error) {
+      console.error("Error posting date:", error);
+    }
+
     setShowIdModalVisible(true);
   };
 
@@ -84,12 +119,32 @@ export const FindIdForm = () => {
     setShowIdModalVisible(false);
   };
 
-  //인증번호 일치여부 모달
-  const [correctCertification, setCorrectCertification] = useState(true);
+  // 인증번호 일치여부 모달
+  const [correctCertification, setCorrectCertification] = useState(false);
   const [certificateModalVisible, setCertificateModalVisible] = useState(false);
 
-  const openCertificateModalVisible = () => {
-    setCertificateModalVisible(true);
+  const openCertificateModalVisible = async () => {
+    try {
+      const response = await api.get("/certify/confirm-sms");
+      console.log(response.data);
+
+      const phoneNum =
+        phoneNumber.split("-")[0] +
+        phoneNumber.split("-")[1] +
+        phoneNumber.split("-")[2];
+
+      console.log(phoneNum);
+
+      if (
+        response.data.certifyNumber === certificationNumber &&
+        response.data.phoneNumber === phoneNum
+      ) {
+        setCertificateModalVisible(true);
+        setCorrectCertification(true);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
   };
 
   const closeCertificateModalVisible = () => {
@@ -176,11 +231,7 @@ export const FindIdForm = () => {
       <ConfirmationModal
         visible={showIdModalVisible}
         onClose={closeIdModal}
-        message={
-          isValidId
-            ? `${name}님의 이메일은\n${email} 입니다.`
-            : "가입된 유저가 아닙니다."
-        }
+        message={isValidId ? `${email}` : "가입된 유저가 아닙니다."}
         buttonText="확인"
       />
     </View>
