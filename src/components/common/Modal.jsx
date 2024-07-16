@@ -171,6 +171,7 @@ const styles = EStyleSheet.create({
     color: "$Blue01",
     fontSize: 16,
     fontWeight: "bold",
+    padding: 20,
   },
 
   button: {
