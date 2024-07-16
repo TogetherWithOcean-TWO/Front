@@ -21,6 +21,10 @@ import CharactorCustomScreen from "./src/screens/charactorCustomScreen/Charactor
 import MarinBookScreen from "./src/screens/marinBookScreen/MarinBookScreen";
 import { UserItemInfoProvider } from "./src/contexts/UserItemContext";
 import { UserLocationProvider } from "./src/contexts/UserLocationContext";
+import SettingScreen from "./src/screens/SettingScreen/SettingScreen";
+import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen";
+import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
+import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 
 const Stack = createStackNavigator();
 
@@ -29,7 +33,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="SplashScreen">
+          <Stack.Navigator initialRouteName="HomeScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -121,6 +125,26 @@ const App = () => {
             <Stack.Screen
               name="Calendar"
               component={CalendarScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={SettingScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfileScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditAddress"
+              component={EditAddressScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditGoal"
+              component={EditGoalScreen}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
