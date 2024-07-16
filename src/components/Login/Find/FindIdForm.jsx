@@ -39,12 +39,9 @@ export const FindIdForm = () => {
 
     console.log(phoneNum);
     try {
-      const response = await axios.post(
-        "http://13.124.240.85:8080/certify/send-sms",
-        {
-          phoneNumber: phoneNum,
-        }
-      );
+      const response = await api.post("/certify/send-sms", {
+        phoneNumber: phoneNum,
+      });
       setIsValidSendCode(true);
       console.log("res" + response);
     } catch (error) {
