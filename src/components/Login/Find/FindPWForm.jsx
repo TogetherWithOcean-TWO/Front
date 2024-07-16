@@ -6,6 +6,7 @@ import { CustomInput, CustomInputWithButton } from "../../common/CustomInput";
 import EStyleSheet from "../../../styles/global";
 import { ConfirmationModal } from "../../common/Modal";
 import { useNavigation } from "@react-navigation/native";
+import api from "../../../api/api";
 
 export const FindPWForm = (props) => {
   const [name, setName] = useState("");
@@ -49,10 +50,26 @@ export const FindPWForm = (props) => {
   };
 
   // 인증코드를 보냈습니다
-  const [isValidSendCode, setIsValidSendCode] = useState(true);
+  const [isValidSendCode, setIsValidSendCode] = useState(false);
   const [sendCodeModalVisible, setSendCodeModalVisible] = useState(false);
 
-  const openSendCodeModal = () => {
+  const openSendCodeModal = async () => {
+    try {
+      const response = await api.post("/certify/confirm-email", {
+        email: email,
+      });
+      setIsValidSendCode(true);
+      console.log("res" + response);
+    } catch (error) {
+      console.error("Error posting date:", error);
+      setIsValidSendCode(false);
+    } finally {
+      console.log(isValidSendCode);
+      if (isValidSendCode) {
+        setIsTimerActive(true);
+        setTimer(180); // Reset timer to 3 minutes
+      }
+    }
     setSendCodeModalVisible(true);
   };
 
@@ -61,10 +78,24 @@ export const FindPWForm = (props) => {
   };
 
   //인증번호 일치여부 모달
-  const [correctCertification, setCorrectCertification] = useState(true);
+  const [correctCertification, setCorrectCertification] = useState(false);
   const [certificateModalVisible, setCertificateModalVisible] = useState(false);
 
-  const openCertificateModalVisible = () => {
+  const openCertificateModalVisible = async () => {
+    try {
+      const response = await api.get("/certify/confirm-email");
+      console.log(response.data);
+
+      if (
+        response.data.certifyNumber === certificationNumber &&
+        response.data.email === email
+      ) {
+        setCertificateModalVisible(true);
+        setCorrectCertification(true);
+      }
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
     setCertificateModalVisible(true);
   };
 
