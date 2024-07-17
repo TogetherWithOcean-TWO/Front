@@ -27,6 +27,7 @@ import SettingScreen from "./src/screens/SettingScreen/SettingScreen";
 import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen";
 import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
 import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
+import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
 
 const Stack = createStackNavigator();
 
@@ -154,6 +155,13 @@ const App = () => {
               component={RequestTrashBagScreen}
               options={{ headerShown: false }}
             />
+
+            <Stack.Screen
+              name="Ranking"
+              component={RankingScreen}
+              options={{ headerShown: false }}
+            />
+
 
 
           </Stack.Navigator>
