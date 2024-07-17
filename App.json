@@ -15,6 +15,19 @@
         "android.permission.CAMERA"
       ],
       "package": "com.TWO.front"
-    }
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.TWO.front",
+      "config": {
+        "googleMapsApiKey": "AIzaSyBW_54AgleHcRFHWVf4bEmxDkgoJEwNLYg"
+      }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9ec23bde-94e2-448b-9ca3-ad6171e395c3"
+      }
+    },
+    "owner": "yjs616"
   }
 }
