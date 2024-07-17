@@ -7,7 +7,7 @@ import { NarrowButton } from "../common/CustomButton";
 import { useUserInfo } from "../../contexts/UserInfoContext";
 import { ConfirmationModal } from "../common/Modal";
 import axios from "axios";
-import { validateUserInfo, formatPhoneNumber } from "./utils";
+import { validateUserInfo, formatPhoneNumber } from "../common/utils";
 
 export const SignupForm = ({ setIsValid }) => {
   const { userInfo, setUserInfo } = useUserInfo();

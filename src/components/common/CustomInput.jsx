@@ -8,6 +8,8 @@ export const CustomInput = ({
   onChangeText,
   secure,
   numeric = false,
+  maxLength,
+  
 }) => {
   return (
     <TextInput
@@ -18,6 +20,7 @@ export const CustomInput = ({
       placeholderTextColor="#A8A8A8"
       secureTextEntry={secure}
       keyboardType={numeric ? "numeric" : "default"}
+      maxLength={maxLength}
     />
   );
 };
