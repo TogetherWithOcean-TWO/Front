@@ -69,7 +69,6 @@ function PhotoSubmitScreen() {
           <Icon
             name="camera-outline"
             size={32}
-            style={styles.photoIcon}
             padding={5}
           />
           <Text style={styles.trashCount}>{trashCount}개</Text>
