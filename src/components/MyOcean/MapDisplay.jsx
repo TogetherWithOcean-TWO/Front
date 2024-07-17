@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Dimensions } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { useUserLocation } from '../../contexts/UserLocationContext';
 
 const { width, height } = Dimensions.get('window');
@@ -15,6 +15,7 @@ const MapDisplay = () => {
 
   return (
     <MapView
+      provider={PROVIDER_GOOGLE} // 추가
       style={styles.map}
       initialRegion={{
         latitude: LATITUDE,
