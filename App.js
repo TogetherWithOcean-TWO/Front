@@ -13,6 +13,7 @@ import WalkingScreen from "./src/screens/WalkingScreen/WalkingScreen";
 import PhotoSubmitScreen from "./src/screens/WalkingScreen/PhotoSubmitScreen";
 import CameraScreen from "./src/screens/WalkingScreen/CameraScreen";
 import MyOceanScreen from "./src/screens/MyOceanScreen/MyOceanScreen";
+
 import RequestTrashBagScreen from "./src/screens/RequestTrashBagScreen/RequestTrashBagScreen";
 import CalendarScreen from "./src/screens/CalendarScreen/CalendarScreen";
 
@@ -22,6 +23,10 @@ import CharactorCustomScreen from "./src/screens/charactorCustomScreen/Charactor
 import MarinBookScreen from "./src/screens/marinBookScreen/MarinBookScreen";
 import { UserItemInfoProvider } from "./src/contexts/UserItemContext";
 import { UserLocationProvider } from "./src/contexts/UserLocationContext";
+import SettingScreen from "./src/screens/SettingScreen/SettingScreen";
+import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen";
+import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
+import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 
 const Stack = createStackNavigator();
 
@@ -119,6 +124,29 @@ const App = () => {
               component={MyOceanScreen}
               options={{ headerShown: false }}
             />
+            <Stack.Screen
+              name="Calendar"
+              component={CalendarScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Settings"
+              component={SettingScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditProfile"
+              component={EditProfileScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditAddress"
+              component={EditAddressScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="EditGoal"
+              component={EditGoalScreen}
 
             <Stack.Screen
               name="RequestTrashBag"
@@ -126,11 +154,7 @@ const App = () => {
               options={{ headerShown: false }}
             />
 
-            <Stack.Screen
-              name="Calendar"
-              component={CalendarScreen}
-              options={{ headerShown: false }}
-            />
+
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>
