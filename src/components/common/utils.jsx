@@ -90,3 +90,43 @@ export const formatPhoneNumber = (
     setPhoneNumberError(" ");
   }
 };
+
+// 유효성 검사 함수
+export const validateTrashBagRequest = (userInfo) => {
+  let valid = true;
+  let errors = {
+    nameError: "",
+    phoneNumberError: "",
+  };
+
+  // 이름 유효성 검사
+  if (!userInfo.realName || !/^[가-힣a-zA-Z]{2,10}$/.test(userInfo.realName)) {
+    errors.nameError = "숫자, 특수문자를 제외하고 2~10자로 입력해주세요";
+    valid = false;
+  } else {
+    errors.nameError = " ";
+  }
+
+  // 전화번호 유효성 검사
+  if (!userInfo.phoneNumber || !/^010-\d{4}-\d{4}$/.test(userInfo.phoneNumber)) {
+    errors.phoneNumberError = "010-1234-5678 형식에 맞게 입력해주세요";
+    valid = false;
+  } else {
+    errors.phoneNumberError = " ";
+  }
+
+  return { valid, errors };
+};
+
+// 봉투 신청에서 변경 사항을 전역 변수에 반영하지 않기 위해 set 없는 format
+// 봉투 신청 시 번호 자동 포맷팅
+export const formatPhoneNumberWithoutSet = (text) => {
+  let formatted = text.replace(/\D/g, "");
+
+  if (formatted.length > 3 && formatted.length < 8)
+    formatted = formatted.replace(/(\d{3})(\d{1,4})/, "$1-$2");
+  if (formatted.length >= 8)
+    formatted = formatted.replace(/(\d{3})(\d{4})(\d{1,4})/, "$1-$2-$3");
+
+  return formatted;
+};

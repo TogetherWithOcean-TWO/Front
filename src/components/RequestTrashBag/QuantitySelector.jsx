@@ -26,6 +26,7 @@ const QuantitySelector = ({ quantity, setQuantity }) => {
           <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
       </View>
+      {/*등록 가능 갯수는 10-사진등록 갯수로 수정이 되야 한다*/}
       <Text style={styles.note}>최대 쓰레기 봉투 등록 가능 개수는 {quantity}개 입니다</Text>
     </View>
   );
