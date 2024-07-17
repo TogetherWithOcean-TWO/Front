@@ -139,14 +139,6 @@ const styles = EStyleSheet.create({
   postcode: {
     flex: 1,
   },
-  closeButton: {
-    backgroundColor: '#ddd',
-    padding: 10,
-    alignItems: 'center',
-  },
-  closeButtonText: {
-    color: '#333',
-  },
 
 
 });
