@@ -147,6 +147,7 @@ const App = () => {
             <Stack.Screen
               name="EditGoal"
               component={EditGoalScreen}
+              />
 
             <Stack.Screen
               name="RequestTrashBag"
