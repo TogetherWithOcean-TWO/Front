@@ -1,9 +1,9 @@
 // 추천 지도.js
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import { SubTitle } from '../common/CustomText';
-import EStyleSheet from '../../styles/global'; 
+import EStyleSheet from '../../styles/global';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const RecommendationSection = () => {
@@ -16,6 +16,7 @@ const RecommendationSection = () => {
             </View>
             <View style={styles.mapContainer}>
                 <MapView
+                    provider={PROVIDER_GOOGLE} // 추가
                     style={styles.map}
                     initialRegion={{
                         latitude: 37.5665, // 원하는 초기 위치의 위도
