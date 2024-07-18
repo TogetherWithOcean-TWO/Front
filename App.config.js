@@ -1,7 +1,9 @@
-// app.config.js
-const { EXPO_PROJECT_ID, GOOGLE_MAPS_API_KEY } = require('./apikey');
+//App.config.js
+import 'dotenv/config';
 
-module.exports = {
+//const { GOOGLE_MAPS_API_KEY, EXPO_PROJECT_ID } = process.env;
+
+export default {
   expo: {
     plugins: [
       [
@@ -16,6 +18,8 @@ module.exports = {
     android: {
       permissions: [
         'android.permission.CAMERA',
+        'android.permission.ACCESS_FINE_LOCATION',
+        'android.permission.ACCESS_COARSE_LOCATION'
       ],
       package: 'com.TWO.front',
     },
@@ -23,14 +27,18 @@ module.exports = {
       supportsTablet: true,
       bundleIdentifier: 'com.TWO.front',
       config: {
-        googleMapsApiKey: GOOGLE_MAPS_API_KEY,
+        googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+      },
+      infoPlist: {
+        NSLocationWhenInUseUsageDescription: "앱이 실행되는 동안 위치를 사용합니다.",
+        NSLocationAlwaysAndWhenInUseUsageDescription: "항상 위치 정보가 필요합니다.",
       },
     },
     extra: {
       eas: {
-        projectId: EXPO_PROJECT_ID,
+        projectId: process.env.EXPO_PROJECT_ID,
       },
     },
-    owner: 'yjs616',
+    owner: 'togetherwithocean',
   },
 };
