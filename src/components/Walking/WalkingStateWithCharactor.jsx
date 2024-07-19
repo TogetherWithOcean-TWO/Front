@@ -5,12 +5,10 @@ import { InfoText, ErrorText } from "../../components/common/CustomText";
 import { Pedometer } from "expo-sensors";
 import { useEffect, useState } from "react";
 
-export const WalkingScreenWithCharactor = () => {
+export const WalkingScreenWithCharactor = ({startTime}) => {
     const characterImage=dolphin;
     const [stepCount, setStepCount] = useState(0);
     const [isPedometerAvailable, setIsPedometerAvailable] = useState("checking");
-    const [startTime, setStartTime] = useState(new Date()); //현재시각에 만보기 시작
-
     
     useEffect(()=>{
         Pedometer.isAvailableAsync().then(
@@ -22,24 +20,20 @@ export const WalkingScreenWithCharactor = () => {
             }
         );
 
-        const subscription=Pedometer.watchStepCount(result=>{
-            setStepCountSinceStart(result.steps);
-        })
-
-        const start = new Date();
-        start.setHours(0,0,0,0);
-        Pedometer.getStepCountAsync(start, new Date()).then(
-            result => {
-                setStepCount(result.steps);
-            },
-            error => {
-                console(error);
-            }
-        );
+        const subscription = Pedometer.watchStepCount(result => {
+            // 현재 시간까지의 총 걸음 수를 업데이트
+            Pedometer.getStepCountAsync(startTime, new Date()).then(
+                result => {
+                    setStepCount(result.steps);
+                },
+                error => {
+                    console.error(error);
+                }
+            );
+        });
 
         return () => subscription && subscription.remove();
-    },[startTime]);
-    
+    }, [startTime]);
 
     return(
         <View style = {styles.container}>
