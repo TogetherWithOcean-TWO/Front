@@ -9,6 +9,7 @@ import { LoginForm } from "../../components/Login/LoginForm";
 import { KakaoLoginButton } from "../../components/Login/KakaoLoginButton";
 import axios from "axios";
 import { ConfirmationModal } from "../../components/common/Modal";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 function LoginScreen() {
   const navigation = useNavigation();
@@ -18,12 +19,13 @@ function LoginScreen() {
   };
 
   const navigateToKakaoLoginScreen = () => {
-    navigation.navigate("HomeScreen");
+    navigation.navigate("KakaoLoginScreen");
   };
   const navigateToFindForLoginScreen = () => {
     navigation.navigate("Findforlogin");
   };
 
+  const {setUserInfo} = useUserInfo();
   const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {
@@ -48,6 +50,22 @@ function LoginScreen() {
       );
       if (response.status === 200) {
         // console.log("로그인 완료");
+        const member = response.data.memberRes;
+        setUserInfo({
+          realName: member.realName,
+          nickname: member.nickname,
+          email: member.email,
+          passwd: member.passwd,
+          phoneNumber: member.phoneNumber,
+          postalCode: member.postalCode,
+          address: member.address,
+          detailAddress: member.detailAddress,
+          charId: member.charId,
+          charName: member.charName,
+          stepGoal: member.stepGoal,
+          todaySteps: member.step,
+          point: member.point,
+        });
         navigateToMainScreen();
       } else {
         openModal();
