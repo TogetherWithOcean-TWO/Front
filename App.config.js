@@ -1,10 +1,5 @@
-<<<<<<< HEAD
-// app.config.js
-const { EXPO_PROJECT_ID, GOOGLE_MAPS_API_KEY } = require("./apikey");
-=======
 //App.config.js
-import 'dotenv/config';
->>>>>>> dev
+import "dotenv/config";
 
 //const { GOOGLE_MAPS_API_KEY, EXPO_PROJECT_ID } = process.env;
 
@@ -19,17 +14,12 @@ export default {
       ],
     ],
     android: {
-<<<<<<< HEAD
-      permissions: ["android.permission.CAMERA"],
-      package: "com.TWO.front",
-=======
       permissions: [
-        'android.permission.CAMERA',
-        'android.permission.ACCESS_FINE_LOCATION',
-        'android.permission.ACCESS_COARSE_LOCATION'
+        "android.permission.CAMERA",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
       ],
-      package: 'com.TWO.front',
->>>>>>> dev
+      package: "com.TWO.front",
     },
     ios: {
       supportsTablet: true,
@@ -38,8 +28,10 @@ export default {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
       },
       infoPlist: {
-        NSLocationWhenInUseUsageDescription: "앱이 실행되는 동안 위치를 사용합니다.",
-        NSLocationAlwaysAndWhenInUseUsageDescription: "항상 위치 정보가 필요합니다.",
+        NSLocationWhenInUseUsageDescription:
+          "앱이 실행되는 동안 위치를 사용합니다.",
+        NSLocationAlwaysAndWhenInUseUsageDescription:
+          "항상 위치 정보가 필요합니다.",
       },
     },
     extra: {
@@ -47,10 +39,6 @@ export default {
         projectId: process.env.EXPO_PROJECT_ID,
       },
     },
-<<<<<<< HEAD
     owner: "togetherwithocean",
-=======
-    owner: 'togetherwithocean',
->>>>>>> dev
   },
 };
