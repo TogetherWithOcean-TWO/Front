@@ -30,6 +30,8 @@ import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen
 import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
 import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
+import LocationRegistrationScreen from './src/screens/WalkingScreen/LocationRegistrationScreen';
+
 
 const Stack = createStackNavigator();
 
@@ -38,7 +40,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="HomeScreen">
+          <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -160,6 +162,16 @@ const App = () => {
               component={RankingScreen}
               options={{ headerShown: false }}
             />
+
+            {/*위치 등록 화면 */}
+            <Stack.Screen
+              name="LocationRegistration"
+              component={LocationRegistrationScreen}
+              options={{ headerShown: false }}
+            />
+
+
+            
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>

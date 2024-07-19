@@ -1,0 +1,22 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Debug Android",
+        "program": "C:/Users/sally/OneDrive/바탕 화면/2024/TWO/Front/.vscode/launch.json",
+        "request": "launch",
+        "type": "reactnative",
+        "cwd": "C:/Users/sally/OneDrive/바탕 화면/2024/TWO/Front",
+        "platform": "android",
+        "sourceMaps": true,
+      },
+      {
+        "name": "Attach to packager",
+        "program": "C:/Users/sally/OneDrive/바탕 화면/2024/TWO/Front/.vscode/launch.json",
+        "request": "attach",
+        "type": "reactnative",
+        "cwd": "C:/Users/sally/OneDrive/바탕 화면/2024/TWO/Front",
+        "port": 8080
+      }
+    ]
+  }

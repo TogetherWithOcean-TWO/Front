@@ -1,5 +1,5 @@
 import { View } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackBar } from "../../components/common/CustomBar";
 import { Timer } from "../../components/Walking/Timer";
 import EStyleSheet from "../../styles/global";
@@ -10,6 +10,9 @@ import React, { useEffect, useState } from "react";
 function WalkingScreen() {
   const navigation = useNavigation();
   const [isTimerActive, setIsTimerActive] = useState(true);
+  const route = useRoute();
+  const {startTime} = route.params;
+  const start = new Date(startTime);
 
   const handleStopPress = () => {
     setIsTimerActive(!isTimerActive);
@@ -35,7 +38,7 @@ function WalkingScreen() {
             { marginBottom: isTimerActive ? 75 : 15 },
           ]}
         >
-          <WalkingScreenWithCharactor />
+          <WalkingScreenWithCharactor startTime={start}/>
         </View>
         {isTimerActive ? (
           <WideButton text="중지" onPress={handleStopPress} />
