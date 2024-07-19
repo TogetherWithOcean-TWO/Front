@@ -1046,7 +1046,10 @@
   dependencies:
     "@babel/code-frame" "~7.10.4"
     "@expo/config-plugins" "~8.0.0-beta.0"
+<<<<<<< HEAD
+=======
     "@expo/config-plugins" "~8.0.0-beta.0"
+>>>>>>> dev
     "@expo/config-types" "^51.0.0-unreleased"
     "@expo/json-file" "^8.3.0"
     getenv "^1.0.0"
@@ -1767,6 +1770,8 @@
   dependencies:
     "@react-native/codegen" "0.74.85"
 
+<<<<<<< HEAD
+=======
 "@react-native/babel-preset@0.74.84":
   version "0.74.84"
   resolved "https://registry.npmjs.org/@react-native/babel-preset/-/babel-preset-0.74.84.tgz"
@@ -1816,6 +1821,7 @@
     babel-plugin-transform-flow-enums "^0.0.2"
     react-refresh "^0.14.0"
 
+>>>>>>> dev
 "@react-native/babel-preset@0.74.85":
   version "0.74.85"
   resolved "https://registry.npmjs.org/@react-native/babel-preset/-/babel-preset-0.74.85.tgz"
@@ -1878,6 +1884,8 @@
     mkdirp "^0.5.1"
     nullthrows "^1.1.1"
 
+<<<<<<< HEAD
+=======
 "@react-native/codegen@0.74.85":
   version "0.74.85"
   resolved "https://registry.npmjs.org/@react-native/codegen/-/codegen-0.74.85.tgz"
@@ -1891,6 +1899,7 @@
     mkdirp "^0.5.1"
     nullthrows "^1.1.1"
 
+>>>>>>> dev
 "@react-native/community-cli-plugin@0.74.85":
   version "0.74.85"
   resolved "https://registry.npmjs.org/@react-native/community-cli-plugin/-/community-cli-plugin-0.74.85.tgz"
@@ -1914,10 +1923,10 @@
   resolved "https://registry.npmjs.org/@react-native/debugger-frontend/-/debugger-frontend-0.74.85.tgz"
   integrity sha512-gUIhhpsYLUTYWlWw4vGztyHaX/kNlgVspSvKe2XaPA7o3jYKUoNLc3Ov7u70u/MBWfKdcEffWq44eSe3j3s5JQ==
 
-"@react-native/dev-middleware@0.74.84":
-  version "0.74.84"
-  resolved "https://registry.npmjs.org/@react-native/dev-middleware/-/dev-middleware-0.74.84.tgz"
-  integrity sha512-veYw/WmyrAOQHUiIeULzn2duJQnXDPiKq2jZ/lcmDo6jsLirpp+Q73lx09TYgy/oVoPRuV0nfmU3x9B6EV/7qQ==
+"@react-native/dev-middleware@0.74.85":
+  version "0.74.85"
+  resolved "https://registry.yarnpkg.com/@react-native/dev-middleware/-/dev-middleware-0.74.85.tgz#eca35aceb882b1111385f7c20f1aad7a33a2734e"
+  integrity sha512-BRmgCK5vnMmHaKRO+h8PKJmHHH3E6JFuerrcfE3wG2eZ1bcSr+QTu8DAlpxsDWvJvHpCi8tRJGauxd+Ssj/c7w==
   dependencies:
     "@isaacs/ttlcache" "^1.4.1"
     "@react-native/debugger-frontend" "0.74.84"
@@ -1984,7 +1993,11 @@
 
 "@react-native/normalize-colors@^0.74.1":
   version "0.74.84"
+<<<<<<< HEAD
+  resolved "https://registry.yarnpkg.com/@react-native/normalize-colors/-/normalize-colors-0.74.84.tgz#4764d59775c17a6ed193509cb01ae2f42dd5c045"
+=======
   resolved "https://registry.npmjs.org/@react-native/normalize-colors/-/normalize-colors-0.74.84.tgz"
+>>>>>>> dev
   integrity sha512-Y5W6x8cC5RuakUcTVUFNAIhUZ/tYpuqHZlRBoAuakrTwVuoNHXfQki8lj1KsYU7rW6e3VWgdEx33AfOQpdNp6A==
 
 "@react-native/virtualized-lists@0.74.85":
@@ -3713,6 +3726,44 @@ expo-constants@~16.0.0:
     "@expo/config" "~9.0.0"
     "@expo/env" "~0.3.0"
 
+<<<<<<< HEAD
+expo-dev-client@^4.0.20:
+  version "4.0.20"
+  resolved "https://registry.yarnpkg.com/expo-dev-client/-/expo-dev-client-4.0.20.tgz#fc2c88f3c299d84f1cd52118420a8f36802d3bf3"
+  integrity sha512-lSr5PoJSqXD2srzWyPY3sb8kcwRaLWNCVemdQryW796tglm6sTnSbRhmUGtUPvrm6Bk+rZAmQNFsqKh1sjHfqg==
+  dependencies:
+    expo-dev-launcher "4.0.22"
+    expo-dev-menu "5.0.16"
+    expo-dev-menu-interface "1.8.3"
+    expo-manifests "~0.14.0"
+    expo-updates-interface "~0.16.2"
+
+expo-dev-launcher@4.0.22:
+  version "4.0.22"
+  resolved "https://registry.yarnpkg.com/expo-dev-launcher/-/expo-dev-launcher-4.0.22.tgz#318c0e5312b719786abe950a68a72364e70ff534"
+  integrity sha512-U8SR4MphP+QatjmD+sQ7AWtKwy7faPpW2PcaPBPnfzBiDc3yk8Kc2sf6/JyN7bUmvA6PFqTnsSJMlZEWi917OQ==
+  dependencies:
+    ajv "8.11.0"
+    expo-dev-menu "5.0.16"
+    expo-manifests "~0.14.0"
+    resolve-from "^5.0.0"
+    semver "^7.6.0"
+
+expo-dev-menu-interface@1.8.3:
+  version "1.8.3"
+  resolved "https://registry.yarnpkg.com/expo-dev-menu-interface/-/expo-dev-menu-interface-1.8.3.tgz#8c1262e29e0124fc5932a129c95b36de56656b20"
+  integrity sha512-QM0LRozeFT5Ek0N7XpV93M+HMdEKRLEOXn0aW5M3uoUlnqC1+PLtF3HMy3k3hMKTTE/kJ1y1Z7akH07T0lunCQ==
+
+expo-dev-menu@5.0.16:
+  version "5.0.16"
+  resolved "https://registry.yarnpkg.com/expo-dev-menu/-/expo-dev-menu-5.0.16.tgz#56342552745618fbe26a7f4e8a47fd95c2ad3dab"
+  integrity sha512-zsUiVCvVWT9ve5EsYEGHGu0dJac13NoEQkmzOjhmvcQXb7+OnKgwtBiNAX6rvponfnx9il506rnyZ+0M9CbwYQ==
+  dependencies:
+    expo-dev-menu-interface "1.8.3"
+    semver "^7.5.4"
+
+=======
+>>>>>>> dev
 expo-file-system@^17.0.1, expo-file-system@~17.0.1:
   version "17.0.1"
   resolved "https://registry.npmjs.org/expo-file-system/-/expo-file-system-17.0.1.tgz"
@@ -3789,10 +3840,22 @@ expo-status-bar@~1.12.1:
   resolved "https://registry.npmjs.org/expo-status-bar/-/expo-status-bar-1.12.1.tgz"
   integrity sha512-/t3xdbS8KB0prj5KG5w7z+wZPFlPtkgs95BsmrP/E7Q0xHXTcDcQ6Cu2FkFuRM+PKTb17cJDnLkawyS5vDLxMA==
 
+<<<<<<< HEAD
+expo-updates-interface@~0.16.2:
+  version "0.16.2"
+  resolved "https://registry.yarnpkg.com/expo-updates-interface/-/expo-updates-interface-0.16.2.tgz#ad1ac2ca8ee5a8cc84052ea3c18a11da64da569b"
+  integrity sha512-929XBU70q5ELxkKADj1xL0UIm3HvhYhNAOZv5DSk7rrKvLo7QDdPyl+JVnwZm9LrkNbH4wuE2rLoKu1KMgZ+9A==
+
+expo@^51.0.21:
+  version "51.0.21"
+  resolved "https://registry.yarnpkg.com/expo/-/expo-51.0.21.tgz#91cb8b78d25ebed4e849f3a25881f25b75bcfe18"
+  integrity sha512-tCKJUw4U4F15FecFPwJTFnAwHZMmUD1Wm7FX0Z/Oj3Jr14MOkom8Lnt2OkBK6BtM91lz33EF9OhgqReX6kchLA==
+=======
 expo@~51.0.17:
   version "51.0.17"
   resolved "https://registry.npmjs.org/expo/-/expo-51.0.17.tgz"
   integrity sha512-VqLrdVMLdjCUhNuWWGdexqkiscnudY7OACafBrfqIFOejAeKceEaBU5YQIlNlOsKuB7PBMqDkhdZ+dG93Ul4ig==
+>>>>>>> dev
   dependencies:
     "@babel/runtime" "^7.20.0"
     "@expo/cli" "0.18.21"
@@ -6617,10 +6680,10 @@ react-native-maps-directions@^1.9.0:
     lodash.isequal "^4.5.0"
     prop-types "^15.6.0"
 
-react-native-maps@^1.15.6:
-  version "1.15.6"
-  resolved "https://registry.npmjs.org/react-native-maps/-/react-native-maps-1.15.6.tgz"
-  integrity sha512-RRyjMvpMoV3249kJ9PA1JjZE/8FmYYHrHuloI/Vzkg/DjxFtJAbFnCnhg5AyS/LI5/n2riulbVl4qpiKpuO22Q==
+react-native-maps@1.14.0:
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-1.14.0.tgz#1e5cac8e88d80002c512dd4763a205493a1ae58d"
+  integrity sha512-ai7h4UdRLGPFCguz1fI8n4sKLEh35nZXHAH4nSWyAeHGrN8K9GjICu9Xd4Q5Ok4h+WwrM6Xz5pGbF3Qm1tO6iQ==
   dependencies:
     "@types/geojson" "^7946.0.13"
 
@@ -6720,9 +6783,9 @@ react-native-webview@13.8.6:
     escape-string-regexp "2.0.0"
     invariant "2.2.4"
 
-react-native@0.74.3:
+react-native@^0.74.3:
   version "0.74.3"
-  resolved "https://registry.npmjs.org/react-native/-/react-native-0.74.3.tgz"
+  resolved "https://registry.yarnpkg.com/react-native/-/react-native-0.74.3.tgz#eef32cd10afb1f4b26f75b79eefd6b220c63953c"
   integrity sha512-UFutCC6WEw6HkxlcpQ2BemKqi0JkwrgDchYB5Svi8Sp4Xwt4HA6LGEjNQgZ+3KM44bjyFRpofQym0uh0jACGng==
   dependencies:
     "@jest/create-cache-key-function" "^29.6.3"
