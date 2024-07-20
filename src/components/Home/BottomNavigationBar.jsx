@@ -7,6 +7,7 @@ import EStyleSheet from "../../styles/global";
 const BottomNavigationBar = ({ navigation }) => {
   const iconColor = EStyleSheet.value("$Blue01");
   const startColor = EStyleSheet.value("$White01");
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -25,7 +26,7 @@ const BottomNavigationBar = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.startButtonContainer}
-        onPress={() => navigation.navigate("Walking")}
+        onPress={() => navigation.navigate("Walking", {startTime : Date.now() })}
       >
         <View style={styles.startButton}>
           <Icon name="walk-outline" size={40} color={startColor} />

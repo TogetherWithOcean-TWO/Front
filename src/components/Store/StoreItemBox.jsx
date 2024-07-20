@@ -45,7 +45,7 @@ export const StoreItemBox = (props) => {
 
   return (
     <View style={styles.shadowContainer}>
-      <TouchableOpacity onPress={openModal} activeOpacity={0.7}>
+      <TouchableOpacity onPress={[openModal]} activeOpacity={0.7}>
         <View style={styles.box}>
           <Image style={styles.image} source={imageSource} />
           <View style={styles.pointView}>
