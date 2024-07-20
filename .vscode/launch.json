@@ -1,6 +1,7 @@
 {
     "version": "0.2.0",
     "configurations": [
+      
       {
         "name": "Debug Android",
         "program": "C:/Users/sally/OneDrive/바탕 화면/2024/TWO/Front/.vscode/launch.json",
