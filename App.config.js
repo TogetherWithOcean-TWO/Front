@@ -19,7 +19,12 @@ export default {
         "android.permission.ACCESS_FINE_LOCATION",
         "android.permission.ACCESS_COARSE_LOCATION",
       ],
-      package: "com.TWO.front",
+      package: 'com.TWO.front',
+      config: {
+        googleMaps: {
+          apiKey: process.env.GOOGLE_MAPS_API_KEY,
+        },
+      },
     },
     ios: {
       supportsTablet: true,
