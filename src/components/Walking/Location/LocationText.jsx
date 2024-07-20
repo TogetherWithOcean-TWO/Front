@@ -3,12 +3,12 @@ import { View, Text, StyleSheet } from 'react-native';
 import { SubTitle, InfoText } from '../../common/CustomText';
 import EStyleSheet from "../../../styles/global";
 
-const LocationText = ({ address }) => {
+const LocationText = ({ placeName }) => {
     return (
         <View style={styles.container}>
             <SubTitle text="장소" />
             <View style={styles.locationContainer}>
-                <InfoText text={address}/>
+                <InfoText text={placeName}/>
             </View>
             <InfoText text="현재 주소가 일치하지 않는다면 수정해주세요 :)" />
         </View>

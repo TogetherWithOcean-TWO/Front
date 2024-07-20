@@ -3,14 +3,15 @@ import { View, StyleSheet } from 'react-native';
 import LocationMap from './LocationMap';
 import LocationText from './LocationText';
 
+
 const LocationRegistration = () => {
     const [region, setRegion] = useState(null);
-    const [address, setAddress] = useState("");
+    const [placeName, setPlaceName] = useState("");
 
     return (
         <View style={styles.container}>
-            <LocationMap region={region} setRegion={setRegion} setAddress={setAddress} />
-            <LocationText address={address} />
+            <LocationMap region={region} setRegion={setRegion} setPlaceName={setPlaceName} />
+            <LocationText placeName={placeName} />
         </View>
     );
 };
