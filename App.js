@@ -1,3 +1,5 @@
+import "expo-dev-client";
+
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import SplashScreen from "./src/screens/SplashScreen/SplashScreen";
@@ -38,7 +40,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="LocationRegistration">
+          <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -147,10 +149,7 @@ const App = () => {
               component={EditAddressScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen
-              name="EditGoal"
-              component={EditGoalScreen}
-              />
+            <Stack.Screen name="EditGoal" component={EditGoalScreen} />
 
             <Stack.Screen
               name="RequestTrashBag"

@@ -42,6 +42,7 @@ function SignupSetGoalScreen() {
     // 숫자만 입력되도록 필터링
     const numericGoal = text.replace(/[^0-9]/g, "");
     setUserInfo({ ...userInfo, stepGoal: numericGoal });
+    setUserInfo({ ...userInfo, todaySteps: 0 });
   };
 
   const [modalVisible, setModalVisible] = useState(false);
