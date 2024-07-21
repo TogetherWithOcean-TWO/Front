@@ -30,8 +30,7 @@ import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen
 import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
 import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
-import LocationRegistrationScreen from './src/screens/WalkingScreen/LocationRegistrationScreen';
-
+import LocationRegistrationScreen from "./src/screens/WalkingScreen/LocationRegistrationScreen";
 
 const Stack = createStackNavigator();
 
@@ -169,9 +168,6 @@ const App = () => {
               component={LocationRegistrationScreen}
               options={{ headerShown: false }}
             />
-
-
-            
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>
