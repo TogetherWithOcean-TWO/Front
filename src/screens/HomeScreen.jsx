@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, StyleSheet, ScrollView } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { LogoBar } from "../components/common/CustomBar";
@@ -12,20 +12,56 @@ import EStyleSheet from "../styles/global";
 import { useUserInfo } from "../contexts/UserInfoContext";
 import { useNavigation } from "@react-navigation/native";
 import { useFonts } from "expo-font";
+import axios from "axios";
 
 const HomeScreen = () => {
-  const [fontsLoaded] = useFonts({
+  /*const [fontsLoaded] = useFonts({
     Pretendard: require("../assets/fonts/JejuGothic.ttf"),
-  });
+  });*/
 
-  const { userInfo } = useUserInfo();
+  //const { userInfo } = useUserInfo();
+  const [userData, setUserData] = useState({nickname:"", monthlyPlog:0});
+  const {token, refreshToken} = useUserInfo();
   const navigation = useNavigation();
 
   useEffect(() => {
-    if (userInfo.charId === "") {
+    const fetchUserData = async () => {
+      try{
+        const response = await axios.get("http://13.124.240.85:8080/member/main-info",{
+          headers:{
+            Authorization : token,
+            RefreshToken : refreshToken,
+          },
+        });
+
+        if(response.status === 200){
+          const {nickname, monthlyPlog} = response.data;
+          setUserData({nickname, monthlyPlog});
+        }else{
+          console.error("사용자 데이터를 가져오지 못했습니다.");
+        }
+      }catch(error){
+        console.error("사용자 데이터를 가져오는 중에 오류가 발생했습니다.", error.message);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+        } else if (error.request) {
+          console.error("Request data:", error.request);
+        } else {
+          console.error("Error message:", error.message);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [token, refreshToken]);
+
+  useEffect(() => {
+    if (userData.charId === "") {
       navigation.navigate("SignupCharacter"); // 캐릭터 선택 화면으로 이동
     }
-  }, [userInfo.charId]);
+  }, [userData.charId]);
 
   return (
     <View style={styles.container}>
@@ -39,13 +75,13 @@ const HomeScreen = () => {
         <ScrollView>
           <View style={styles.greetingContainer}>
             <SubTitle
-              text={`안녕하세요, ${userInfo.realName}님!`}
+              text={`안녕하세요, ${userData.realName}님!`}
               style={styles.greetingTitle}
             />
             <SubTitle text="제주 곽지 해수욕장에 가보는건 어떨까요?" />
           </View>
           <View style={styles.ploggingDoneContainer}>
-            <Text style={styles.ploggingDoneText}>7월 3회 실천!</Text>
+            <Text style={styles.ploggingDoneText}>{`7월 ${userData.monthlyPlog}회 실천!`}</Text>
           </View>
           <CharacterSection />
           <StepSection />

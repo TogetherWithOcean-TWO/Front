@@ -20,8 +20,14 @@ export const UserInfoProvider = ({ children }) => {
     stepGoal: 0,
     todaySteps: 0, // 오늘 걸음 수 초기화
 
+    monthlyPlog:0,    //달에 줍깅 몇번
+
     // 포인트
     point: 10000,
+
+    //토큰
+    token:"",
+    refreshToken: "",
   });
 
   return (
