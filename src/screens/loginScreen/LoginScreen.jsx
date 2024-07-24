@@ -25,7 +25,7 @@ function LoginScreen() {
     navigation.navigate("Findforlogin");
   };
 
-  const {setUserInfo} = useUserInfo();
+  const { setUserInfo } = useUserInfo();
   const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {
@@ -49,7 +49,7 @@ function LoginScreen() {
         }
       );
       if (response.status === 200) {
-        // console.log("로그인 완료");
+        console.log("로그인 완료");
         const member = response.data.memberRes;
         setUserInfo({
           realName: member.realName,
@@ -72,7 +72,7 @@ function LoginScreen() {
         // alert(response.data.message || "로그인 실패");
       }
     } catch (error) {
-      // console.error("Error:", error);
+      console.error("Error:", error);
       openModal();
       // alert("로그인중 발생했습니다.");
     }

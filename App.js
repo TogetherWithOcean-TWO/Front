@@ -30,10 +30,9 @@ import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen
 import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
 import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
-import LocationRegistrationScreen from './src/screens/WalkingScreen/LocationRegistrationScreen';
+import LocationRegistrationScreen from "./src/screens/WalkingScreen/LocationRegistrationScreen";
 
 import TrashCollectionScreen from "./src/screens/WalkingScreen/TrashCollectionScreen";
-
 
 const Stack = createStackNavigator();
 
@@ -42,7 +41,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="HomeScreen">
+          <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -151,8 +150,11 @@ const App = () => {
               component={EditAddressScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="EditGoal" component={EditGoalScreen} />
-
+            <Stack.Screen
+              name="EditGoal"
+              component={EditGoalScreen}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="RequestTrashBag"
               component={RequestTrashBagScreen}
@@ -178,9 +180,6 @@ const App = () => {
               component={TrashCollectionScreen}
               options={{ headerShown: false }}
             />
-
-
-            
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>
