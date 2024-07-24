@@ -31,10 +31,8 @@ import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
 import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
 import LocationRegistrationScreen from "./src/screens/WalkingScreen/LocationRegistrationScreen";
-import LocationRegistrationScreen from './src/screens/WalkingScreen/LocationRegistrationScreen';
 
 import TrashCollectionScreen from "./src/screens/WalkingScreen/TrashCollectionScreen";
-
 
 const Stack = createStackNavigator();
 
@@ -43,7 +41,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="Camera">
+          <Stack.Navigator initialRouteName="SplashScreen">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -182,9 +180,6 @@ const App = () => {
               component={TrashCollectionScreen}
               options={{ headerShown: false }}
             />
-
-
-            
           </Stack.Navigator>
         </NavigationContainer>
       </UserInfoProvider>
