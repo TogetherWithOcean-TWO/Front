@@ -148,8 +148,11 @@ const App = () => {
               component={EditAddressScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="EditGoal" component={EditGoalScreen} />
-
+            <Stack.Screen
+              name="EditGoal"
+              component={EditGoalScreen}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="RequestTrashBag"
               component={RequestTrashBagScreen}
