@@ -68,7 +68,8 @@ function LoginScreen() {
           stepGoal: member.stepGoal,
           todaySteps: member.step,
           point: member.point,
-          token : token.accessToken
+          token : token.accessToken,
+          refreshToken : token.refreshToken
         });
         navigateToMainScreen();
       } else {
