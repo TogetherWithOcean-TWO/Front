@@ -10,20 +10,19 @@ import Icon from "react-native-vector-icons/Feather";
 import userIcon from "../../assets/images/userIcon.png";
 import { useNavigation } from "@react-navigation/native";
 
-export const MainContainer = () => {
+export const MainContainer = ({info}) => {
   const navigation = useNavigation();
-  const [name, setName] = useState("abc");
 
   const goEditProfile = () => {
-    navigation.navigate("EditProfile");
+    navigation.navigate("EditProfile", {info});
   };
 
   const goEditAddress = () => {
-    navigation.navigate("EditAddress");
+    navigation.navigate("EditAddress", {info});
   };
 
   const goEditGoal = () => {
-    navigation.navigate("EditGoal");
+    navigation.navigate("EditGoal", {info});
   };
   return (
     <View style={styles.container}>
@@ -33,7 +32,7 @@ export const MainContainer = () => {
       </View>
       <View style={styles.userbar}>
         <Image source={userIcon} />
-        <SubTitle text={`${name} 님`} style={styles.name} />
+        <SubTitle text={`${info.nickname} 님`} style={styles.name} />
       </View>
       <View style={styles.statusbar}>
         <View style={styles.statusLeft}>
@@ -42,7 +41,7 @@ export const MainContainer = () => {
         </View>
         <View style={styles.statusRight}>
           <LabelTitle text="나의 포인트" />
-          <SubTitle text={"1000 P"} />
+          <SubTitle text={`${info.point} P`} />
         </View>
       </View>
       <View>

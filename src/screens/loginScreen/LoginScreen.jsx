@@ -51,11 +51,14 @@ function LoginScreen() {
       if (response.status === 200) {
         // console.log("로그인 완료");
         const member = response.data.memberRes;
+        const token = response.data.token;
+        console.log(response.data);
         setUserInfo({
           realName: member.realName,
           nickname: member.nickname,
           email: member.email,
           passwd: member.passwd,
+          checkPasswd : member.passwd,
           phoneNumber: member.phoneNumber,
           postalCode: member.postalCode,
           address: member.address,
@@ -65,6 +68,7 @@ function LoginScreen() {
           stepGoal: member.stepGoal,
           todaySteps: member.step,
           point: member.point,
+          token : token.accessToken
         });
         navigateToMainScreen();
       } else {

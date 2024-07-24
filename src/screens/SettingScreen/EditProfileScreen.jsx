@@ -5,6 +5,7 @@ import { BackBar } from "../../components/common/CustomBar";
 import EStyleSheet from "../../styles/global";
 
 import { EditProfileForm } from "../../components/Setting/EditProfileForm";
+
 export const EditProfileScreen = () => {
   const navigation = useNavigation();
   return (

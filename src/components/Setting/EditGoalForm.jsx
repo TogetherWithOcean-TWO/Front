@@ -8,7 +8,7 @@ import { AddressForm } from "../Signup/AddressForm";
 import { useNavigation } from "@react-navigation/native";
 import { CharactorForm } from "../Signup/CharactorForm";
 
-export const EditGoalForm = () => {
+export const EditGoalForm = ({settingInfo}) => {
   const [isValid, setIsValid] = useState(false);
   const [characterImage, setCharacterImage] = useState();
 

@@ -22,6 +22,9 @@ export const UserInfoProvider = ({ children }) => {
 
     // 포인트
     point: 10000,
+
+    //토큰
+    token : ""
   });
 
   return (

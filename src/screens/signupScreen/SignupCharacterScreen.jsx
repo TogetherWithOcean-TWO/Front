@@ -12,7 +12,6 @@ import { ConfirmationModal } from "../../components/common/Modal";
 
 function SignupAddressScreen() {
   const { userInfo, setUserInfo } = useUserInfo();
-
   const navigation = useNavigation();
 
   //추가
@@ -36,6 +35,7 @@ function SignupAddressScreen() {
         characterImage,
         fromHome
       });
+
     } else {
       openModal();
     }

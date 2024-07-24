@@ -3,6 +3,8 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import EStyleSheet from "../../styles/global";
+import { useUserInfo } from "../../contexts/UserInfoContext";
+import axios from "axios";
 
 const BottomNavigationBar = ({ navigation }) => {
   const iconColor = EStyleSheet.value("$Blue01");

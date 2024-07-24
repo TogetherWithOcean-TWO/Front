@@ -1,18 +1,21 @@
 import { React, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackBar } from "../../components/common/CustomBar";
 import EStyleSheet from "../../styles/global";
 
 import { EditProfileForm } from "../../components/Setting/EditProfileForm";
 import { EditGoalForm } from "../../components/Setting/EditGoalForm";
 
-export const EditGoalScreen = () => {
+export const EditGoalScreen = ({info}) => {
   const navigation = useNavigation();
+  const route = useRoute();
+  const  settingInfo = route.params;
+
   return (
     <View style={styles.container}>
       <BackBar navigation={navigation} />
-      <EditGoalForm />
+      <EditGoalForm settingInfo={settingInfo}/>
     </View>
   );
 };
