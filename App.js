@@ -32,6 +32,8 @@ import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen
 import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
 import LocationRegistrationScreen from './src/screens/WalkingScreen/LocationRegistrationScreen';
 
+import TrashCollectionScreen from "./src/screens/WalkingScreen/TrashCollectionScreen";
+
 
 const Stack = createStackNavigator();
 
@@ -40,7 +42,7 @@ const App = () => {
     <UserItemInfoProvider>
       <UserInfoProvider>
         <NavigationContainer>
-          <Stack.Navigator initialRouteName="LocationRegistration">
+          <Stack.Navigator initialRouteName="Camera">
             <Stack.Screen
               name="SplashScreen"
               component={SplashScreen}
@@ -167,6 +169,13 @@ const App = () => {
             <Stack.Screen
               name="LocationRegistration"
               component={LocationRegistrationScreen}
+              options={{ headerShown: false }}
+            />
+
+            {/*쓰레기 봉투 인식 */}
+            <Stack.Screen
+              name="TrashCollection"
+              component={TrashCollectionScreen}
               options={{ headerShown: false }}
             />
 

@@ -12,6 +12,13 @@ export default {
           fonts: ["./src/assets/fonts/JejuGothic.ttf"],
         },
       ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
+        }
+      ]
+          
     ],
     android: {
       permissions: [
@@ -33,6 +40,7 @@ export default {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
       },
       infoPlist: {
+        NSCameraUsageDescription: "이 앱은 카메라 접근 권한이 필요합니다.",
         NSLocationWhenInUseUsageDescription:
           "앱이 실행되는 동안 위치를 사용합니다.",
         NSLocationAlwaysAndWhenInUseUsageDescription:
