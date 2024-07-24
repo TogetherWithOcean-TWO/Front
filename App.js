@@ -30,6 +30,7 @@ import { EditProfileScreen } from "./src/screens/SettingScreen/EditProfileScreen
 import { EditGoalScreen } from "./src/screens/SettingScreen/EditGoalScreen";
 import { EditAddressScreen } from "./src/screens/SettingScreen/EditAddressScreen";
 import RankingScreen from "./src/screens/rankingScreen/RankingScreen";
+import LocationRegistrationScreen from "./src/screens/WalkingScreen/LocationRegistrationScreen";
 import LocationRegistrationScreen from './src/screens/WalkingScreen/LocationRegistrationScreen';
 
 import TrashCollectionScreen from "./src/screens/WalkingScreen/TrashCollectionScreen";
@@ -151,8 +152,11 @@ const App = () => {
               component={EditAddressScreen}
               options={{ headerShown: false }}
             />
-            <Stack.Screen name="EditGoal" component={EditGoalScreen} />
-
+            <Stack.Screen
+              name="EditGoal"
+              component={EditGoalScreen}
+              options={{ headerShown: false }}
+            />
             <Stack.Screen
               name="RequestTrashBag"
               component={RequestTrashBagScreen}
