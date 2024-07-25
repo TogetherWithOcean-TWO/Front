@@ -14,7 +14,7 @@ import { saveItem } from "../../utils/asyncStorage"; // Import saveItem function
 
 const LoginScreen = () => {
   const navigation = useNavigation();
-  const { setUserInfo } = useUserInfo();
+  const { userInfo, setUserInfo } = useUserInfo();
   const [modalVisible, setModalVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [passwd, setPasswd] = useState("");
@@ -46,6 +46,7 @@ const LoginScreen = () => {
       );
       if (response.status === 200) {
         console.log("로그인 완료");
+        //console.log(response.data);
         const member = response.data.memberRes;
         const tokenData = response.data.token; // token 객체를 추출
 
@@ -80,7 +81,6 @@ const LoginScreen = () => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         }));
-
         navigateToMainScreen();
       } else {
         openModal();

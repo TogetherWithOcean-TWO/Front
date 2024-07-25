@@ -3,10 +3,34 @@ import React from "react";
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import EStyleSheet from "../../styles/global";
+import { getItem } from "../../utils/asyncStorage"; // Import saveItem function
+import axios from "axios";
 
 const BottomNavigationBar = ({ navigation }) => {
   const iconColor = EStyleSheet.value("$Blue01");
   const startColor = EStyleSheet.value("$White01");
+
+  const setting = async() => {
+    try {
+      const accessToken = await getItem("accessToken");
+      const refreshToken = await getItem("refreshToken");
+
+      const response = await axios.get(
+        "http://13.124.240.85:8080/member/mypage-info",
+        {
+          headers : {
+            'Authorization': `Bearer ${accessToken}`, 
+            'RefreshToken': refreshToken
+          }
+        }
+      );
+      if (response.status === 200) {
+        navigation.navigate("Settings", response.data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -41,7 +65,7 @@ const BottomNavigationBar = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.item}
-        onPress={() => navigation.navigate("Settings")}
+        onPress={setting}
       >
         <Icon name="settings-outline" size={30} color={iconColor} />
         <Text style={styles.label}>설정</Text>
