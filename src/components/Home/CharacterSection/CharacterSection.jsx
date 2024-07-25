@@ -1,8 +1,9 @@
-import React, { useRef, useState } from 'react';
+//캐릭터 관련 데이터 페칭
+import React, { useRef, useState, useEffect } from 'react';
 import { View,StyleSheet, Image, Text } from 'react-native';
 import Character from './Character';
 import CharacterButton from './CharacterButton';
-import { useUserInfo } from '../../../contexts/UserInfoContext';
+//import { useUserInfo } from '../../../contexts/UserInfoContext';
 import { useNavigation } from '@react-navigation/native';
 import ViewShot from 'react-native-view-shot';
 import { handleCapture } from '../utils/capture';
@@ -14,6 +15,10 @@ import turtle from '../../../assets/images/charactor/turtle.png';
 import fish from '../../../assets/images/charactor/fish.png';
 
 import { LabelTitle } from '../../common/CustomText'; 
+
+//api 연동
+import { useUserInfo } from '../../../contexts/UserInfoContext';
+import axios from 'axios';
 
 const CharacterSection = () => {
   const { userInfo } = useUserInfo();

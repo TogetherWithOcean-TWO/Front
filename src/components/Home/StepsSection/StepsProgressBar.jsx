@@ -2,14 +2,15 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { useUserInfo } from '../../../contexts/UserInfoContext';
 import EStyleSheet from 'react-native-extended-stylesheet';
+import { ProgressBar } from "react-native-paper";
 
-const StepsProgressBar = () => {
-    const { userInfo } = useUserInfo();
-    const progress = Math.min(1000 / userInfo.stepGoal, 1);
-  
-    return (
+const StepsProgressBar = ({stepGoal, dailyStep}) => {
+    const iconColor = EStyleSheet.value('$Red02');
+    const progress = stepGoal > 0 ? dailyStep / stepGoal : 0;
+
+    return(
       <View style={styles.container}>
-        <View style={[styles.progressBar, { width: `${progress * 100}%` }]} />
+        <ProgressBar progress={progress} style={styles.progressBar} color={iconColor} />
       </View>
     );
   };
@@ -18,14 +19,13 @@ const StepsProgressBar = () => {
     container: {
       height: 15,
       width: '60%',
-      backgroundColor: '$White03',
       borderRadius: 10,
       overflow: 'hidden',
       marginTop: 5,
     },
     progressBar: {
       height: '100%',
-      backgroundColor: '$Red02',
+      backgroundColor: '$White03',
     },
   });
   
