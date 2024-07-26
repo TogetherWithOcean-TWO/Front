@@ -1,11 +1,28 @@
 //캐릭터 불러오는 코드
+//UI 랜더링 담당
 import React from 'react';
-import {View, Image, StyleSheet} from 'react-native';
+import {View, Image, StyleSheet, Text} from 'react-native';
+import { LabelTitle } from '../../common/CustomText'; 
 
-const Character = ({imageSource})=>{
+const characterImages ={
+    1 : require('../../../assets/images/charactor/seal.png'),
+    2: require('../../../assets/images/charactor/dolphin.png'),
+    3 : require('../../../assets/images/charactor/turtle.png'),
+    4 : require('../../../assets/images/charactor/fish.png'),
+}
+
+const Character = ({charId, charName})=>{
     return(
         <View style={styles.container}>
-            <Image source={imageSource} style={styles.character}/>
+            {charId?(
+                <Image
+                    source={characterImages[charId]}
+                    style={styles.characterImages}
+                />
+            ): (
+                <Text style={styles.text}>Character image not available</Text>
+            )}
+            <LabelTitle text={charName} style={styles.characterName} />
         </View>
     )
 }
@@ -15,11 +32,16 @@ const styles = StyleSheet.create({
         justifyContent : 'center',
         alignContent : 'center',
     },
-    character:{
+    characterImages:{
         width : 120,
         height : 120,
         resizeMode: 'contain', // 이미지가 잘 맞도록 설정
     },
+    characterName: {
+        position: 'absolute',
+        //color : 'black',
+        bottom: 10,     
+      },
 });
 
 export default Character;

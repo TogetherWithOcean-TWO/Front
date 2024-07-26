@@ -1,6 +1,6 @@
 //캐릭터 관련 데이터 페칭
 import React, { useRef, useState, useEffect } from 'react';
-import { View,StyleSheet, Image, Text } from 'react-native';
+import { View, StyleSheet, Image, Text } from 'react-native';
 import Character from './Character';
 import CharacterButton from './CharacterButton';
 //import { useUserInfo } from '../../../contexts/UserInfoContext';
@@ -9,59 +9,66 @@ import ViewShot from 'react-native-view-shot';
 import { handleCapture } from '../utils/capture';
 
 
-import seal from '../../../assets/images/charactor/seal.png';
-import dolphin from '../../../assets/images/charactor/dolphin.png';
-import turtle from '../../../assets/images/charactor/turtle.png';
-import fish from '../../../assets/images/charactor/fish.png';
-
-import { LabelTitle } from '../../common/CustomText'; 
-
 //api 연동
 import { useUserInfo } from '../../../contexts/UserInfoContext';
 import axios from 'axios';
 
 const CharacterSection = () => {
-  const { userInfo } = useUserInfo();
+  //const { userInfo } = useUserInfo();
+  const [charData, setCharData] = useState({ charId: "", charName: "" });
+  const { token, refreshToken } = useUserInfo();
   const navigation = useNavigation();
 
+  //캡쳐
   const viewRef = useRef();
   const [capturedUri, setCapturedUri] = useState(null);
 
-  const getCharacterImage = (charId) => {
-    switch (charId) {
-      case 0:
-        return seal;
-      case 1:
-        return dolphin;
-      case 2:
-        return turtle;
-      case 3:
-        return fish;
-      default:
-        return null;
-    }
-  };
+  useEffect(() => {
+    const fetchCharacterData = async () => {
+      try {
+        const response = await axios.get("http://13.124.240.85:8080/member/main-info", {
+          headers: {
+            Authorization: token,
+            RefreshToken: refreshToken,
+          },
+        });
 
-  const characterImage = getCharacterImage(userInfo.charId);
+        if (Response.status === 200) {
+          const { charId, charName } = response.data;
+          setCharData({ charId, charName });
+        } else {
+          console.error("Faild to fetch character data");
+        }
+      } catch (error) {
+        console.error("Error fetching character data:", error.message);
+        if (error.response) {
+          console.error("Response data:", error.response.data);
+          console.error("Response status:", error.response.status);
+          console.error("Response headers:", error.response.headers);
+        } else if (error.request) {
+          console.error("Request data:", error.request);
+        } else {
+          console.error("Error message:", error.message);
+        }
 
-  if (characterImage === null) {
-    return null; // 캐릭터 이미지가 설정되지 않은 경우 렌더링하지 않음
-  }
+      }
+    };
+    fetchCharacterData();
+  }, [token, refreshToken]);
 
   return (
     <View style={styles.container}>
       <View style={styles.sideButtons}>
-        <CharacterButton iconName="camera-outline" label="캡쳐"  onPress={() => handleCapture(viewRef, setCapturedUri)} />
+        <CharacterButton iconName="camera-outline" label="캡쳐" onPress={() => handleCapture(viewRef, setCapturedUri)} />
         <CharacterButton iconName="color-wand-outline" label="꾸미기" onPress={() => navigation.navigate("CharactorCustomScreen")} />
-        <CharacterButton iconName="refresh-outline" label="캐릭터 변경" onPress={() => navigation.navigate('SignupCharacter', {fromHome : true})} />
+        <CharacterButton iconName="refresh-outline" label="캐릭터 변경" onPress={() => navigation.navigate('SignupCharacter', { fromHome: true })} />
       </View>
-    
+
       <ViewShot ref={viewRef} style={styles.characterContainer}>
-        <Character imageSource={characterImage} />
-        <LabelTitle text={userInfo.charName} style={styles.characterName} />
+        <Character charId={charData.charId} charName={charData.charName} />
       </ViewShot>
-      
-      
+
+
       <View style={styles.sideButtons}>
         <CharacterButton iconName="cart-outline" label="상점" onPress={() => navigation.navigate('StoreScreen')} />
         <CharacterButton iconName="fish-outline" label="도감" onPress={() => navigation.navigate('MarinBookScreen')} />
@@ -73,14 +80,14 @@ const CharacterSection = () => {
 
 const styles = StyleSheet.create({
   container: {
-    width : '100%',
-    height : '40%',
+    width: '100%',
+    height: '40%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     //borderWidth: 2, // 테두리 두께
     //borderColor: 'black', // 테두리 색상
-    
+
   },
   sideButtons: {
     flex: 1,
@@ -90,9 +97,9 @@ const styles = StyleSheet.create({
     //borderColor: 'black', // 테두리 색상
   },
   characterContainer: {
-    height : '100%',
+    height: '100%',
     flex: 3,
-    justifyContent : 'center',
+    justifyContent: 'center',
     alignItems: 'center',
     //borderWidth: 2, // 테두리 두께
     ///borderColor: 'black', // 테두리 색상
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
   characterName: {
     position: 'absolute',
     //color : 'black',
-    bottom: 10,     
+    bottom: 10,
   },
 });
 
