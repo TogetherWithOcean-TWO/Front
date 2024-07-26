@@ -63,7 +63,7 @@ const LoginScreen = () => {
         await saveItem("refreshToken", refreshToken);
 
         // Save token and refresh token to context
-        setUserInfo((prevUserInfo) => ({
+        await setUserInfo((prevUserInfo) => ({
           ...prevUserInfo,
           realName: member.realName,
           nickname: member.nickname,
@@ -81,6 +81,7 @@ const LoginScreen = () => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         }));
+        console.log(userInfo);
         navigateToMainScreen();
       } else {
         openModal();

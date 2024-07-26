@@ -9,9 +9,13 @@ import EStyleSheet from "../../styles/global";
 import Icon from "react-native-vector-icons/Feather";
 import userIcon from "../../assets/images/userIcon.png";
 import { useNavigation } from "@react-navigation/native";
+import { getItem } from "../../utils/asyncStorage";
+import { useUserInfo } from "../../contexts/UserInfoContext";
+import axios from "axios";
 
 export const MainContainer = (settingInfo) => {
   const navigation = useNavigation();
+  const userInfo = useUserInfo();
 
   const goEditProfile = () => {
     navigation.navigate("EditProfile");
@@ -24,6 +28,51 @@ export const MainContainer = (settingInfo) => {
   const goEditGoal = () => {
     navigation.navigate("EditGoal");
   };
+
+  const logout = async() => {
+    try {
+      const accessToken = await getItem("accessToken");
+      const refreshToken = await getItem("refreshToken");
+
+      const response = await axios.post(
+        "http://13.124.240.85:8080/member/logout",
+        {},
+        {
+          headers : {
+            'Authorization': `Bearer ${accessToken}`, 
+            'RefreshToken': refreshToken
+            }
+        }
+      );
+      if (response.status === 200) {
+        navigation.navigate("SplashScreen");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  const memberDelete = async() => {
+    try {
+      const accessToken = await getItem("accessToken");
+      const refreshToken = await getItem("refreshToken");
+
+      const response = await axios.delete(
+        "http://13.124.240.85:8080/member/delete",
+        {
+          headers : {
+            'Authorization': `Bearer ${accessToken}`, 
+            'RefreshToken': refreshToken
+            }
+          }
+      );
+      if (response.status === 200) {
+        navigation.navigate("SplashScreen");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
   return (
     <View style={styles.container}>
       <View style={styles.title}>
@@ -54,10 +103,10 @@ export const MainContainer = (settingInfo) => {
         <TouchableOpacity style={styles.subtitle} onPress={goEditGoal}>
           <SubTitle text="목표 걸음 변경" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.subtitle}>
+        <TouchableOpacity style={styles.subtitle} onPress={logout}> 
           <SubTitle text="로그아웃" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.subtitle}>
+        <TouchableOpacity style={styles.subtitle} onPress={memberDelete}>
           <SubTitle text="탈퇴하기" />
         </TouchableOpacity>
       </View>
