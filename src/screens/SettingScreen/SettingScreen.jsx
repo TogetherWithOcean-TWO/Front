@@ -1,6 +1,6 @@
 import { React, useState } from "react";
 import { View, Text, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { BackBar } from "../../components/common/CustomBar";
 
 import EStyleSheet from "../../styles/global";
@@ -9,11 +9,12 @@ import { MainContainer } from "../../components/Setting/MainContainer";
 
 function SettingScreen() {
   const navigation = useNavigation();
+  const route = useRoute();
 
   return (
     <View style={styles.container}>
       <BackBar navigation={navigation} />
-      <MainContainer />
+      <MainContainer settingInfo = {route.params}/>
     </View>
   );
 }

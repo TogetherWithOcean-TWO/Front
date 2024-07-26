@@ -8,13 +8,14 @@ import { BackBar } from "../../components/common/CustomBar";
 import { MainTitle } from "../../components/common/CustomText";
 import { SignupForm } from "../../components/Signup/SignupForm";
 import { WideButton } from "../../components/common/CustomButton";
-
 import { ConfirmationModal } from "../../components/common/Modal";
+import { useUserInfo } from "../../contexts/UserInfoContext";
 
 function SignupScreen() {
   const navigation = useNavigation();
 
   const [isValid, setIsValid] = useState(false);
+  const {userInfo} = useUserInfo();
 
   const next = () => {
     if (isValid) {
@@ -27,6 +28,8 @@ function SignupScreen() {
   const [modalVisible, setModalVisible] = useState(false);
 
   const openModal = () => {
+    console.log(userInfo);
+
     setModalVisible(true);
   };
 

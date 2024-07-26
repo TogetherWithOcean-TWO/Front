@@ -10,9 +10,8 @@ import Icon from "react-native-vector-icons/Feather";
 import userIcon from "../../assets/images/userIcon.png";
 import { useNavigation } from "@react-navigation/native";
 
-export const MainContainer = () => {
+export const MainContainer = (settingInfo) => {
   const navigation = useNavigation();
-  const [name, setName] = useState("abc");
 
   const goEditProfile = () => {
     navigation.navigate("EditProfile");
@@ -33,16 +32,16 @@ export const MainContainer = () => {
       </View>
       <View style={styles.userbar}>
         <Image source={userIcon} />
-        <SubTitle text={`${name} 님`} style={styles.name} />
+        <SubTitle text={`${settingInfo.settingInfo.nickname} 님`} style={styles.name} />
       </View>
       <View style={styles.statusbar}>
         <View style={styles.statusLeft}>
           <LabelTitle text="나의 점수" />
-          <SubTitle text={"1000 점"} />
+          <SubTitle text={`${settingInfo.settingInfo.score} 점`} />
         </View>
         <View style={styles.statusRight}>
           <LabelTitle text="나의 포인트" />
-          <SubTitle text={"1000 P"} />
+          <SubTitle text={`${settingInfo.settingInfo.point} 점`} />
         </View>
       </View>
       <View>

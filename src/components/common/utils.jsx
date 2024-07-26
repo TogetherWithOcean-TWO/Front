@@ -19,8 +19,8 @@ export const validateUserInfo = (userInfo, checkNickName, checkEmail) => {
 
   // 닉네임 유효성 검사
   if (
-    !userInfo.nickName ||
-    !/^[\d가-힣a-zA-Z]{2,10}$/.test(userInfo.nickName)
+    !userInfo.nickname ||
+    !/^[\d가-힣a-zA-Z]{2,10}$/.test(userInfo.nickname)
   ) {
     errors.nicknameError = "특수문자를 제외하고 2~10자로 입력해주세요";
     valid = false;

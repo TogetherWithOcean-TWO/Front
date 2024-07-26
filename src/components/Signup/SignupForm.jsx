@@ -44,7 +44,7 @@ export const SignupForm = ({ setIsValid }) => {
     }
     axios
       .get(
-        `http://13.124.240.85:8080/member/check-nick?nickname=${userInfo.nickName}`
+        `http://13.124.240.85:8080/member/check-nick?nickname=${userInfo.nickname}`
       )
       .then((res) => {
         if (res.data === "사용가능한 닉네임입니다.") {
@@ -81,7 +81,7 @@ export const SignupForm = ({ setIsValid }) => {
     validate();
   }, [
     userInfo.realName,
-    userInfo.nickName,
+    userInfo.nickname,
     userInfo.email,
     userInfo.passwd,
     userInfo.checkPasswd,
@@ -125,9 +125,9 @@ export const SignupForm = ({ setIsValid }) => {
             <CustomInputWithButton
               style={styles.inputWithButtonInput}
               placeholder="닉네임을 입력해주세요"
-              value={userInfo.nickName}
+              value={userInfo.nickname}
               onChangeText={(text) =>
-                setUserInfo({ ...userInfo, nickName: text })
+                setUserInfo({ ...userInfo, nickname: text })
               }
             />
             <NarrowButton text="중복확인" onPress={handleCheckNickName} />

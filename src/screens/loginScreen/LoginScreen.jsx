@@ -10,23 +10,14 @@ import { KakaoLoginButton } from "../../components/Login/KakaoLoginButton";
 import axios from "axios";
 import { ConfirmationModal } from "../../components/common/Modal";
 import { useUserInfo } from "../../contexts/UserInfoContext";
+import { saveItem } from "../../utils/asyncStorage"; // Import saveItem function
 
-function LoginScreen() {
+const LoginScreen = () => {
   const navigation = useNavigation();
-
-  const navigateToMainScreen = () => {
-    navigation.navigate("HomeScreen");
-  };
-
-  const navigateToKakaoLoginScreen = () => {
-    navigation.navigate("KakaoLoginScreen");
-  };
-  const navigateToFindForLoginScreen = () => {
-    navigation.navigate("Findforlogin");
-  };
-
-  const { setUserInfo } = useUserInfo();
+  const { userInfo, setUserInfo } = useUserInfo();
   const [modalVisible, setModalVisible] = useState(false);
+  const [email, setEmail] = useState("");
+  const [passwd, setPasswd] = useState("");
 
   const openModal = () => {
     setModalVisible(true);
@@ -36,10 +27,15 @@ function LoginScreen() {
     setModalVisible(false);
   };
 
-  const [email, setEmail] = useState("");
-  const [passwd, setPasswd] = useState("");
+  const navigateToMainScreen = () => {
+    navigation.navigate("HomeScreen");
+  };
 
-  const handelLogin = async () => {
+  const navigateToFindForLoginScreen = () => {
+    navigation.navigate("Findforlogin");
+  };
+
+  const handleLogin = async () => {
     try {
       const response = await axios.post(
         "http://13.124.240.85:8080/member/sign-in",
@@ -50,8 +46,25 @@ function LoginScreen() {
       );
       if (response.status === 200) {
         console.log("로그인 완료");
+        //console.log(response.data);
         const member = response.data.memberRes;
-        setUserInfo({
+        const tokenData = response.data.token; // token 객체를 추출
+
+        // Ensure tokenData has the expected properties
+        if (!tokenData || !tokenData.accessToken || !tokenData.refreshToken) {
+          throw new Error("Token data is missing accessToken or refreshToken");
+        }
+
+        const accessToken = tokenData.accessToken;
+        const refreshToken = tokenData.refreshToken;
+
+        // Save the tokens to AsyncStorage
+        await saveItem("accessToken", accessToken);
+        await saveItem("refreshToken", refreshToken);
+
+        // Save token and refresh token to context
+        setUserInfo((prevUserInfo) => ({
+          ...prevUserInfo,
           realName: member.realName,
           nickname: member.nickname,
           email: member.email,
@@ -65,16 +78,16 @@ function LoginScreen() {
           stepGoal: member.stepGoal,
           todaySteps: member.step,
           point: member.point,
-        });
+          accessToken: accessToken,
+          refreshToken: refreshToken,
+        }));
         navigateToMainScreen();
       } else {
         openModal();
-        // alert(response.data.message || "로그인 실패");
       }
     } catch (error) {
       console.error("Error:", error);
       openModal();
-      // alert("로그인중 발생했습니다.");
     }
   };
 
@@ -91,7 +104,7 @@ function LoginScreen() {
       />
       <View style={styles.buttonContainer}>
         <View style={styles.button}>
-          <WideButton text="로그인" onPress={handelLogin} />
+          <WideButton text="로그인" onPress={handleLogin} />
         </View>
         <View style={styles.button}>
           <KakaoLoginButton onPress={navigateToMainScreen} />
@@ -109,7 +122,7 @@ function LoginScreen() {
       />
     </View>
   );
-}
+};
 
 const styles = EStyleSheet.create({
   container: {
