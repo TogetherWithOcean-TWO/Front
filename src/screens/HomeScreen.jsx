@@ -62,12 +62,12 @@ const HomeScreen = () => {
     fetchUserData();
   }, [accessToken, refreshToken]); // Depend on token and refreshToken
 
-  useEffect(() => {
-    if (charId === 0 || !charId) {
-      // Include check for undefined or null charId
-      navigation.navigate("SignupCharacter");
-    }
-  }, [charId, navigation]);
+  // useEffect(() => {
+  //   if (charId === 0 || !charId) {
+  //     // Include check for undefined or null charId
+  //     navigation.navigate("SignupCharacter");
+  //   }
+  // }, [charId, navigation]);
 
   return (
     <View style={styles.container}>
