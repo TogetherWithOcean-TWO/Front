@@ -5,7 +5,6 @@ import { LabelTitle, ErrorText } from "../../common/CustomText";
 import { CustomInput, CustomInputWithButton } from "../../common/CustomInput";
 import EStyleSheet from "../../../styles/global";
 import { ConfirmationModal } from "../../common/Modal";
-import api from "../../../api/api";
 import axios from "axios";
 
 export const FindIdForm = () => {
@@ -39,9 +38,12 @@ export const FindIdForm = () => {
 
     console.log(phoneNum);
     try {
-      const response = await api.post("/certify/send-sms", {
-        phoneNumber: phoneNum,
-      });
+      const response = await axios.post(
+        "http://13.124.240.85:8080/certify/send-sms",
+        {
+          phoneNumber: phoneNum,
+        }
+      );
       setIsValidSendCode(true);
       console.log("res" + response);
     } catch (error) {

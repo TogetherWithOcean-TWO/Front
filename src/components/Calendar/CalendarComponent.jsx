@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Calendar, LocaleConfig } from "react-native-calendars";
 import { View, Text, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
@@ -7,6 +7,7 @@ import EStyleSheet from "../../styles/global";
 import { DetailDay } from "./DetailDay";
 import { format } from "date-fns";
 import IconOcticons from "react-native-vector-icons/Octicons";
+import { getItem } from "../../utils/asyncStorage";
 
 // 한국어 설정
 LocaleConfig.locales["kr"] = {
@@ -29,7 +30,7 @@ LocaleConfig.locales["kr"] = {
 };
 LocaleConfig.defaultLocale = "kr";
 
-export const CalendarComponent = () => {
+export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
   const today = format(new Date(), "yyyy-MM-dd");
   const [date, setDate] = useState(today);
   const [markedDates, setMarkedDates] = useState({
@@ -43,6 +44,33 @@ export const CalendarComponent = () => {
     });
     // console.log(day);
   };
+
+  // const fetchData = async () => {
+  //   try {
+  //     const accessToken = await getItem("accessToken");
+  //     const refreshToken = await getItem("refreshToken");
+
+  //     const response = await axios.get(
+  //       `http://13.124.240.85:8080//stat/daily?date=2024-07-24`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${accessToken}`,
+  //           RefreshToken: refreshToken,
+  //         },
+  //       }
+  //     );
+  //     if (response.status === 200) {
+  //       console.log(response.data);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error:", error);
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   fetchData();
+  //   console.log(data);
+  // }, []);
 
   return (
     <View style={styles.calendar}>
@@ -60,8 +88,8 @@ export const CalendarComponent = () => {
         onDayPress={onDayPress}
         hideExtraDays={true}
         monthFormat={"M월"}
-        onMonthChange={(month) => {
-          console.log(month);
+        onMonthChange={(data) => {
+          setMonth(data.month);
         }}
         renderArrow={(direction) =>
           direction === "left" ? (
@@ -87,6 +115,7 @@ export const CalendarComponent = () => {
               }}
             >
               <Svg height="40" width="40">
+                {/** 배경색 -> 얘는 변하지 않는 값 */}
                 <Circle
                   cx="20"
                   cy="20"
@@ -146,15 +175,15 @@ export const CalendarComponent = () => {
       <View style={styles.calendarTextView}>
         <Text style={[styles.calendarText, { color: "#B96D6D" }]}>
           <IconOcticons name="dot-fill" style={styles.dotIcon} />
-          {" 걷깅"}
+          {" 출석"}
         </Text>
         <Text style={[styles.calendarText, { color: "#67C9CA" }]}>
           <IconOcticons name="dot-fill" style={styles.dotIcon} />
-          {" 줍깅"}
+          {" 걷깅"}
         </Text>
         <Text style={[styles.calendarText, { color: "#B8B977" }]}>
           <IconOcticons name="dot-fill" style={styles.dotIcon} />
-          {" 출석"}
+          {" 사진찍기"}
         </Text>
       </View>
       <DetailDay date={date} />
