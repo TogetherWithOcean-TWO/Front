@@ -11,7 +11,7 @@ const characterImages ={
     4 : require('../../../assets/images/charactor/fish.png'),
 }
 
-const Character = ({charId, charName})=>{
+const Character = ({charId})=>{
     return(
         <View style={styles.container}>
             {charId?(
@@ -20,9 +20,9 @@ const Character = ({charId, charName})=>{
                     style={styles.characterImages}
                 />
             ): (
-                <Text style={styles.text}>Character image not available</Text>
+                <Text style={styles.text}>캐릭터 이미지 불러올 수 없음</Text>
             )}
-            <LabelTitle text={charName} style={styles.characterName} />
+            
         </View>
     )
 }
@@ -37,11 +37,7 @@ const styles = StyleSheet.create({
         height : 120,
         resizeMode: 'contain', // 이미지가 잘 맞도록 설정
     },
-    characterName: {
-        position: 'absolute',
-        //color : 'black',
-        bottom: 10,     
-      },
+
 });
 
 export default Character;

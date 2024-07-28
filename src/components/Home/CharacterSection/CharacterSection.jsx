@@ -3,58 +3,16 @@ import React, { useRef, useState, useEffect } from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import Character from './Character';
 import CharacterButton from './CharacterButton';
-//import { useUserInfo } from '../../../contexts/UserInfoContext';
 import { useNavigation } from '@react-navigation/native';
 import ViewShot from 'react-native-view-shot';
 import { handleCapture } from '../utils/capture';
+import { LabelTitle } from '../../common/CustomText'; 
 
-
-//api 연동
-import { useUserInfo } from '../../../contexts/UserInfoContext';
-import axios from 'axios';
-
-const CharacterSection = () => {
-  //const { userInfo } = useUserInfo();
-  const [charData, setCharData] = useState({ charId: "", charName: "" });
-  const { token, refreshToken } = useUserInfo();
+const CharacterSection = ({charId, charName}) => {
   const navigation = useNavigation();
-
   //캡쳐
   const viewRef = useRef();
   const [capturedUri, setCapturedUri] = useState(null);
-
-  useEffect(() => {
-    const fetchCharacterData = async () => {
-      try {
-        const response = await axios.get("http://13.124.240.85:8080/member/main-info", {
-          headers: {
-            Authorization: token,
-            RefreshToken: refreshToken,
-          },
-        });
-
-        if (Response.status === 200) {
-          const { charId, charName } = response.data;
-          setCharData({ charId, charName });
-        } else {
-          console.error("Faild to fetch character data");
-        }
-      } catch (error) {
-        console.error("Error fetching character data:", error.message);
-        if (error.response) {
-          console.error("Response data:", error.response.data);
-          console.error("Response status:", error.response.status);
-          console.error("Response headers:", error.response.headers);
-        } else if (error.request) {
-          console.error("Request data:", error.request);
-        } else {
-          console.error("Error message:", error.message);
-        }
-
-      }
-    };
-    fetchCharacterData();
-  }, [token, refreshToken]);
 
   return (
     <View style={styles.container}>
@@ -65,7 +23,8 @@ const CharacterSection = () => {
       </View>
 
       <ViewShot ref={viewRef} style={styles.characterContainer}>
-        <Character charId={charData.charId} charName={charData.charName} />
+        <Character charId={charId} charName={charName} />
+        <LabelTitle text={charName} style={styles.characterName} />
       </ViewShot>
 
 
