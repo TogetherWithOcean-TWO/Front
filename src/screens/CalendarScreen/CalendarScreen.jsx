@@ -43,7 +43,7 @@ function CalendarScreen() {
   useEffect(() => {
     fetchData();
     console.log(data);
-  }, []);
+  }, [month, year]);
 
   return (
     <View style={styles.container}>

@@ -7,7 +7,9 @@ import EStyleSheet from "../../styles/global";
 import { DetailDay } from "./DetailDay";
 import { format } from "date-fns";
 import IconOcticons from "react-native-vector-icons/Octicons";
+
 import { getItem } from "../../utils/asyncStorage";
+import axios from "axios";
 
 // 한국어 설정
 LocaleConfig.locales["kr"] = {
@@ -42,35 +44,38 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
     setMarkedDates({
       [day.dateString]: { selected: true },
     });
-    // console.log(day);
+    console.log(day.dateString);
   };
 
-  // const fetchData = async () => {
-  //   try {
-  //     const accessToken = await getItem("accessToken");
-  //     const refreshToken = await getItem("refreshToken");
+  const [dayData, setDayData] = useState({});
 
-  //     const response = await axios.get(
-  //       `http://13.124.240.85:8080//stat/daily?date=2024-07-24`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${accessToken}`,
-  //           RefreshToken: refreshToken,
-  //         },
-  //       }
-  //     );
-  //     if (response.status === 200) {
-  //       console.log(response.data);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error:", error);
-  //   }
-  // };
+  const fetchData = async () => {
+    try {
+      const accessToken = await getItem("accessToken");
+      const refreshToken = await getItem("refreshToken");
 
-  // useEffect(() => {
-  //   fetchData();
-  //   console.log(data);
-  // }, []);
+      const response = await axios.get(
+        `http://13.124.240.85:8080/stat/daily?date=${date}`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            RefreshToken: refreshToken,
+          },
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        console.log(response.data);
+        setDayData(response.data);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, [date]); // date가 변경될 때마다 fetchData를 호출합니다.
 
   return (
     <View style={styles.calendar}>
@@ -90,6 +95,8 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
         monthFormat={"M월"}
         onMonthChange={(data) => {
           setMonth(data.month);
+          setYear(data.year);
+          console.log(`Month changed to ${data.month} in year ${data.year}`);
         }}
         renderArrow={(direction) =>
           direction === "left" ? (
@@ -115,7 +122,6 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
               }}
             >
               <Svg height="40" width="40">
-                {/** 배경색 -> 얘는 변하지 않는 값 */}
                 <Circle
                   cx="20"
                   cy="20"
@@ -124,7 +130,6 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
                   stroke="#A8A8A850"
                   strokeWidth="4"
                 />
-                {/* 핑크 30% */}
                 <Circle
                   cx="20"
                   cy="20"
@@ -134,7 +139,6 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
                   strokeWidth="4"
                   strokeDasharray="30 70"
                 />
-                {/* 하늘색 30% */}
                 <Circle
                   cx="20"
                   cy="20"
@@ -146,7 +150,6 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
                   rotation="90"
                   origin="20,20"
                 />
-                {/* 초록색 나머지 */}
                 <Circle
                   cx="20"
                   cy="20"
@@ -186,7 +189,7 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
           {" 사진찍기"}
         </Text>
       </View>
-      <DetailDay date={date} />
+      <DetailDay dayData={dayData} date={date} />
     </View>
   );
 };
