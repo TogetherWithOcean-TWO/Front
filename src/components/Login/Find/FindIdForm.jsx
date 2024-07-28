@@ -102,11 +102,14 @@ export const FindIdForm = () => {
 
   const openIdModal = async () => {
     try {
-      const response = await api.post("/member/find-email", {
-        realName: name,
-        phoneNumber: phoneNumber,
-        confirm: correctCertification, // 인증 여부를 프론트가 true, false로 가지고 있다가 리턴해줘야 함
-      });
+      const response = await axios.post(
+        "http://13.124.240.85:8080/member/find-email",
+        {
+          realName: name,
+          phoneNumber: phoneNumber,
+          confirm: correctCertification, // 인증 여부를 프론트가 true, false로 가지고 있다가 리턴해줘야 함
+        }
+      );
       console.log("Server response:", response.data);
       setIsValidId(true);
       setEmail(response.data);
@@ -127,24 +130,23 @@ export const FindIdForm = () => {
 
   const openCertificateModalVisible = async () => {
     try {
-      const response = await api.get("/certify/confirm-sms");
-      console.log(response.data);
-
       const phoneNum =
         phoneNumber.split("-")[0] +
         phoneNumber.split("-")[1] +
         phoneNumber.split("-")[2];
 
-      console.log(phoneNum);
-
-      if (
-        response.data.certifyNumber === certificationNumber &&
-        response.data.phoneNumber === phoneNum
-      ) {
-        setCertificateModalVisible(true);
-        setCorrectCertification(true);
-      }
+      const response = await axios.post(
+        "http://13.124.240.85:8080/certify/confirm-sms",
+        {
+          phoneNumber: phoneNum,
+          certifyNumber: certificationNumber,
+        }
+      );
+      setCorrectCertification(true);
+      setCertificateModalVisible(true);
     } catch (error) {
+      setCorrectCertification(false);
+      setCertificateModalVisible(true);
       console.error("Error fetching data:", error);
     }
   };

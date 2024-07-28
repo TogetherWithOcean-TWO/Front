@@ -6,23 +6,46 @@ import { CustomInput } from "../../common/CustomInput";
 import EStyleSheet from "../../../styles/global";
 import { ConfirmationModal } from "../../common/Modal";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
-export const FindPWNextForm = () => {
+export const FindPWNextForm = ({ realName, email, confirm }) => {
   const navigation = useNavigation();
   const [newPW, setNewPW] = useState("");
   const [newPWCheck, setNewPWCheck] = useState("");
 
   // 비밀번호 설정이 완료되었습니다 모달
-  const [isValidPWSetting, setIsValidPWSetting] = useState(true);
+  const [isValidPWSetting, setIsValidPWSetting] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
 
-  const openModal = () => {
-    setModalVisible(true);
+  const openModal = async () => {
+    try {
+      // console.log("realname", realName, "email", email);
+      const response = await axios.patch(
+        "http://13.124.240.85:8080/member/find-pw",
+        {
+          realName: realName,
+          email: email,
+          passwd: newPW,
+          re_passwd: newPWCheck,
+          confirm: confirm,
+        }
+      );
+      // console.log(response.data);
+      setIsValidPWSetting(response.data);
+      setModalVisible(true);
+    } catch (error) {
+      // console.log(response.data);
+      setIsValidPWSetting(response.data);
+      console.error("Error fetching data:", error);
+    }
   };
 
   const closeModal = () => {
     setModalVisible(false);
-    navigation.navigate("LoginScreen");
+
+    if (isValidPWSetting === "비밀번호 설정이 완료되었습니다.") {
+      navigation.navigate("LoginScreen");
+    }
   };
 
   return (
@@ -61,7 +84,7 @@ export const FindPWNextForm = () => {
       <ConfirmationModal
         visible={modalVisible}
         onClose={closeModal}
-        message="비밀번호 설정이 완료되었습니다."
+        message={isValidPWSetting}
         buttonText="확인"
       />
     </View>
@@ -84,6 +107,7 @@ const styles = EStyleSheet.create({
     marginHorizontal: 10,
     marginTop: 5,
     fontSize: 12,
+    fontFamily: "Pretendard",
   },
   button: {
     bottom: 0,

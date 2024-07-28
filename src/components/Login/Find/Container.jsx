@@ -10,6 +10,10 @@ export const MainContainer = () => {
   const [selectIdOrPW, setSelectIdOrPW] = useState(true); // id->true, pw->false
   const [pwNextCheck, setPwNextCheck] = useState(false);
 
+  const [realName, setRealName] = useState("");
+  const [email, setEmail] = useState("");
+  const [confirm, setConfirm] = useState(false);
+
   return (
     <View style={styles.main}>
       <ChooseFindBar
@@ -20,9 +24,14 @@ export const MainContainer = () => {
       {selectIdOrPW ? (
         <FindIdForm />
       ) : pwNextCheck ? (
-        <FindPWNextForm />
+        <FindPWNextForm realName={realName} email={email} confirm={confirm} />
       ) : (
-        <FindPWForm setPwNextCheck={setPwNextCheck} />
+        <FindPWForm
+          setPwNextCheck={setPwNextCheck}
+          setRealName={setRealName}
+          setEmail={setEmail}
+          setConfirm={setConfirm}
+        />
       )}
     </View>
   );

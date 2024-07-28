@@ -55,23 +55,19 @@ export const FindPWForm = (props) => {
 
   const openSendCodeModal = async () => {
     try {
-      const response = await axio.post(
-        "http://13.124.240.85:8080/certify/confirm-email",
+      const response = await axios.post(
+        "http://13.124.240.85:8080/certify/send-email",
         {
           email: email,
         }
       );
       setIsValidSendCode(true);
       console.log("res" + response);
+      setIsTimerActive(true);
+      setTimer(180); // Reset timer to 3 minutes
     } catch (error) {
       console.error("Error posting date:", error);
       setIsValidSendCode(false);
-    } finally {
-      console.log(isValidSendCode);
-      if (isValidSendCode) {
-        setIsTimerActive(true);
-        setTimer(180); // Reset timer to 3 minutes
-      }
     }
     setSendCodeModalVisible(true);
   };
@@ -86,17 +82,22 @@ export const FindPWForm = (props) => {
 
   const openCertificateModalVisible = async () => {
     try {
-      const response = await api.get("/certify/confirm-email");
-      console.log(response.data);
+      const response = await axios.post(
+        "http://13.124.240.85:8080/certify/confirm-email",
+        {
+          email: email,
+          certifyNumber: certificationNumber,
+        }
+      );
 
-      if (
-        response.data.certifyNumber === certificationNumber &&
-        response.data.email === email
-      ) {
-        setCertificateModalVisible(true);
-        setCorrectCertification(true);
-      }
+      setCertificateModalVisible(true);
+      setCorrectCertification(true);
+      setIsValidPW(true);
+      props.setConfirm(true);
     } catch (error) {
+      setCorrectCertification(false);
+
+      setCertificateModalVisible(true);
       console.error("Error fetching data:", error);
     }
     setCertificateModalVisible(true);
@@ -118,7 +119,7 @@ export const FindPWForm = (props) => {
   };
 
   // 가입된 유저가 아닙니다 모달
-  const [isValidPW, setIsValidPW] = useState(true);
+  const [isValidPW, setIsValidPW] = useState(false);
   const [showPWModalVisible, setShowPWModalVisible] = useState(false);
 
   const openPWModal = () => {
@@ -144,7 +145,10 @@ export const FindPWForm = (props) => {
         <CustomInput
           placeholder="이름을 입력해주세요"
           value={name}
-          onChangeText={(text) => setName(text)}
+          onChangeText={(text) => {
+            setName(text);
+            props.setRealName(text);
+          }}
         />
       </View>
       <View style={styles.formGroup}>
@@ -153,7 +157,10 @@ export const FindPWForm = (props) => {
           <CustomInputWithButton
             placeholder="가입하신 이메일을 입력해주세요."
             value={email}
-            onChangeText={(text) => setEmail(text)}
+            onChangeText={(text) => {
+              setEmail(text);
+              props.setEmail(text);
+            }}
             maxLength={13}
           />
           <NarrowButton text="인증 코드" onPress={startTimer} />
@@ -206,7 +213,7 @@ export const FindPWForm = (props) => {
       <ConfirmationModal
         visible={showPWModalVisible}
         onClose={closePWModal}
-        message={"가입된 유저가 아닙니다."}
+        message={"정보를 다시 입력해주세요."}
         buttonText="확인"
       />
     </View>
@@ -234,6 +241,7 @@ const styles = EStyleSheet.create({
     marginHorizontal: 10,
     marginTop: 5,
     fontSize: 12,
+    fontFamily: "Pretendard",
   },
   button: {
     bottom: 0,
