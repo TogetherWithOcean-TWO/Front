@@ -1,7 +1,11 @@
 //App.config.js
 import "dotenv/config";
+//import dotenv from "dotenv";
 
-//const { GOOGLE_MAPS_API_KEY, EXPO_PROJECT_ID } = process.env;
+const { GOOGLE_MAPS_API_KEY, EXPO_PROJECT_ID } = process.env;
+
+console.log("Google Maps API Key:", process.env.GOOGLE_MAPS_API_KEY);
+console.log("Expo Project ID:", process.env.EXPO_PROJECT_ID);
 
 export default {
   expo: {
@@ -38,6 +42,7 @@ export default {
       bundleIdentifier: "com.TWO.front",
       config: {
         googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
+        
       },
       infoPlist: {
         NSCameraUsageDescription: "이 앱은 카메라 접근 권한이 필요합니다.",
