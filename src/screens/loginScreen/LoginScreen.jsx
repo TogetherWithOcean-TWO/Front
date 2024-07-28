@@ -81,7 +81,7 @@ const LoginScreen = () => {
           accessToken: accessToken,
           refreshToken: refreshToken,
         }));
-        console.log(userInfo);
+        // console.log(userInfo);
         navigateToMainScreen();
       } else {
         openModal();

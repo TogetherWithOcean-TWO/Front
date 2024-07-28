@@ -6,7 +6,7 @@ import { CustomInput, CustomInputWithButton } from "../../common/CustomInput";
 import EStyleSheet from "../../../styles/global";
 import { ConfirmationModal } from "../../common/Modal";
 import { useNavigation } from "@react-navigation/native";
-import api from "../../../api/api";
+import axios from "axios";
 
 export const FindPWForm = (props) => {
   const [name, setName] = useState("");
@@ -55,9 +55,12 @@ export const FindPWForm = (props) => {
 
   const openSendCodeModal = async () => {
     try {
-      const response = await api.post("/certify/confirm-email", {
-        email: email,
-      });
+      const response = await axio.post(
+        "http://13.124.240.85:8080/certify/confirm-email",
+        {
+          email: email,
+        }
+      );
       setIsValidSendCode(true);
       console.log("res" + response);
     } catch (error) {
