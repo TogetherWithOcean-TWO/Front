@@ -77,6 +77,64 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
     fetchData();
   }, [date]); // date가 변경될 때마다 fetchData를 호출합니다.
 
+  const renderShape = (dateString) => {
+    const dayData = data?.monthlyCalendar?.find((d) => d.date === dateString);
+    const attend = dayData?.attend || false;
+    const achieveStep = dayData?.achieveStep || false;
+    const plogging = dayData?.plogging * 10 || 0;
+    // const plogging = 2 * 10;
+
+    return (
+      <Svg height="40" width="40">
+        <Circle
+          cx="20"
+          cy="20"
+          r="15"
+          fill="none"
+          stroke="#A8A8A850"
+          strokeWidth="4"
+        />
+        {attend && (
+          <Circle
+            cx="20"
+            cy="20"
+            r="15"
+            fill="none"
+            stroke="#B96D6D"
+            strokeWidth="4"
+            strokeDasharray="33 67" // 원의 1/3
+          />
+        )}
+        {achieveStep && (
+          <Circle
+            cx="20"
+            cy="20"
+            r="15"
+            fill="none"
+            stroke="#67C9CA"
+            strokeWidth="4"
+            strokeDasharray="33 67"
+            rotation="120" // 원의 1/3 (120도 회전)
+            origin="20,20"
+          />
+        )}
+        {plogging > 0 && (
+          <Circle
+            cx="20"
+            cy="20"
+            r="15"
+            fill="none"
+            stroke="#B8B977"
+            strokeWidth="4"
+            strokeDasharray={`${plogging} 67`}
+            rotation="240" // 원의 1/3 (240도 회전)
+            origin="20,20"
+          />
+        )}
+      </Svg>
+    );
+  };
+
   return (
     <View style={styles.calendar}>
       <Calendar
@@ -121,47 +179,7 @@ export const CalendarComponent = ({ data, month, setMonth, year, setYear }) => {
                 borderRadius: 20,
               }}
             >
-              <Svg height="40" width="40">
-                <Circle
-                  cx="20"
-                  cy="20"
-                  r="15"
-                  fill="none"
-                  stroke="#A8A8A850"
-                  strokeWidth="4"
-                />
-                <Circle
-                  cx="20"
-                  cy="20"
-                  r="15"
-                  fill="none"
-                  stroke="#B96D6D"
-                  strokeWidth="4"
-                  strokeDasharray="30 70"
-                />
-                <Circle
-                  cx="20"
-                  cy="20"
-                  r="15"
-                  fill="none"
-                  stroke="#67C9CA"
-                  strokeWidth="4"
-                  strokeDasharray="30 70"
-                  rotation="90"
-                  origin="20,20"
-                />
-                <Circle
-                  cx="20"
-                  cy="20"
-                  r="15"
-                  fill="none"
-                  stroke="#B8B977"
-                  strokeWidth="4"
-                  strokeDasharray="40 60"
-                  rotation="180"
-                  origin="20,20"
-                />
-              </Svg>
+              {renderShape(date.dateString)}
               <Text
                 style={{
                   position: "absolute",

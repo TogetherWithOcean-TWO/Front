@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import { BackBar } from "../../components/common/CustomBar";
 import EStyleSheet from "../../styles/global";
 import { useNavigation } from "@react-navigation/native";
@@ -53,26 +53,31 @@ function CalendarScreen() {
           <MainTitle text={`${month}월 리포트 `} />
           <Icon name="calendar" size={25} />
         </View>
-        <View style={styles.titleView}>
-          <SubTitle text={`${userInfo.realName}님!`} style={styles.subtitle} />
-          <SubTitle
-            text={`${month}월 줍깅 횟수는 ${data.monthlyPlog || 0}번 입니다.`}
-            style={[styles.backgroudColor, styles.subtitle]}
-          />
-          <SubTitle
-            text={`이번달 획득 포인트는 ${data.monthlyScore || 0}P 입니다.`}
-            style={styles.subtitle}
-          />
-        </View>
-        <View style={styles.calendarView}>
-          <CalendarComponent
-            month={month}
-            setMonth={setMonth}
-            year={year}
-            setYear={setYear}
-            data={data}
-          />
-        </View>
+        <ScrollView>
+          <View style={styles.titleView}>
+            <SubTitle
+              text={`${userInfo.realName}님!`}
+              style={styles.subtitle}
+            />
+            <SubTitle
+              text={`${month}월 줍깅 횟수는 ${data.monthlyPlog || 0}번 입니다.`}
+              style={[styles.backgroudColor, styles.subtitle]}
+            />
+            <SubTitle
+              text={`이번달 획득 포인트는 ${data.monthlyScore || 0}P 입니다.`}
+              style={styles.subtitle}
+            />
+          </View>
+          <View style={styles.calendarView}>
+            <CalendarComponent
+              month={month}
+              setMonth={setMonth}
+              year={year}
+              setYear={setYear}
+              data={data}
+            />
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
@@ -82,6 +87,7 @@ const styles = EStyleSheet.create({
   mainContainer: {
     flex: 1,
     padding: 20,
+    paddingTop: 5,
   },
   mainTitle: {
     display: "flex",

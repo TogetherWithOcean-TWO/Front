@@ -1,4 +1,4 @@
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import EStyleSheet from "../../styles/global";
 import { SubTitle } from "../common/CustomText";
 
