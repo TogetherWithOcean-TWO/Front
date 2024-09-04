@@ -11,9 +11,9 @@ import kakao from "../../assets/images/kakao.svg"
   );
 };*/
 
-export const KakaoLoginButton = () => {
+export const KakaoLoginButton = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.button}>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
       <WithLocalSvg asset={kakao} width="100%"></WithLocalSvg>
     </TouchableOpacity>
   );
