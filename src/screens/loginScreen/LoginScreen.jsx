@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View } from "react-native";
+import { View, Linking } from "react-native";
 import { WideButton } from "../../components/common/CustomButton";
 import EStyleSheet from "../../styles/global";
 import FooterText from "../../components/Splash/FooterText";
@@ -92,6 +92,28 @@ const LoginScreen = () => {
     }
   };
 
+  //카카오 로그인
+  const handleKakaoLogin = async () => {
+    console.log("Kakao login button pressed"); // 버튼이 눌렸을 때 로그 출력
+    try {
+      const response = await axios.get("http://13.124.240.85:8080/oauth/kakao/login");
+      //console.log("Kakao login API response:", response); // API 응답 로그 출력
+      if (response.status === 200) {
+        const url  = response.data;
+        console.log("Kakao login URL:", url); // 리다이렉트 URL 로그 출력
+        Linking.openURL(url); // Redirect to the Kakao login page
+      } else {
+        console.log("Kakao login failed with status:", response.status); // 실패 시 상태 코드 로그 출력
+        console.log("Kakao login response data:", response.data); // 응답 데이터 로그 출력
+        openModal();
+      }
+    } catch (error) {
+      console.error("Error:", error); // 에러 로그 출력
+      openModal();
+    }
+  };
+
+
   return (
     <View style={styles.container}>
       <View style={styles.imageContainer}>
@@ -108,7 +130,7 @@ const LoginScreen = () => {
           <WideButton text="로그인" onPress={handleLogin} />
         </View>
         <View style={styles.button}>
-          <KakaoLoginButton onPress={navigateToMainScreen} />
+          <KakaoLoginButton onPress={handleKakaoLogin} />
         </View>
         <FooterText
           text="아이디 / 비밀번호를 잊어버렸나요?"

@@ -19,6 +19,7 @@ const SplashScreen = ({ navigation }) => {
     const unsubscribe = navigation.addListener("focus", () => {
       // 화면이 포커스를 받을 때 실행되는 코드
       resetUserInfo();
+
     });
 
     return unsubscribe;

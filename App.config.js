@@ -21,7 +21,23 @@ export default {
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
-      ]
+      ],
+      [
+        "@react-native-seoul/kakao-login",
+        {
+          "kakaoAppKey": "23d26ac2031f78ec87400bac783e1edf",
+          "overrideKakaoSDKVersion": "2.11.2", // Optional, 
+          "kotlinVersion": "1.9.0" // #392
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "extraMavenRepos": ["https://devrepo.kakao.com/nexus/content/groups/public/"]
+          }
+        }
+      ]     
           
     ],
     android: {
